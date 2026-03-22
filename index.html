@@ -12,6 +12,66 @@
 <link rel="manifest" href="manifest.json">
 <title>EKB-Intelligence v6 · Marchés CEDEAO</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- JS NAVIGATION — scope global garanti -->
+<script>
+// ── Navigation principale EKB ───────────────────────────────────
+var PAGES = {
+  home:'/ Tableau de bord',
+  mondial:'/ Données Mondiales',
+  energie:'/ Énergie',
+  construction:'/ BTP',
+  agriculture:'/ Agriculture',
+  agroalim:'/ Agroalimentaire',
+  transport:'/ Transport',
+  sources:'/ Sources (49)',
+  terrain:'/ Signal Terrain CI',
+  brvm:'/ BRVM & Marchés',
+  about:'/ EKB — Principe & Sources'
+};
+
+    var bns = document.querySelectorAll('.bn');
+    for (var j = 0; j < bns.length; j++) {
+      bns[j].classList.remove('on');
+    }
+    var pg = document.getElementById('pg-' + id);
+    if (pg) pg.classList.add('on');
+    var bn = document.getElementById('bn-' + id);
+    if (bn) bn.classList.add('on');
+    var tbPage = document.getElementById('tb-page');
+    if (tbPage) tbPage.textContent = PAGES[id] || '';
+    if (navigator.vibrate) navigator.vibrate(18);
+    // Scroll en haut de la page
+    if (pg) pg.scrollTop = 0;
+  } catch(e) {
+    console.warn('gp error:', e);
+  }
+}
+
+function setLvl(lvl) {
+  try {
+    var tabs = document.querySelectorAll('.ltab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.remove('aw');
+    }
+    var active = document.getElementById('lt-' + lvl);
+    if (active) active.classList.add('aw');
+    var sections = document.querySelectorAll('.lv-section');
+    for (var j = 0; j < sections.length; j++) {
+      sections[j].style.display = 'none';
+    }
+    var activeSec = document.getElementById('lv-' + lvl);
+    if (activeSec) activeSec.style.display = 'block';
+  } catch(e) {
+    console.warn('setLvl error:', e);
+  }
+}
+
+// Exposer explicitement
+window.gp     = gp;
+window.setLvl = setLvl;
+window.PAGES  = PAGES;
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 
