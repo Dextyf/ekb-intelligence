@@ -5067,6 +5067,14 @@ function ekbChangePIN() {
 }
 
 
+
+// ── Exposition globale des fonctions HTML onclick ──────────────
+window.gp         = gp;
+window.setLvl     = typeof setLvl     !== 'undefined' ? setLvl     : function(){};
+window.genPDF     = typeof genPDF     !== 'undefined' ? genPDF     : function(){};
+window.sendWA     = typeof sendWA     !== 'undefined' ? sendWA     : function(){};
+window.ekbChangePIN = typeof ekbChangePIN !== 'undefined' ? ekbChangePIN : function(){};
+
 } catch(globalErr) {
   console.warn('EKB main JS:', globalErr);
   // Afficher l'app quand même
