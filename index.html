@@ -66,8 +66,25 @@ function setLvl(lvl) {
   }
 }
 
+
+function gp(id) {
+  try {
+    var pages = document.querySelectorAll('.page');
+    for (var i = 0; i < pages.length; i++) pages[i].classList.remove('on');
+    var bns = document.querySelectorAll('.bn');
+    for (var j = 0; j < bns.length; j++) bns[j].classList.remove('on');
+    var pg = document.getElementById('pg-' + id);
+    var bn = document.getElementById('bn-' + id);
+    if (pg) { pg.classList.add('on'); pg.scrollTop = 0; }
+    if (bn) bn.classList.add('on');
+    var tbPage = document.getElementById('tb-page');
+    if (tbPage && PAGES[id]) tbPage.textContent = PAGES[id];
+    if (navigator.vibrate) navigator.vibrate(18);
+  } catch(e) { console.warn('gp:', e); }
+}
+
 // Exposer explicitement
-window.gp     = gp;
+window.gp = gp;
 window.setLvl = setLvl;
 window.PAGES  = PAGES;
 </script>
