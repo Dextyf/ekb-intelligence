@@ -228,31 +228,14 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 .page::-webkit-scrollbar{display:none;}
 
 /* ─── BOTTOM NAV ──────────────────────────────── */
-.bnav{
-  height:calc(var(--navH) + var(--safeB));padding-bottom:var(--safeB);
-  background:linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
-  border-top:1px solid var(--border);
-  display:flex;flex-shrink:0;overflow-x:auto;
-  position:relative;
-}
-.bnav::before{
-  content:'';position:absolute;top:0;left:15%;right:15%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  opacity:.25;
-}
-.bnav::-webkit-scrollbar{display:none;}
-.bn{
-  flex-shrink:0;min-width:54px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;cursor:pointer;
-  padding:8px 3px 0;transition:all .15s;min-height:var(--navH);
-}
-.bn-ico{font-size:19px;transition:transform .2s;}
-.bn-lbl{font-size:7px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--txt3);transition:color .15s;}
-.bn-bar{width:16px;height:3px;border-radius:2px;background:transparent;margin-top:2px;transition:all .2s;}
-.bn.on .bn-ico{transform:translateY(-2px);}
-.bn.on .bn-lbl{color:var(--goldLt);}
-.bn.on .bn-bar{background:var(--gold);box-shadow:0 0 8px rgba(197,146,46,.5);}
-.bn:active{opacity:.7;}
+
+
+
+
+
+
+
+
 
 /* ══════════ COMPOSANTS EKB ═══════════════════════
 
@@ -1130,16 +1113,9 @@ html, body {
 }
 
 /* Navigation bottom — compacte sur très petits écrans */
-.bn {
-  min-width: 46px;
-  padding: 6px 2px 0;
-}
-.bn-ico {
-  font-size: 17px;
-}
-.bn-lbl {
-  font-size: 6.5px;
-}
+
+
+
 
 /* KPI grid — toujours 2 colonnes */
 .kg {
@@ -1279,9 +1255,7 @@ pre, code, .src-url, .ms-url {
 }
 
 /* Safe area bottom pour iPhone avec encoche */
-.bnav {
-  padding-bottom: max(var(--safeB), env(safe-area-inset-bottom, 8px));
-}
+
 /* padding-bottom intégré dans règle .page principale */
 
 
@@ -1470,88 +1444,22 @@ body {
 }
 
 /* ── PAGES : affichage/masquage propre sans superposition ── */
-.page {
-  display: none !important;         /* Masqué par défaut — !important pour iOS */
-  visibility: hidden !important;    /* Double sécurité iOS */
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding: 10px 12px;
-  padding-bottom: calc(var(--navH) + env(safe-area-inset-bottom, 8px) + 8px);
-  contain: layout paint style;      /* Isolation complète du contenu */
-  pointer-events: none;             /* Désactiver les clics sur pages cachées */
-}
+/* supprimé doublon .page */
 
 /* Page active */
-.page.on {
-  display: block !important;
-  visibility: visible !important;
-  contain: none !important;         /* Annuler contain pour la page active */
-  pointer-events: auto !important;  /* Réactiver les clics */
-  z-index: 1;
-}
+/* supprimé doublon .page.on */
 
 /* ── Navigation bottom ── */
-.bnav {
-  height: calc(var(--navH) + env(safe-area-inset-bottom, 8px));
-  padding-bottom: env(safe-area-inset-bottom, 8px);
-  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
-  border-top: 1px solid var(--border);
-  display: flex;
-  flex-shrink: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  position: relative;
-  z-index: 10; /* Au-dessus des pages */
-  scrollbar-width: none;
-}
-.bnav::-webkit-scrollbar { display: none; }
-.bnav::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 15%; right: 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: .25;
-}
+
+
+
 
 /* Nav items */
-.bn {
-  flex-shrink: 0;
-  min-width: 52px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  cursor: pointer;
-  padding: 7px 3px 0;
-  transition: opacity .15s;
-  min-height: var(--navH);
-}
-.bn-ico { font-size: 19px; }
-.bn-lbl {
-  font-size: 7px;
-  font-weight: 700;
-  letter-spacing: .3px;
-  text-transform: uppercase;
-  color: var(--txt3);
-}
-.bn-bar {
-  width: 16px;
-  height: 3px;
-  border-radius: 2px;
-  background: transparent;
-  margin-top: 2px;
-}
-.bn.on .bn-lbl { color: var(--goldLt); }
-.bn.on .bn-bar {
-  background: var(--gold);
-  box-shadow: 0 0 6px rgba(197,146,46,.5);
-}
-.bn:active { opacity: .65; }
+
+
+
+
+
 
 /* ── Overlays (au-dessus de tout) ── */
 #splash {
@@ -1697,8 +1605,8 @@ p, div, span {
   .tb-page { display: none; }
   .brent-pill { font-size: 7.5px; padding: 2px 5px; }
   .k-val { font-size: 18px; }
-  .bn { min-width: 44px; }
-  .bn-ico { font-size: 17px; }
+  
+  
 }
 @media (max-width: 320px) {
   .brent-pill { display: none; }
@@ -2219,6 +2127,509 @@ p, div, span {
   background: linear-gradient(135deg, rgba(197,146,46,.3), rgba(26,118,160,.2));
 }
 
+
+/* ══════════════════════════════════════════════════════
+   FIX UI/UX v6.1 — Corrections superpositions iPhone
+   ══════════════════════════════════════════════════════ */
+
+/* ── ISOLATION ABSOLUE DES PAGES ── */
+.page {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 12px;
+  padding-bottom: calc(var(--navH) + env(safe-area-inset-bottom,8px) + 16px);
+  z-index: 0;
+}
+
+.page.on {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
+
+/* ── TOPBAR CORRIGÉE ── */
+.topbar {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  padding-top: calc(env(safe-area-inset-top,0px) + 8px);
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+  min-height: 52px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.tb-l {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.tb-logo {
+  height: 30px;
+  width: 30px;
+  flex-shrink: 0;
+  border-radius: 7px;
+}
+.tb-brand {
+  flex-shrink: 0;
+}
+.tb-ekb {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--goldLt);
+  line-height: 1;
+}
+.tb-intel {
+  font-size: 9px;
+  color: var(--txt3);
+  letter-spacing: 1px;
+}
+.tb-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border2);
+  flex-shrink: 0;
+}
+.tb-page {
+  font-size: 10px;
+  color: var(--txt3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.tb-r {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── TICKER CORRIGÉ ── */
+.ticker {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(197,146,46,.15);
+}
+.tk-label {
+  font-size: 8px;
+  font-weight: 800;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 3px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: .5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.tk-wrap {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+.tk-inner {
+  display: flex;
+  gap: 0;
+  animation: tickerScroll 60s linear infinite;
+  white-space: nowrap;
+}
+.tk-inner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── BRIEF CARD CORRIGÉE ── */
+.brief {
+  background: linear-gradient(135deg,
+    rgba(197,146,46,.07) 0%,
+    rgba(26,118,160,.04) 100%);
+  border: 1px solid rgba(197,146,46,.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.brief-date {
+  font-size: 9px;
+  color: var(--txt3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.brief-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--goldLt);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.brief-body {
+  font-size: 11.5px;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.brief-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.brief-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--gold), #A07820);
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--bg);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── KPI GRID CORRIGÉE ── */
+.kg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.kc {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 11px 10px;
+  position: relative;
+  overflow: hidden;
+  min-height: 90px;
+}
+.k-bg {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 28px;
+  opacity: .08;
+  pointer-events: none;
+}
+.k-lbl {
+  font-size: 9px;
+  color: var(--txt3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.k-val {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+.k-sub {
+  font-size: 9px;
+  color: var(--txt3);
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.k-foot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* ── DATA BAR CORRIGÉE ── */
+.dbar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 4px 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-shrink: 0;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.dbar::-webkit-scrollbar { display: none; }
+.db-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px;
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.db-item:last-child { border-right: none; }
+
+/* ── LEVEL TABS CORRIGÉES ── */
+.ltabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.ltab {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.ltab.aw {
+  background: linear-gradient(135deg,rgba(197,146,46,.15),rgba(26,118,160,.08));
+  border-color: rgba(197,146,46,.4);
+}
+.ltab span:first-child { font-size: 18px; display: block; margin-bottom: 2px; }
+.ltab span:last-child  { font-size: 8px; color: var(--txt3); letter-spacing: .5px; }
+.ltab.aw span:last-child { color: var(--goldLt); }
+
+/* ── IMPACT SECTORIEL CARDS ── */
+.sec-card {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sec-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.sec-info { flex: 1; min-width: 0; }
+.sec-name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.sec-sub {
+  font-size: 10px;
+  color: var(--txt3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sec-pct {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* ── SECTION TITRES ── */
+.sec-title {
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--txt3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 12px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sec-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Responsive final */
+@media (max-width: 360px) {
+  .k-val { font-size: 18px; }
+  .brief-title { font-size: 13px; }
+  .ltab span:first-child { font-size: 15px; }
+}
+
+
+
+/* ══════════════════════════════════════════════════════
+   NAVIGATION SCROLLABLE MOBILE v6.3
+   11 onglets · scroll horizontal · snap · indicateurs
+   ══════════════════════════════════════════════════════ */
+
+/* Conteneur nav */
+.bnav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
+  border-top: 1px solid var(--border);
+  height: calc(56px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  flex-shrink: 0;
+  /* Gradient fade sur les bords pour indiquer le scroll */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    black 16px,
+    black calc(100% - 16px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    black 16px,
+    black calc(100% - 16px),
+    transparent 100%
+  );
+}
+.bnav::-webkit-scrollbar { display: none; }
+
+/* Chaque onglet */
+.bn {
+  flex: 0 0 auto;
+  width: 64px;
+  min-width: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 4px 4px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity .15s;
+  position: relative;
+}
+.bn:active { opacity: .6; }
+
+/* Icône */
+.bn-ico {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .2s;
+}
+.bn.on .bn-ico { transform: scale(1.1); }
+
+/* Label */
+.bn-lbl {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  color: var(--txt3);
+  white-space: nowrap;
+  transition: color .15s;
+}
+.bn.on .bn-lbl { color: var(--goldLt); }
+
+/* Barre indicateur active */
+.bn-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  border-radius: 2px 2px 0 0;
+  background: var(--gold);
+  transition: width .2s ease;
+  box-shadow: 0 0 8px rgba(197,146,46,.5);
+}
+.bn.on .bn-bar { width: 28px; }
+
+/* Ligne séparatrice dorée en haut */
+.bnav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(197,146,46,.3) 20%,
+    rgba(197,146,46,.5) 50%,
+    rgba(197,146,46,.3) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Sur tablette et desktop : onglets plus larges, pas de mask */
+@media (min-width: 640px) {
+  .bnav {
+    -webkit-mask-image: none;
+    mask-image: none;
+    justify-content: flex-start;
+  }
+  .bn {
+    width: 72px;
+    min-width: 72px;
+  }
+  .bn-lbl { font-size: 8.5px; }
+  .bn-ico  { font-size: 20px; }
+}
+
+@media (min-width: 1024px) {
+  .bnav {
+    justify-content: center;
+    overflow-x: visible;
+  }
+  .bn { width: 80px; min-width: 80px; }
+}
 </style>
 </head>
 <body>
@@ -2378,16 +2789,7 @@ p, div, span {
 
 <div class="page on" id="pg-home">
 
-  <!-- Level tabs -->
-  <div class="ltabs">
-    <div class="ltab aw" id="lt-w" onclick="setLvl('w')"><span>🌍</span>MONDIAL</div>
-    <div class="ltab"    id="lt-r" onclick="setLvl('r')"><span>🌿</span>CEDEAO</div>
-    <div class="ltab"    id="lt-n" onclick="setLvl('n')"><span>🇨🇮</span>CI</div>
-  </div>
-
-
-  <!-- Signal Terrain CI — accès rapide home -->
-  <div onclick="gp('terrain')" style="
+<div onclick="gp('terrain')" style="
     background:linear-gradient(135deg,rgba(232,56,56,.12),rgba(197,146,46,.06));
     border:1px solid rgba(232,56,56,.35);border-radius:var(--r);
     padding:10px 12px;margin-bottom:9px;
@@ -2402,178 +2804,139 @@ p, div, span {
     <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--red);font-weight:700">VOIR →</div>
   </div>
 
-  <!-- KPIs home -->
-  <div class="kg">
-    <div class="kc ke"><div class="k-bg">🛢️</div><div class="k-lbl">Brent</div><div class="k-val" style="color:var(--red)" id="kv0">114,64</div><div class="k-sub" id="ks0">+38% en 3 sem.</div><div class="k-foot"><span class="kbadge kbr" id="kb0">▲ +4,8%</span><span class="dsb dsb-w" id="ksrc0">EIA</span></div></div>
-    <div class="kc ke"><div class="k-bg">🌾</div><div class="k-lbl" id="kl1">FAO Alim.</div><div class="k-val" style="color:var(--gold)" id="kv1">125,3</div><div class="k-sub" id="ks1">pts Fév. 2026</div><div class="k-foot"><span class="kbadge kbo" id="kb1">▲ +0,9%</span><span class="dsb dsb-w" id="ksrc1">FAO</span></div></div>
-    <div class="kc ke"><div class="k-bg">💱</div><div class="k-lbl" id="kl2">USD/XOF</div><div class="k-val" style="color:var(--violet)" id="kv2">566</div><div class="k-sub" id="ks2">BCEAO</div><div class="k-foot"><span class="kbadge kbo" id="kb2">⚠ Pression</span><span class="dsb dsb-r" id="ksrc2">BCEAO</span></div></div>
-    <div class="kc ks"><div class="k-bg">☀️</div><div class="k-lbl" id="kl3">Solaire PV</div><div class="k-val" style="color:var(--success)" id="kv3">STABLE</div><div class="k-sub" id="ks3">Hors conflit</div><div class="k-foot"><span class="kbadge kbg" id="kb3">= STABLE ✓</span><span class="dsb dsb-r" id="ksrc3">IRENA</span></div></div>
+
   </div>
 
-  <!-- Brief -->
-  <div class="brief">
-    <div class="brief-date" id="b-date">DIMANCHE 22 MARS 2026 — 06:00 UTC</div>
-    <div class="brief-title" id="b-title">⚡ ALERTE CRITIQUE — Fenêtre stratégique maximale</div>
-    <div class="brief-body" id="b-body">ALERTE CRITIQUE — J+23 conflit Iran/USA/Israël. Iran menace infrastructures énergétiques EAU et Golfe si Trump frappe centrales iraniennes. Ormuz : transit -95% (10 Mb/j bloqués). Brent : 112,19 $/b. GNL TTF : 59,34 €/MWh. FAO FPMA : 125,3 pts. USD/XOF : 566. EKB-Intelligence : fenêtre stratégique SUNWAVE maximale — niveau 10/10.</div>
-    <div class="brief-srcs">
-      <span class="dsb dsb-w">EIA</span><span class="dsb dsb-w">FAO FPMA</span>
-      <span class="dsb dsb-r">BCEAO</span><span class="dsb dsb-n">INS CI</span>
-      <span class="dsb dsb-n">ANARE</span><span class="dsb dsb-r">IRENA</span>
+  <!-- Construction -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:16px;">🏗️</span>
+      <div style="font-size:12px;font-weight:700;color:#2A96C0;">Construction</div>
+      <div style="font-size:9px;color:var(--txt3);">Matières premières · Fret</div>
     </div>
-    <button class="brief-btn" onclick="gp('energie')">Voir l'analyse complète →</button>
-  </div>
-
-  <!-- 5 secteurs -->
-  <div class="sh"><div class="sh-dot" style="background:var(--gold)"></div><div class="sh-t">Impact sectoriel · 42 sources vérifiées</div></div>
-
-  <div class="ic" style="border-color:rgba(197,146,46,.28)" onclick="gp('energie')">
-    <div class="ic-top">
-      <div class="ic-ico" style="background:var(--goldGl)">⚡</div>
-      <div><div class="ic-name" style="color:var(--gold)">Énergie</div><div class="ic-tag">CIE + groupes électrogènes CI</div></div>
-      <div class="ic-pct">+42%</div>
-    </div>
-    <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE : économie client <strong style="color:var(--success)">127 000 F/mois</strong> post-choc</div>
-    <div class="ic-srcs"><span class="dsb dsb-w">EIA</span><span class="dsb dsb-n">ANARE-CI</span><span class="dsb dsb-n">INS CI</span></div>
-  </div>
-
-  <div class="ic" style="border-color:rgba(26,118,160,.28)" onclick="gp('construction')">
-    <div class="ic-top">
-      <div class="ic-ico" style="background:var(--blueGl)">🏗️</div>
-      <div><div class="ic-name" style="color:var(--build)">Construction & BTP</div><div class="ic-tag">Ciment, acier, transport chantier</div></div>
-      <div class="ic-pct">+30%</div>
-    </div>
-    <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE chantier : énergie <strong style="color:var(--build)">-40%</strong></div>
-    <div class="ic-srcs"><span class="dsb dsb-w">WB Pink</span><span class="dsb dsb-n">CCI CI</span><span class="dsb dsb-n">CEPICI</span></div>
-  </div>
-
-  <div class="ic" style="border-color:rgba(58,128,32,.25)" onclick="gp('agriculture')">
-    <div class="ic-top">
-      <div class="ic-ico" style="background:var(--aGl)">🌾</div>
-      <div><div class="ic-name" style="color:var(--agri)">Agriculture</div><div class="ic-tag">Engrais, irrigation, récolte</div></div>
-      <div class="ic-pct">+40%</div>
-    </div>
-    <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE pompage solaire : carburant <strong style="color:var(--agri)">= 0 FCFA</strong></div>
-    <div class="ic-srcs"><span class="dsb dsb-w">FAO FPMA</span><span class="dsb dsb-r">AMIS CEDEAO</span><span class="dsb dsb-n">CCA CI</span></div>
-  </div>
-
-  <div class="ic" style="border-color:rgba(16,200,224,.2)" onclick="gp('agroalim')">
-    <div class="ic-top">
-      <div class="ic-ico" style="background:var(--agGl)">🏭</div>
-      <div><div class="ic-name" style="color:var(--agro)">Agroalimentaire</div><div class="ic-tag">GNL industrie, chaîne froide</div></div>
-      <div class="ic-pct">+75%</div>
-    </div>
-    <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE PRO : facture CIE industrielle <strong style="color:var(--agro)">-60%</strong></div>
-    <div class="ic-srcs"><span class="dsb dsb-w">IEA</span><span class="dsb dsb-n">ANARE</span><span class="dsb dsb-r">BCEAO</span></div>
-  </div>
-
-  <div class="ic" style="border-color:rgba(128,96,200,.2)" onclick="gp('transport')">
-    <div class="ic-top">
-      <div class="ic-ico" style="background:var(--tGl)">🚚</div>
-      <div><div class="ic-name" style="color:var(--transp)">Transport & Logistique</div><div class="ic-tag">Gasoil, fret maritime, assurances</div></div>
-      <div class="ic-pct">+60%</div>
-    </div>
-    <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE dépôt : charges fixes <strong style="color:var(--transp)">-40%</strong></div>
-    <div class="ic-srcs"><span class="dsb dsb-w">FBX</span><span class="dsb dsb-w">IATA</span><span class="dsb dsb-n">PAA</span></div>
-  </div>
-
-
-  <!-- Widget actualités médias — page Home -->
-  <div class="sh"><div class="sh-dot" style="background:var(--violet)"></div><div class="sh-t">Actualités médias — Impacts sectoriels</div></div>
-
-  <div class="media-bar" style="margin-bottom:9px">
-    <span class="mb-label">EN DIRECT</span>
-    <span class="media-pill mp-f24">FRANCE 24</span>
-    <span class="media-pill mp-alj">AL JAZEERA</span>
-    <span class="media-pill mp-cnn">CNN</span>
-    <span class="media-pill mp-a24">AFRICA 24</span>
-    <span class="media-pill mp-rti">RTI</span>
-    <span class="media-pill mp-bfm">BFM TV</span>
-  </div>
-
-  <div class="news-card" onclick="gp('energie')">
-    <div class="nc-media"><span class="media-pill mp-alj">AJZ</span></div>
-    <div class="nc-body">
-      <div class="nc-title">Golfe Persique : Détroit d'Ormuz — 20% du pétrole mondial menacé</div>
-      <div class="nc-meta">
-        <span class="nc-time">J+23 · Mars 2026</span>
-        <span class="nc-sector" style="background:var(--eGl);color:var(--energy)">⚡ Énergie</span>
-        <span class="nc-sector" style="background:var(--tGl);color:var(--transp)">🚚 Transport</span>
-      </div>
+    <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div class="dr"><div class="dr-ico">🔩</div><div class="dr-lbl">Acier / Fer à béton (WB Pink)</div><div class="dr-val" style="color:var(--red)">+25%</div><div class="dr-bar"><div class="dr-fill" style="width:70%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🪨</div><div class="dr-lbl">Clinker / Ciment mondial (WB)</div><div class="dr-val" style="color:var(--red)">+28%</div><div class="dr-bar"><div class="dr-fill" style="width:72%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🔶</div><div class="dr-lbl">Aluminium (WB Pink Sheet)</div><div class="dr-val" style="color:var(--warn)">-10%</div><div class="dr-bar"><div class="dr-fill" style="width:35%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🟤</div><div class="dr-lbl">Cuivre câblage (WB Pink)</div><div class="dr-val" style="color:var(--warn)">-10%</div><div class="dr-bar"><div class="dr-fill" style="width:30%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🚢</div><div class="dr-lbl">Fret import matériaux (FBX)</div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar"><div class="dr-fill" style="width:85%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🏗️</div><div class="dr-lbl">Investissements infra CEDEAO (BAD)</div><div class="dr-val" style="color:var(--lr)">Actifs</div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--lr)"></div></div></div>
     </div>
   </div>
 
-  <div class="news-card" onclick="gp('energie')">
-    <div class="nc-media"><span class="media-pill mp-f24">F24</span></div>
-    <div class="nc-body">
-      <div class="nc-title">Énergie Afrique : la transition solaire s'accélère face à la crise des hydrocarbures</div>
-      <div class="nc-meta">
-        <span class="nc-time">Mars 2026</span>
-        <span class="nc-sector" style="background:var(--eGl);color:var(--energy)">⚡ Énergie</span>
-        <span class="nc-sector" style="background:var(--aGl);color:var(--agri)">🌾 Agriculture</span>
-      </div>
+  <!-- Agriculture -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:16px;">🌾</span>
+      <div style="font-size:12px;font-weight:700;color:#3A8020;">Agriculture</div>
+      <div style="font-size:9px;color:var(--txt3);">Céréales · Intrants · FAO</div>
+    </div>
+    <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div class="dr"><div class="dr-ico">🌿</div><div class="dr-lbl">Urée engrais azotés (WB Pink)</div><div class="dr-val" style="color:var(--red)">+40%</div><div class="dr-bar"><div class="dr-fill" style="width:80%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🌾</div><div class="dr-lbl">Blé mondial (FAO FPMA)</div><div class="dr-val" style="color:var(--warn)">+3,3%</div><div class="dr-bar"><div class="dr-fill" style="width:35%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🌽</div><div class="dr-lbl">Maïs (USDA NASS)</div><div class="dr-val" style="color:var(--warn)">+3,2%</div><div class="dr-bar"><div class="dr-fill" style="width:32%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🥜</div><div class="dr-lbl">Huiles végétales (FAO FFPI)</div><div class="dr-val" style="color:var(--warn)">+4,1%</div><div class="dr-bar"><div class="dr-fill" style="width:38%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">📊</div><div class="dr-lbl">Indice FAO alimentaire (FAO)</div><div class="dr-val" style="color:var(--gold)">125,3 pts</div><div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--gold)"></div></div></div>
+      <div class="dr"><div class="dr-ico">⛽</div><div class="dr-lbl">Gasoil irrigation (EIA)</div><div class="dr-val" style="color:var(--red)">+35%</div><div class="dr-bar"><div class="dr-fill" style="width:75%;background:var(--red)"></div></div></div>
     </div>
   </div>
 
-  <div class="news-card" onclick="gp('agriculture')">
-    <div class="nc-media"><span class="media-pill mp-a24">A24</span></div>
-    <div class="nc-body">
-      <div class="nc-title">Agriculture AOF : la hausse des engrais (+40%) menace les récoltes 2026-2027</div>
-      <div class="nc-meta">
-        <span class="nc-time">Mars 2026</span>
-        <span class="nc-sector" style="background:var(--aGl);color:var(--agri)">🌾 Agriculture</span>
-        <span class="nc-sector" style="background:var(--agGl);color:var(--agro)">🏭 Agro</span>
-      </div>
+  <!-- Agroalimentaire -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:16px;">🏭</span>
+      <div style="font-size:12px;font-weight:700;color:#B07D2A;">Agroalimentaire</div>
+      <div style="font-size:9px;color:var(--txt3);">GNL · Chaîne froide</div>
+    </div>
+    <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div class="dr"><div class="dr-ico">🔥</div><div class="dr-lbl">GNL industrie agroalim. (IEA)</div><div class="dr-val" style="color:var(--red)">+75%</div><div class="dr-bar"><div class="dr-fill" style="width:95%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🌾</div><div class="dr-lbl">Blé import industrie (FAO FPMA)</div><div class="dr-val" style="color:var(--warn)">+3,3%</div><div class="dr-bar"><div class="dr-fill" style="width:35%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🥜</div><div class="dr-lbl">Huiles végétales (FAO FFPI)</div><div class="dr-val" style="color:var(--warn)">+4,1%</div><div class="dr-bar"><div class="dr-fill" style="width:38%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🧂</div><div class="dr-lbl">Sucre mondial (FAO FFPI)</div><div class="dr-val" style="color:var(--warn)">+2,8%</div><div class="dr-bar"><div class="dr-fill" style="width:30%;background:var(--warn)"></div></div></div>
+      <div class="dr"><div class="dr-ico">📦</div><div class="dr-lbl">Emballages / fret (FBX)</div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar"><div class="dr-fill" style="width:85%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">📊</div><div class="dr-lbl">Inflation alimentaire UEMOA (BCEAO)</div><div class="dr-val" style="color:var(--warn)">4,2%</div><div class="dr-bar"><div class="dr-fill" style="width:42%;background:var(--warn)"></div></div></div>
     </div>
   </div>
 
-  <div class="news-card" onclick="gp('terrain')">
-    <div class="nc-media"><span class="media-pill mp-rti">RTI</span></div>
-    <div class="nc-body">
-      <div class="nc-title">CI : délestages répétés à Abidjan — la CIE invoque la pression saisonnière</div>
-      <div class="nc-meta">
-        <span class="nc-time">26 Fév. 2026</span>
-        <span class="nc-sector" style="background:var(--eGl);color:var(--energy)">⚡ Énergie CI</span>
-        <span class="dsb dsb-n" style="font-size:7.5px">RTI · CIE officiel</span>
-      </div>
+  <!-- Transport -->
+  <div style="margin-bottom:14px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:16px;">🚚</span>
+      <div style="font-size:12px;font-weight:700;color:#8A9BB0;">Transport</div>
+      <div style="font-size:9px;color:var(--txt3);">Fret maritime · Aérien · Pétrole</div>
+    </div>
+    <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div class="dr"><div class="dr-ico">🚢</div><div class="dr-lbl">Fret conteneurs (FBX Freightos)</div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar"><div class="dr-fill" style="width:95%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">✈️</div><div class="dr-lbl">Kérosène aviation (IATA)</div><div class="dr-val" style="color:var(--red)">+38%</div><div class="dr-bar"><div class="dr-fill" style="width:80%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🛡️</div><div class="dr-lbl">Assurances navires Golfe</div><div class="dr-val" style="color:var(--red)">×10</div><div class="dr-bar"><div class="dr-fill" style="width:100%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">⛵</div><div class="dr-lbl">Détroit d'Ormuz — risque</div><div class="dr-val" style="color:var(--red)">ACTIF</div><div class="dr-bar"><div class="dr-fill" style="width:90%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">⛽</div><div class="dr-lbl">Gasoil poids lourds (EIA)</div><div class="dr-val" style="color:var(--red)">+35%</div><div class="dr-bar"><div class="dr-fill" style="width:75%;background:var(--red)"></div></div></div>
+      <div class="dr"><div class="dr-ico">🌍</div><div class="dr-lbl">Corridors transport AOF (CEDEAO)</div><div class="dr-val" style="color:var(--lr)">Sous pression</div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--lr)"></div></div></div>
     </div>
   </div>
 
-  <div class="news-card" onclick="gp('transport')">
-    <div class="nc-media"><span class="media-pill mp-cnn">CNN</span></div>
-    <div class="nc-body">
-      <div class="nc-title">Shipping crisis: Gulf conflict sends freight rates surging 60%</div>
-      <div class="nc-meta">
-        <span class="nc-time">Mars 2026</span>
-        <span class="nc-sector" style="background:var(--tGl);color:var(--transp)">🚚 Transport</span>
-        <span class="nc-sector" style="background:var(--agGl);color:var(--agro)">🏭 Agro</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="news-card" onclick="gp('construction')">
-    <div class="nc-media"><span class="media-pill mp-bfm">BFM</span></div>
-    <div class="nc-body">
-      <div class="nc-title">BTP mondial : acier et ciment en hausse, les chantiers africains sous pression</div>
-      <div class="nc-meta">
-        <span class="nc-time">Mars 2026</span>
-        <span class="nc-sector" style="background:var(--bGl);color:var(--build)">🏗️ Construction</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="div-gold"></div>
-  <div style="background:linear-gradient(135deg,var(--goldGl),var(--blueGl));border:1px solid var(--border2);border-radius:var(--r);padding:14px;text-align:center;">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--gold);letter-spacing:2px;margin-bottom:8px">EKB-Intelligence · SUNWAVE HYBRID · 5 SECTEURS</div>
-    <div style="font-size:13px;font-weight:700;color:var(--goldBr);font-style:italic;line-height:1.5">"Pendant que 42 sources confirment<br>la hausse de tout, une seule chose<br>reste stable : votre panneau solaire."</div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
-      <button class="btn btn-gold" style="flex:1;font-size:11px;padding:9px" onclick="genPDF()">📄 Rapport PDF</button>
-      <button class="btn btn-s" style="flex:1;font-size:11px;padding:9px" onclick="shareWA()">📱 WhatsApp</button>
-    </div>
-  </div>
+  <div style="height:8px;"></div>
 </div>
 
-<!-- ─── ÉNERGIE ───────────────────────────────────── -->
-<div class="page"
+<!-- ─── DONNÉES MONDIALES ────────────────────────── -->
+<div class="page" id="pg-mondial">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-top:4px;">
+    <div>
+      <div style="font-size:10px;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">Niveau 1 · 18 sources</div>
+      <div style="font-size:19px;font-weight:800;color:var(--goldLt);">Données Mondiales</div>
+      <div style="font-size:10px;color:var(--txt3);margin-top:2px;">EIA · IEA · FAO · WB Pink · FBX · OPEC · Alpha Vantage</div>
+    </div>
+    <div style="background:rgba(197,146,46,.1);border:1px solid rgba(197,146,46,.3);border-radius:8px;padding:5px 10px;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:1px;">MONDIAL</div>
+  </div>
+
+  <!-- Energie -->
+  <div style="font-size:9px;font-weight:800;color:#F0C040;letter-spacing:2px;text-transform:uppercase;margin:10px 0 6px;display:flex;align-items:center;gap:6px;">⚡ ÉNERGIE<span style="flex:1;height:1px;background:rgba(240,192,64,.2);display:block;"></span></div>
+  <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <div class="dr"><div class="dr-ico">🛢️</div><div class="dr-info"><div class="dr-lbl">Brent (EIA USA)</div></div><div class="dr-val" style="color:var(--red)">112,19 $/b</div><div class="dr-bar" style="background:var(--red);width:85%"></div></div>
+    <div class="dr"><div class="dr-ico">🔥</div><div class="dr-info"><div class="dr-lbl">GNL TTF Europe (IEA)</div></div><div class="dr-val" style="color:var(--red)">59,34 €/MWh</div><div class="dr-bar" style="background:var(--red);width:70%"></div></div>
+    <div class="dr"><div class="dr-ico">⛽</div><div class="dr-info"><div class="dr-lbl">WTI (EIA USA)</div></div><div class="dr-val" style="color:var(--red)">108,30 $</div><div class="dr-bar" style="background:var(--red);width:78%"></div></div>
+    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">Capex solaire PV (IRENA)</div></div><div class="dr-val" style="color:var(--green)">STABLE</div><div class="dr-bar" style="background:var(--green);width:40%"></div></div>
+    <div class="dr"><div class="dr-ico">📊</div><div class="dr-info"><div class="dr-lbl">Production OPEP (OPEC)</div></div><div class="dr-val" style="color:var(--red)">-10% Golfe</div><div class="dr-bar" style="background:var(--red);width:30%"></div></div>
+  </div>
+
+  <!-- Construction -->
+  <div style="font-size:9px;font-weight:800;color:#2A96C0;letter-spacing:2px;text-transform:uppercase;margin:10px 0 6px;display:flex;align-items:center;gap:6px;">🏗️ CONSTRUCTION<span style="flex:1;height:1px;background:rgba(42,150,192,.2);display:block;"></span></div>
+  <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <div class="dr"><div class="dr-ico">🔩</div><div class="dr-info"><div class="dr-lbl">Acier HRC (WB Pink)</div></div><div class="dr-val" style="color:var(--red)">+28%</div><div class="dr-bar" style="background:var(--red);width:55%"></div></div>
+    <div class="dr"><div class="dr-ico">🪨</div><div class="dr-info"><div class="dr-lbl">Ciment CI (CCI CI)</div></div><div class="dr-val" style="color:var(--red)">+30%</div><div class="dr-bar" style="background:var(--red);width:60%"></div></div>
+    <div class="dr"><div class="dr-ico">🔶</div><div class="dr-info"><div class="dr-lbl">Cuivre (WB Pink)</div></div><div class="dr-val" style="color:var(--gold)">+12%</div><div class="dr-bar" style="background:var(--gold);width:35%"></div></div>
+    <div class="dr"><div class="dr-ico">🚢</div><div class="dr-info"><div class="dr-lbl">Fret chantier (FBX)</div></div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar" style="background:var(--red);width:72%"></div></div>
+  </div>
+
+  <!-- Agriculture -->
+  <div style="font-size:9px;font-weight:800;color:#3A8020;letter-spacing:2px;text-transform:uppercase;margin:10px 0 6px;display:flex;align-items:center;gap:6px;">🌾 AGRICULTURE<span style="flex:1;height:1px;background:rgba(58,128,32,.2);display:block;"></span></div>
+  <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">FAO Alim. (FAO FPMA)</div></div><div class="dr-val" style="color:var(--gold)">125,3 pts</div><div class="dr-bar" style="background:var(--gold);width:50%"></div></div>
+    <div class="dr"><div class="dr-ico">🌾</div><div class="dr-info"><div class="dr-lbl">Blé (USDA/WB)</div></div><div class="dr-val" style="color:var(--gold)">+8%</div><div class="dr-bar" style="background:var(--gold);width:30%"></div></div>
+    <div class="dr"><div class="dr-ico">🌽</div><div class="dr-info"><div class="dr-lbl">Maïs (FAO FFPI)</div></div><div class="dr-val" style="color:var(--green)">Stable</div><div class="dr-bar" style="background:var(--green);width:25%"></div></div>
+    <div class="dr"><div class="dr-ico">🌴</div><div class="dr-info"><div class="dr-lbl">Cacao CI (CCA CI)</div></div><div class="dr-val" style="color:var(--gold)">3 850 $/t</div><div class="dr-bar" style="background:var(--gold);width:55%"></div></div>
+    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">Urée (WB Pink)</div></div><div class="dr-val" style="color:var(--red)">+40%</div><div class="dr-bar" style="background:var(--red);width:65%"></div></div>
+  </div>
+
+  <!-- Agroalimentaire -->
+  <div style="font-size:9px;font-weight:800;color:#B07D2A;letter-spacing:2px;text-transform:uppercase;margin:10px 0 6px;display:flex;align-items:center;gap:6px;">🏭 AGROALIMENTAIRE<span style="flex:1;height:1px;background:rgba(176,125,42,.2);display:block;"></span></div>
+  <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <div class="dr"><div class="dr-ico">🔥</div><div class="dr-info"><div class="dr-lbl">GNL industrie (IEA)</div></div><div class="dr-val" style="color:var(--red)">+75%</div><div class="dr-bar" style="background:var(--red);width:80%"></div></div>
+    <div class="dr"><div class="dr-ico">🌾</div><div class="dr-info"><div class="dr-lbl">Indice alim. (FAO)</div></div><div class="dr-val" style="color:var(--gold)">125,3</div><div class="dr-bar" style="background:var(--gold);width:50%"></div></div>
+    <div class="dr"><div class="dr-ico">🫙</div><div class="dr-info"><div class="dr-lbl">Huile palme (WB Pink)</div></div><div class="dr-val" style="color:var(--gold)">+18%</div><div class="dr-bar" style="background:var(--gold);width:40%"></div></div>
+  </div>
+
+  <!-- Transport -->
+  <div style="font-size:9px;font-weight:800;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin:10px 0 6px;display:flex;align-items:center;gap:6px;">🚚 TRANSPORT<span style="flex:1;height:1px;background:rgba(138,155,176,.2);display:block;"></span></div>
+  <div style="background:var(--panel2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+    <div class="dr"><div class="dr-ico">🚢</div><div class="dr-info"><div class="dr-lbl">Fret maritime (FBX)</div></div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar" style="background:var(--red);width:72%"></div></div>
+    <div class="dr"><div class="dr-ico">✈️</div><div class="dr-info"><div class="dr-lbl">Kérosène IATA</div></div><div class="dr-val" style="color:var(--red)">+42%</div><div class="dr-bar" style="background:var(--red);width:65%"></div></div>
+    <div class="dr"><div class="dr-ico">🛡️</div><div class="dr-info"><div class="dr-lbl">Ormuz transit (Kpler)</div></div><div class="dr-val" style="color:var(--red)">-95%</div><div class="dr-bar" style="background:var(--red);width:95%"></div></div>
+  </div>
+
+  <div style="height:8px;"></div>
+</div>
 
 <div class="page" id="pg-energie">
     <div class="media-bar">
@@ -3968,7 +4331,12 @@ p, div, span {
   <nav class="bnav">
 
   <div class="bn on" id="bn-home"         onclick="gp('home')"><div class="bn-ico">🏠</div><div class="bn-lbl">Board</div><div class="bn-bar"></div></div>
-  <div class="bn"    id="bn-energie"      onclick="gp('energie')"><div class="bn-ico">⚡</div><div class="bn-lbl">Énergie</div><div class="bn-bar"></div></div>
+  <div class="bn"    id="bn-mondial"      onclick="gp('mondial')">
+    <div class="bn-ico">🌍</div>
+    <div class="bn-lbl">Monde</div>
+    <div class="bn-bar"></div>
+  </div>
+    <div class="bn"    id="bn-energie"      onclick="gp('energie')"><div class="bn-ico">⚡</div><div class="bn-lbl">Énergie</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-construction" onclick="gp('construction')"><div class="bn-ico">🏗️</div><div class="bn-lbl">BTP</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-agriculture"  onclick="gp('agriculture')"><div class="bn-ico">🌾</div><div class="bn-lbl">Agri</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-agroalim"     onclick="gp('agroalim')"><div class="bn-ico">🏭</div><div class="bn-lbl">Agro</div><div class="bn-bar"></div></div>
@@ -3987,7 +4355,7 @@ p, div, span {
   <div class="bn" id="bn-about" onclick="gp('about')">
     <div class="bn-ico">ℹ️</div>
     <div class="bn-lbl">EKB</div>
-    <div class="bn-bar"></div>
+    <div class="bn-bar">
   </div>
 
   </nav>
@@ -4418,7 +4786,7 @@ window.addEventListener('load', () => {
 
 // ── Navigation ──────────────────────────────────────
 const PAGES = {
-  home:'/ Tableau de bord',     energie:'/ Énergie',
+  home:'/ Tableau de bord',     mondial:'/ Données Mondiales',  energie:'/ Énergie',
   construction:'/ BTP',          agriculture:'/ Agriculture',
   agroalim:'/ Agroalimentaire',  transport:'/ Transport',
   sources:'/ Sources (49)',       terrain:'/ Signal Terrain CI',  brvm:'/ BRVM & Marchés',
