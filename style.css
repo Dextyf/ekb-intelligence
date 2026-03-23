@@ -1,0 +1,70 @@
+:root {
+  /* Variables */
+  --main-bg-color: #f0f0f0;
+  --main-text-color: #333;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  /* Add more variables as needed */
+}
+
+/* Layout */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Components */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Pages */
+.home {
+  background-color: var(--main-bg-color);
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+/* Special Modules */
+/* Terrain */
+.terrain { /* Styles for terrain */ }
+/* Sources */
+.sources { /* Styles for sources */ }
+/* Médias */
+.medias { /* Styles for medias */ }
+/* Lockscreen */
+.lockscreen { /* Styles for lockscreen */ }
+
+/* Animations */
+.fade {
+  animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive Rules */
+.responsive {
+  max-width: 100%;
+}
+/* Additional optimized and organized styles go here */
