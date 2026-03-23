@@ -128,28 +128,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ── PAGES — CORRECTION SUPERPOSITION ── */
 .page {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding: 14px 14px;
-  padding-bottom: calc(var(--navH) + env(safe-area-inset-bottom, 8px) + 20px);
-  scrollbar-width: thin;
-  scrollbar-color: var(--bg4) transparent;
+  /* PAS de position:absolute ici - la page inactive est hors du flux */
+  /* Aucune superposition possible */
 }
 .page::-webkit-scrollbar { width: 3px; }
 .page::-webkit-scrollbar-track { background: transparent; }
 .page::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
 .page.on {
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  z-index: 2;
+  /* La page active occupe tout le .main */
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px 14px;
+  padding-bottom: calc(var(--navH) + env(safe-area-inset-bottom, 8px) + 20px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg4) transparent;
+  background: var(--bg0);
   animation: fadeIn .2s ease;
 }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
@@ -1823,548 +1821,95 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 <!-- ─── BRVM & MARCHÉS FINANCIERS ────────────────────────────── -->
 
-<div class="page" id="pg-about">
-
-  <!-- Identité EKB -->
-  <div class="ekb-principle">
-    <div class="ep-logo-wrap">
-      <img class="ep-logo" src="data:image/webp;base64,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" alt="EKB">
-      <div>
-        <div class="ep-brand-ekb">EKB</div>
-        <div class="ep-brand-intel">Intelligence</div>
-        <div class="ep-version">v5.1 · EL-KEYON BUILDER SARL · Grand-Bassam CI</div>
-      </div>
-    </div>
-
-    <!-- Principe fondamental -->
-    <div class="ep-rule">
-      <div class="ep-rule-title">⚖️ PRINCIPE FONDAMENTAL</div>
-      <div class="ep-rule-text">
-        EKB-Intelligence est une <strong>plateforme d'accumulation.</strong>
-        Chaque information reçue — mondiale, régionale, sous-régionale ou nationale —
-        constitue une <strong>couche supplémentaire</strong> qui enrichit l'analyse
-        sans jamais remplacer ni retirer ce qui existe déjà.<br><br>
-        Quand tu envoies un signal terrain (délestages CI, pluie sur cacao,
-        décision OPEP, rapport BCEAO...) ce signal <strong>s'ajoute</strong>
-        aux 49 sources (42 données + 6 médias) et vient renforcer l'intelligence des 5 secteurs.
-      </div>
-    </div>
-
-    <div class="ep-rule" style="border-color:var(--blue)">
-      <div class="ep-rule-title" style="color:var(--lr)">📐 RÈGLE D'OR</div>
-      <div class="ep-rule-text">
-        <strong>Toute information = + (addition), jamais = (remplacement)</strong><br><br>
-        Niveau 🌍 Mondial → sources permanentes automatiques<br>
-        Niveau 🌿 CEDEAO/Régional → sources permanentes automatiques<br>
-        Niveau 🇨🇮 National CI → sources permanentes + signaux terrain<br>
-        Signaux DG → complément immédiat intégré dans les couches CI
-      </div>
-    </div>
-  </div>
-
-  <!-- Statistiques EKB -->
-  <div class="ekb-stats">
-    <div class="ekb-stat">
-      <div class="ekb-stat-val" style="color:var(--gold)">42</div>
-      <div class="ekb-stat-lbl">Sources permanentes actives</div>
-    </div>
-    <div class="ekb-stat">
-      <div class="ekb-stat-val" style="color:var(--blue)">3</div>
-      <div class="ekb-stat-lbl">Niveaux géographiques</div>
-    </div>
-    <div class="ekb-stat">
-      <div class="ekb-stat-val" style="color:var(--agri)">5</div>
-      <div class="ekb-stat-lbl">Secteurs couverts</div>
-    </div>
-    <div class="ekb-stat">
-      <div class="ekb-stat-val" style="color:var(--red)">∞</div>
-      <div class="ekb-stat-lbl">Signaux terrain intégrables</div>
-    </div>
-    <div class="ekb-stat">
-      <div class="ekb-stat-val" style="color:var(--success)">6h</div>
-      <div class="ekb-stat-lbl">Cycle mise à jour N8N</div>
-    </div>
-    <div class="ekb-stat">
-      <div class="ekb-stat-val" style="color:var(--violet)">AI</div>
-      <div class="ekb-stat-lbl">Analyse Claude quotidienne</div>
-    </div>
-  </div>
-
-  <!-- Architecture 3 niveaux -->
-  <div class="sh"><div class="sh-dot" style="background:var(--gold)"></div><div class="sh-t">Architecture des données</div></div>
-
-  <div class="arch-viz">
-    <div class="arch-level">
-      <div class="arch-badge" style="background:var(--lwGl);color:var(--lw)">MONDIAL</div>
-      <div class="arch-content">
-        <div class="arch-title" style="color:var(--lw)">🌍 Niveau Mondial — 18 sources</div>
-        <div class="arch-sources">
-          EIA · IEA · FAO FPMA · FAO FFPI · FAOSTAT · WB Pink Sheet · USDA NASS<br>
-          OPEC · OECD · FBX Freightos · IATA · NewsAPI · GDELT · ExchangeRate API · Alpha Vantage
-        </div>
-      </div>
-      <div class="arch-count" style="color:var(--lw)">18</div>
-    </div>
-
-    <div class="arch-level">
-      <div class="arch-badge" style="background:var(--lrGl);color:var(--lr)">CEDEAO</div>
-      <div class="arch-content">
-        <div class="arch-title" style="color:var(--lr)">🌿 Niveau Régional CEDEAO — 11 sources</div>
-        <div class="arch-sources">
-          BCEAO · ECOWAS AMIS · AGRHYMET CILSS · IRENA Africa · ECOWAS CEREEC<br>
-          AfDB Statistics · SE4ALL Africa Hub · FAO GIEWS AOF · UNECA · Open Data for Africa
-        </div>
-      </div>
-      <div class="arch-count" style="color:var(--lr)">11</div>
-    </div>
-
-    <div class="arch-level">
-      <div class="arch-badge" style="background:var(--lnGl);color:var(--ln)">NATIONAL</div>
-      <div class="arch-content">
-        <div class="arch-title" style="color:var(--ln)">🇨🇮 Niveau National CI — 13 sources fixes</div>
-        <div class="arch-sources">
-          INS CI · ANARE-CI · PETROCI · SOGEPE · CCA CI · MINADER CI<br>
-          PAA · CEPICI · CCI CI · AGEROUTE · BRVM · data.gouv.ci · Trésor CI
-        </div>
-      </div>
-      <div class="arch-count" style="color:var(--ln)">13</div>
-    </div>
-
-    <div class="arch-level" style="border-color:rgba(232,56,56,.3)">
-      <div class="arch-badge" style="background:var(--rGl);color:var(--red)">TERRAIN</div>
-      <div class="arch-content">
-        <div class="arch-title" style="color:var(--red)">⚡ Signaux Terrain — Sources variables</div>
-        <div class="arch-sources">
-          Rapports DG · Facebook CI · Commentaires locaux · Médias CI<br>
-          Communiqués CIE · RTI · FratMat · Pulse CI · 7info · Observations directes
-        </div>
-      </div>
-      <div class="arch-count" style="color:var(--red)">+∞</div>
-    </div>
-
-    <div class="arch-level" style="border-color:rgba(155,111,224,.25)">
-      <div class="arch-badge" style="background:rgba(155,111,224,.1);color:var(--violet)">MÉDIAS</div>
-      <div class="arch-content">
-        <div class="arch-title" style="color:var(--violet)">📺 Médias — 6 chaînes complémentaires</div>
-        <div class="arch-sources">
-          France 24 · BFM TV · Africa 24 · RTI CI<br>
-          CNN International · Al Jazeera<br>
-          <span style="color:rgba(155,111,224,.6)">Intégrés via NewsAPI + GDELT + RSS directs</span>
-        </div>
-      </div>
-      <div class="arch-count" style="color:var(--violet)">6</div>
-    </div>
-  </div>
-
-  <!-- 5 secteurs avec leurs couvertures -->
-  <div class="sh"><div class="sh-dot" style="background:var(--blue)"></div><div class="sh-t">Couverture par secteur</div></div>
-
-  <div class="sector-arch-grid">
-    <div class="sec-arch" onclick="gp('energie')" style="border-color:rgba(197,146,46,.25)">
-      <div class="sec-arch-ico">⚡</div>
-      <div class="sec-arch-name" style="color:var(--energy)">Énergie</div>
-      <div class="sec-arch-count">
-        <span class="sec-arch-dot" style="background:var(--lw)"></span>EIA·IEA·OPEC<br>
-        <span class="sec-arch-dot" style="background:var(--lr)"></span>IRENA·CEREEC<br>
-        <span class="sec-arch-dot" style="background:var(--ln)"></span>ANARE·SOGEPE·PETROCI<br>
-        <span class="sec-arch-dot" style="background:var(--red)"></span>CIE terrain · délestages
-      </div>
-    </div>
-    <div class="sec-arch" onclick="gp('construction')" style="border-color:rgba(26,118,160,.25)">
-      <div class="sec-arch-ico">🏗️</div>
-      <div class="sec-arch-name" style="color:var(--build)">Construction</div>
-      <div class="sec-arch-count">
-        <span class="sec-arch-dot" style="background:var(--lw)"></span>WB Pink·OECD·FBX<br>
-        <span class="sec-arch-dot" style="background:var(--lr)"></span>AfDB·BAD infra<br>
-        <span class="sec-arch-dot" style="background:var(--ln)"></span>CCI CI·CEPICI·AGEROUTE
-      </div>
-    </div>
-    <div class="sec-arch" onclick="gp('agriculture')" style="border-color:rgba(58,128,32,.25)">
-      <div class="sec-arch-ico">🌾</div>
-      <div class="sec-arch-name" style="color:var(--agri)">Agriculture</div>
-      <div class="sec-arch-count">
-        <span class="sec-arch-dot" style="background:var(--lw)"></span>FAO·WB·USDA·EIA<br>
-        <span class="sec-arch-dot" style="background:var(--lr)"></span>AMIS·AGRHYMET·CILSS<br>
-        <span class="sec-arch-dot" style="background:var(--ln)"></span>CCA CI·MINADER
-      </div>
-    </div>
-    <div class="sec-arch" onclick="gp('agroalim')" style="border-color:rgba(16,200,224,.2)">
-      <div class="sec-arch-ico">🏭</div>
-      <div class="sec-arch-name" style="color:var(--agro)">Agroalimentaire</div>
-      <div class="sec-arch-count">
-        <span class="sec-arch-dot" style="background:var(--lw)"></span>IEA·FAO·WB·FBX<br>
-        <span class="sec-arch-dot" style="background:var(--lr)"></span>BCEAO·AfDB<br>
-        <span class="sec-arch-dot" style="background:var(--ln)"></span>ANARE·PETROCI·MINADER
-      </div>
-    </div>
-    <div class="sec-arch" onclick="gp('transport')" style="border-color:rgba(128,96,200,.2);grid-column:1/-1">
-      <div class="sec-arch-ico">🚚</div>
-      <div class="sec-arch-name" style="color:var(--transp)">Transport & Logistique</div>
-      <div class="sec-arch-count">
-        <span class="sec-arch-dot" style="background:var(--lw)"></span>FBX Freightos · IATA · EIA · Baltic Exchange &nbsp;
-        <span class="sec-arch-dot" style="background:var(--lr)"></span>CEDEAO corridors · BCEAO &nbsp;
-        <span class="sec-arch-dot" style="background:var(--ln)"></span>INS CI · PAA · AGEROUTE
-      </div>
-    </div>
-  </div>
-
-  <!-- Flux d'information -->
-  <div class="sh"><div class="sh-dot" style="background:var(--violet)"></div><div class="sh-t">Comment les données arrivent</div></div>
-
-  <div class="info-flow">
-    <div class="if-title">Pipeline d'enrichissement EKB</div>
-    <div class="if-row">
-      <div class="if-source" style="color:var(--lw)">🌍 APIs Mondiales</div>
-      <div class="if-arrow">→</div>
-      <div class="if-dest">N8N collecte auto toutes les 6h → data.json → App mise à jour</div>
-      <div class="if-freq">6h cycle</div>
-    </div>
-    <div class="if-row">
-      <div class="if-source" style="color:var(--lr)">🌿 CEDEAO Régional</div>
-      <div class="if-arrow">→</div>
-      <div class="if-dest">BCEAO · AMIS · IRENA → couche CEDEAO de chaque secteur</div>
-      <div class="if-freq">Mensuel</div>
-    </div>
-    <div class="if-row">
-      <div class="if-source" style="color:var(--ln)">🇨🇮 Sources CI fixes</div>
-      <div class="if-arrow">→</div>
-      <div class="if-dest">INS · ANARE · CCA · PAA → couche nationale CI</div>
-      <div class="if-freq">Mensuel</div>
-    </div>
-    <div class="if-row">
-      <div class="if-source" style="color:var(--red)">⚡ Signal DG terrain</div>
-      <div class="if-arrow">→</div>
-      <div class="if-dest">Tu envoies l'info → s'ajoute comme couche CI supplémentaire</div>
-      <div class="if-freq">Immédiat</div>
-    </div>
-    <div class="if-row">
-      <div class="if-source" style="color:var(--violet)">🤖 Claude AI</div>
-      <div class="if-arrow">→</div>
-      <div class="if-dest">Analyse croisée toutes sources → Score risque/opportunité quotidien</div>
-      <div class="if-freq">06h00</div>
-    </div>
-  </div>
-
-  <!-- Signaux terrain intégrés à ce jour -->
-  <div class="sh"><div class="sh-dot" style="background:var(--red)"></div><div class="sh-t">Signaux terrain intégrés</div></div>
-
-  <div class="signal-card sc-n">
-    <div class="sig-card-head">
-      <div class="sig-card-ico">⚡</div>
-      <div>
-        <div class="sig-card-title" style="color:var(--red)">Délestages Abidjan & Grand-Bassam</div>
-      </div>
-      <span class="dsb dsb-n" style="margin-left:auto">CI Terrain</span>
-    </div>
-    <div class="sig-card-body">Coupures répétées dans 14+ zones dont Grand-Bassam. Réseau CIE saturé structurellement. 3 causes : chaleur saisonnière + travaux gaz naturel + croissance urbaine. Signal reçu via Facebook et confirmé sources officielles CIE, RTI, FratMat.</div>
-    <div class="sig-card-meta">
-      <span class="sig-date">Fév-Mars 2026</span>
-      <span class="dsb dsb-n">CIE.ci</span>
-      <span class="dsb dsb-n">RTI Infos</span>
-      <span class="dsb dsb-n">FratMat</span>
-      <span class="dsb dsb-n">Pulse CI</span>
-      <span class="dsb dsb-n">Facebook terrain</span>
-    </div>
-    <div style="margin-top:7px;font-size:10px;color:var(--txt3);font-family:'JetBrains Mono',monospace">
-      → Intégré dans : Page Énergie (couche CI) · Page Terrain CI (module complet)
-    </div>
-  </div>
-
-  <div style="background:var(--panel2);border:1px dashed rgba(197,146,46,.3);border-radius:var(--r);padding:12px;text-align:center;margin-bottom:9px">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);letter-spacing:2px;margin-bottom:6px">PROCHAIN SIGNAL TERRAIN</div>
-    <div style="font-size:12px;color:var(--txt2)">Envoie toute information pertinente —<br>elle sera intégrée comme couche supplémentaire</div>
-    <div style="font-size:10px;color:var(--txt3);margin-top:5px;font-style:italic">Météo · Prix locaux · Actualités CI · Rapports sectoriels · Observations terrain...</div>
-  </div>
-
-  <!-- Contact EL-KEYON -->
-  <div style="background:linear-gradient(135deg,var(--goldGl),rgba(26,118,160,.06));border:1px solid var(--border2);border-radius:var(--r);padding:13px;text-align:center;">
-    <img src="data:image/webp;base64,UklGRsoBAABXRUJQVlA4IL4BAABwCgCdASodACwAPjESh0KiIQ1WAgAQAYJYwCsMsu553AOkU8og+QHflf1XlH+evRJ/3nAV/rMei723kNKzmoDT1NksMa4iV/t7AUB6yBvnX8wfv9KKNO6goKYoAAD+//aaEuD6T0752xubd9OPo8t+5rSGj+ss89/zvr8+XBsYnR8fM5OFLkqWCOFI1X/Gujv3wn+v/0rzu+2a+/45LWdfi9sVf6ZPEDaurqW30+P/iGOWh13tK45xrw+c3/RmsR3fL45gvR3t5/n6fa8zKN63XAfOsOiTMkvlCW9c/uT0UIoHZNGiOfvxovLKYZhINYKjycnfZ8shPT37k2fS1+uumAkm7hlXIAf1izecCRM3FPY0XqFEmdON5eZ9uAV3J/nXr6sm3/0bna1upp/PIkv9hLcQ2zX90mO//BlzB8MZ46uix2/Z2dWFhyL/2gPv/jSBcyWi2psT1xJTn+fHgnT2d21xpmF8izVL6nVARcphP5FFjRpWrLRf1A0VDng07qQ8UApWJ6z4/Dwto8aZSRHUsh1WNAG+2PSM5YIo1rABe7cNveWHFMKb+Gk46HD66TkUsPi2XuixegcZ2GAAAA==" style="height:36px;width:auto;margin-bottom:8px;" alt="EKB">
-    <div style="font-size:13px;font-weight:800;margin-bottom:3px"><span style="color:#fff">EKB</span><span style="color:var(--goldLt)">-Intelligence</span></div>
-    <div style="font-size:10px;color:var(--txt2);margin-bottom:8px">EL-KEYON BUILDER SARL · RC: CI-GRDBSM-2024-B-3133</div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold)">+225 07 11 77 10 97 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed888186889482838f98848189889fad8a808c8481c38e8280">[email&#160;protected]</a></div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);margin-top:4px">Grand-Bassam, Quartier Mockeyville, Côte d'Ivoire</div>
-  </div>
-
-
-  <!-- ── CHANGER LE CODE PIN ─────────────────── -->
-  <div style="margin-top:16px;background:linear-gradient(135deg,rgba(197,146,46,.08),rgba(26,118,160,.05));border:1px solid rgba(197,146,46,.25);border-radius:12px;padding:14px;">
-    <div style="font-size:13px;font-weight:700;color:#C9972B;margin-bottom:12px;letter-spacing:.5px;">SECURITE — CODE D'ACCES</div>
-
-    <div style="font-size:11px;color:#8A9BB0;margin-bottom:14px;">Modifiez votre code PIN à 4 chiffres. Le nouveau code sera actif immédiatement.</div>
-
-    <!-- Ancien code -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Code actuel</div>
-      <input id="pinOld" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
-        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
-        placeholder="••••">
-    </div>
-
-    <!-- Nouveau code -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Nouveau code</div>
-      <input id="pinNew" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
-        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
-        placeholder="••••">
-    </div>
-
-    <!-- Confirmer -->
-    <div style="margin-bottom:14px;">
-      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Confirmer le nouveau code</div>
-      <input id="pinConfirm" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
-        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
-        placeholder="••••">
-    </div>
-
-    <!-- Message feedback -->
-    <div id="pinMsg" style="font-size:11px;height:14px;margin-bottom:10px;text-align:center;"></div>
-
-    <!-- Bouton -->
-    <button onclick="ekbChangePIN()"
-      style="width:100%;background:linear-gradient(135deg,#C9972B,#A07820);border:none;border-radius:10px;padding:13px;color:#0A1628;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;cursor:pointer;-webkit-tap-highlight-color:transparent;">
-      MODIFIER LE CODE
-    </button>
-  </div>
-
-</div>
 
 <!-- ─── BRVM & MARCHÉS FINANCIERS ────────────────────────────── -->
 <div class="page" id="pg-brvm">
   <div class="media-bar" id="mb-brvm"></div>
 
-  <!-- Header BRVM -->
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
     <div>
-      <div style="font-size:11px;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;">Marchés Financiers</div>
-      <div style="font-size:18px;font-weight:800;color:#F0C040;">BRVM & CEDEAO</div>
+      <div style="font-size:11px;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;">Marchés Financiers</div>
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--goldLt);">BRVM & CEDEAO</div>
     </div>
     <div class="live-api-badge">LIVE</div>
   </div>
 
-  <!-- KPI BRVM principal -->
   <div class="pulse-card" style="margin-bottom:9px;">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;">
       <div>
         <div class="brvm-lbl">BRVM COMPOSITE</div>
-        <div class="brvm-val stat-glow" id="brvm-composite">244,18</div>
+        <div class="brvm-val" id="brvm-composite">244,18</div>
         <div style="display:flex;gap:8px;margin-top:4px;align-items:center;">
           <span class="stock-var pos" id="brvm-var">+1,24%</span>
-          <span style="font-size:9px;color:#4A5568;">22 mars 2026</span>
+          <span style="font-size:9px;color:var(--txt3);">22 mars 2026</span>
         </div>
       </div>
       <div style="text-align:right;">
         <div class="brvm-lbl">BRVM 30</div>
-        <div style="font-size:18px;font-weight:700;color:#E8EFF8;font-family:'JetBrains Mono',monospace;" id="brvm30">312,45</div>
+        <div style="font-size:18px;font-weight:700;color:var(--txt1);font-family:'DM Mono',monospace;" id="brvm30">312,45</div>
         <span class="stock-var pos" style="font-size:9px;" id="brvm30-var">+0,87%</span>
       </div>
     </div>
-    <div style="height:1px;background:rgba(197,146,46,.15);margin:10px 0;"></div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:#4A5568;">
+    <div style="height:1px;background:var(--border3);margin:10px 0;"></div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--txt3);">
       <span>Abidjan · BRVM</span>
-      <span id="brvm-time">Données statiques — API N8N requise</span>
+      <span id="brvm-time">Données de référence · API N8N requise</span>
     </div>
   </div>
 
-  <!-- Forex Live -->
-  <div style="font-size:10px;font-weight:700;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">
-    FOREX — TAUX DE CHANGE LIVE <span class="live-api-badge" style="vertical-align:middle;">API</span>
+  <div style="font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">
+    FOREX — TAUX DE CHANGE <span class="live-api-badge" style="vertical-align:middle;">LIVE</span>
   </div>
   <div class="forex-grid">
-    <div class="forex-item">
-      <div class="forex-pair">USD / XOF</div>
-      <div class="forex-rate" id="fx-usdxof">566</div>
-      <div class="forex-src">BCEAO · ExchangeRate-API</div>
-    </div>
-    <div class="forex-item">
-      <div class="forex-pair">EUR / XOF</div>
-      <div class="forex-rate" id="fx-eurxof">655,96</div>
-      <div class="forex-src">Fixe BCEAO · Parité EUR</div>
-    </div>
-    <div class="forex-item">
-      <div class="forex-pair">USD / EUR</div>
-      <div class="forex-rate" id="fx-usdeur">0,864</div>
-      <div class="forex-src">ExchangeRate-API live</div>
-    </div>
-    <div class="forex-item">
-      <div class="forex-pair">GBP / XOF</div>
-      <div class="forex-rate" id="fx-gbpxof">714</div>
-      <div class="forex-src">ExchangeRate-API live</div>
-    </div>
+    <div class="forex-item"><div class="forex-pair">USD / XOF</div><div class="forex-rate" id="fx-usdxof">566</div><div class="forex-src">BCEAO · ExchangeRate-API</div></div>
+    <div class="forex-item"><div class="forex-pair">EUR / XOF</div><div class="forex-rate" id="fx-eurxof">655,96</div><div class="forex-src">Fixe BCEAO · Parité EUR</div></div>
+    <div class="forex-item"><div class="forex-pair">USD / EUR</div><div class="forex-rate" id="fx-usdeur">0,864</div><div class="forex-src">ExchangeRate-API live</div></div>
+    <div class="forex-item"><div class="forex-pair">GBP / XOF</div><div class="forex-rate" id="fx-gbpxof">714</div><div class="forex-src">ExchangeRate-API live</div></div>
   </div>
 
-  <!-- Top Actions BRVM -->
-  <div style="font-size:10px;font-weight:700;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">
-    TOP ACTIONS BRVM
-  </div>
+  <div style="font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">TOP ACTIONS BRVM</div>
   <div class="glass-card">
-    <div class="stock-row">
-      <div class="stock-name">SONATEL</div>
-      <div class="stock-price">17 500</div>
-      <div class="stock-var pos">+2,1%</div>
-      <div class="stock-vol">12 840 titres</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">ECOBANK-CI</div>
-      <div class="stock-price">8 250</div>
-      <div class="stock-var pos">+0,9%</div>
-      <div class="stock-vol">8 320 titres</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">ORANGE CI</div>
-      <div class="stock-price">14 100</div>
-      <div class="stock-var neg">-0,7%</div>
-      <div class="stock-vol">5 600 titres</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">TOTALENERGIES-CI</div>
-      <div class="stock-price">2 890</div>
-      <div class="stock-var pos">+3,2%</div>
-      <div class="stock-vol">4 100 titres</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">SGBCI</div>
-      <div class="stock-price">11 650</div>
-      <div class="stock-var neu">0,0%</div>
-      <div class="stock-vol">2 980 titres</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">SIFCA</div>
-      <div class="stock-price">4 320</div>
-      <div class="stock-var pos">+1,4%</div>
-      <div class="stock-vol">3 740 titres</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">NESTLÉ CI</div>
-      <div class="stock-price">7 800</div>
-      <div class="stock-var neg">-0,3%</div>
-      <div class="stock-vol">1 920 titres</div>
-    </div>
-    <div style="font-size:9px;color:#2C3A47;text-align:center;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.04);">
-      Cours BRVM · Abidjan · Données de référence — API N8N pour données live
-    </div>
+    <div class="stock-row"><div class="stock-name">SONATEL</div><div class="stock-price">17 500</div><div class="stock-var pos">+2,1%</div><div class="stock-vol">12 840 titres</div></div>
+    <div class="stock-row"><div class="stock-name">ECOBANK-CI</div><div class="stock-price">8 250</div><div class="stock-var pos">+0,9%</div><div class="stock-vol">8 320 titres</div></div>
+    <div class="stock-row"><div class="stock-name">ORANGE CI</div><div class="stock-price">14 100</div><div class="stock-var neg">-0,7%</div><div class="stock-vol">5 600 titres</div></div>
+    <div class="stock-row"><div class="stock-name">TOTALENERGIES-CI</div><div class="stock-price">2 890</div><div class="stock-var pos">+3,2%</div><div class="stock-vol">4 100 titres</div></div>
+    <div class="stock-row"><div class="stock-name">SGBCI</div><div class="stock-price">11 650</div><div class="stock-var neu">0,0%</div><div class="stock-vol">2 980 titres</div></div>
+    <div class="stock-row"><div class="stock-name">SIFCA</div><div class="stock-price">4 320</div><div class="stock-var pos">+1,4%</div><div class="stock-vol">3 740 titres</div></div>
+    <div class="stock-row"><div class="stock-name">NESTLÉ CI</div><div class="stock-price">7 800</div><div class="stock-var neg">-0,3%</div><div class="stock-vol">1 920 titres</div></div>
+    <div style="font-size:9px;color:var(--txt3);text-align:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">Cours BRVM · Abidjan · Données de référence</div>
   </div>
 
-  <!-- Crypto Radar -->
-  <div style="font-size:10px;font-weight:700;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">
-    CRYPTO RADAR <span class="live-api-badge" style="vertical-align:middle;">CoinGecko</span>
-  </div>
+  <div style="font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">CRYPTO RADAR <span class="live-api-badge" style="vertical-align:middle;">CoinGecko</span></div>
   <div class="glass-card">
-    <div class="crypto-row">
-      <div class="crypto-icon">₿</div>
-      <div class="crypto-name">Bitcoin <span style="color:#4A5568;font-size:9px;">BTC</span></div>
-      <div>
-        <div class="crypto-price" id="btc-price">87 240 $</div>
-        <div class="stock-var neg" style="font-size:9px;" id="btc-var">-2,1%</div>
-      </div>
-    </div>
-    <div class="crypto-row">
-      <div class="crypto-icon">Ξ</div>
-      <div class="crypto-name">Ethereum <span style="color:#4A5568;font-size:9px;">ETH</span></div>
-      <div>
-        <div class="crypto-price" id="eth-price">2 014 $</div>
-        <div class="stock-var neg" style="font-size:9px;" id="eth-var">-1,8%</div>
-      </div>
-    </div>
-    <div class="crypto-row">
-      <div class="crypto-icon">◎</div>
-      <div class="crypto-name">XRP <span style="color:#4A5568;font-size:9px;">XRP</span></div>
-      <div>
-        <div class="crypto-price" id="xrp-price">2,14 $</div>
-        <div class="stock-var pos" style="font-size:9px;" id="xrp-var">+0,6%</div>
-      </div>
-    </div>
+    <div class="crypto-row"><div class="crypto-icon">₿</div><div class="crypto-name">Bitcoin <span style="color:var(--txt3);font-size:9px;">BTC</span></div><div><div class="crypto-price" id="btc-price">87 240 $</div><div class="stock-var neg" style="font-size:9px;" id="btc-var">-2,1%</div></div></div>
+    <div class="crypto-row"><div class="crypto-icon">Ξ</div><div class="crypto-name">Ethereum <span style="color:var(--txt3);font-size:9px;">ETH</span></div><div><div class="crypto-price" id="eth-price">2 014 $</div><div class="stock-var neg" style="font-size:9px;" id="eth-var">-1,8%</div></div></div>
+    <div class="crypto-row"><div class="crypto-icon">◎</div><div class="crypto-name">XRP <span style="color:var(--txt3);font-size:9px;">XRP</span></div><div><div class="crypto-price" id="xrp-price">2,14 $</div><div class="stock-var pos" style="font-size:9px;" id="xrp-var">+0,6%</div></div></div>
   </div>
 
-  <!-- Obligations CI -->
-  <div style="font-size:10px;font-weight:700;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">
-    OBLIGATIONS & BONS DU TRÉSOR CI
-  </div>
-  <div class="glass-card">
-    <div class="stock-row">
-      <div class="stock-name">OAT CI 5 ans</div>
-      <div class="stock-price" style="color:#F0C040;">6,25%</div>
-      <div class="stock-var neu">Stable</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">BAT UEMOA 91j</div>
-      <div class="stock-price" style="color:#F0C040;">5,80%</div>
-      <div class="stock-var pos">+10bps</div>
-    </div>
-    <div class="stock-row">
-      <div class="stock-name">Eurobond CI 2033</div>
-      <div class="stock-price" style="color:#F0C040;">7,40%</div>
-      <div class="stock-var neg">-5bps</div>
-    </div>
-    <div style="font-size:9px;color:#2C3A47;text-align:center;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.04);">
-      TRÉSOR CI · BCEAO · UMOA-Titres
-    </div>
-  </div>
-
-  <!-- Météo Abidjan -->
-  <div style="font-size:10px;font-weight:700;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">
-    MÉTÉO ABIDJAN <span class="live-api-badge" style="vertical-align:middle;">Open-Meteo</span>
-  </div>
+  <div style="font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">MÉTÉO GRAND-BASSAM <span class="live-api-badge" style="vertical-align:middle;">Open-Meteo</span></div>
   <div class="glass-card">
     <div class="meteo-grid">
-      <div class="meteo-item">
-        <div class="meteo-val" id="mt-temp">32°C</div>
-        <div class="meteo-lbl">Température</div>
-      </div>
-      <div class="meteo-item">
-        <div class="meteo-val" id="mt-feel">36°C</div>
-        <div class="meteo-lbl">Ressenti</div>
-      </div>
-      <div class="meteo-item">
-        <div class="meteo-val" id="mt-hum">78%</div>
-        <div class="meteo-lbl">Humidité</div>
-      </div>
-      <div class="meteo-item">
-        <div class="meteo-val" id="mt-wind">14 km/h</div>
-        <div class="meteo-lbl">Vent</div>
-      </div>
+      <div class="meteo-item"><div class="meteo-val" id="mt-temp">32°C</div><div class="meteo-lbl">Température</div></div>
+      <div class="meteo-item"><div class="meteo-val" id="mt-feel">36°C</div><div class="meteo-lbl">Ressenti</div></div>
+      <div class="meteo-item"><div class="meteo-val" id="mt-hum">78%</div><div class="meteo-lbl">Humidité</div></div>
+      <div class="meteo-item"><div class="meteo-val" id="mt-wind">14 km/h</div><div class="meteo-lbl">Vent</div></div>
     </div>
-    <div style="font-size:9px;color:#4A5568;text-align:center;margin-top:8px;" id="mt-time">
-      Grand-Bassam · Open-Meteo · Mise à jour auto
-    </div>
+    <div style="font-size:9px;color:var(--txt3);text-align:center;margin-top:8px;" id="mt-time">Grand-Bassam · Open-Meteo · Mise à jour auto</div>
   </div>
 
-  <!-- Statut APIs -->
-  <div style="font-size:10px;font-weight:700;color:#8A9BB0;letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">
-    STATUT DES APIs LIVE
-  </div>
+  <div style="font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin:12px 0 8px;">STATUT APIs LIVE</div>
   <div class="glass-card">
-    <div class="api-status-row">
-      <div class="api-dot load" id="dot-er"></div>
-      <div class="api-name">ExchangeRate-API</div>
-      <div class="api-val" id="val-er">Chargement...</div>
-    </div>
-    <div class="api-status-row">
-      <div class="api-dot load" id="dot-cg"></div>
-      <div class="api-name">CoinGecko</div>
-      <div class="api-val" id="val-cg">Chargement...</div>
-    </div>
-    <div class="api-status-row">
-      <div class="api-dot load" id="dot-mt"></div>
-      <div class="api-name">Open-Meteo</div>
-      <div class="api-val" id="val-mt">Chargement...</div>
-    </div>
-    <div class="api-status-row">
-      <div class="api-dot load" id="dot-wb"></div>
-      <div class="api-name">World Bank API</div>
-      <div class="api-val" id="val-wb">Chargement...</div>
-    </div>
+    <div class="api-status-row"><div class="api-dot load" id="dot-er"></div><div class="api-name">ExchangeRate-API</div><div class="api-val" id="val-er">Chargement...</div></div>
+    <div class="api-status-row"><div class="api-dot load" id="dot-cg"></div><div class="api-name">CoinGecko</div><div class="api-val" id="val-cg">Chargement...</div></div>
+    <div class="api-status-row"><div class="api-dot load" id="dot-mt"></div><div class="api-name">Open-Meteo</div><div class="api-val" id="val-mt">Chargement...</div></div>
+    <div class="api-status-row"><div class="api-dot load" id="dot-wb"></div><div class="api-name">World Bank API</div><div class="api-val" id="val-wb">Chargement...</div></div>
   </div>
 
-  <!-- Bouton refresh -->
-  <button class="refresh-btn" onclick="ekbRefreshAPIs()">
-    🔄 Actualiser les données live
-  </button>
-
+  <button class="refresh-btn" onclick="ekbRefreshAPIs()">🔄 Actualiser les données live</button>
   <div style="height:20px;"></div>
 </div>
 
-  </div>
-  </div><!-- /main -->
+</div><!-- /main -->
 
 
 
@@ -3369,5 +2914,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+</div>
 </body>
 </html>
