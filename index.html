@@ -3,72 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#0A1628">
-<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0D0F14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="EKB">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https:; manifest-src 'self'; worker-src 'self';">
 <link rel="manifest" href="manifest.json">
-<title>EKB-Intelligence v6 · Marchés CEDEAO</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- JS NAVIGATION -->
-<script>
-var PAGES = {
-  home:'/ Tableau de bord',
-  mondial:'/ Données Mondiales',
-  energie:'/ Énergie',
-  construction:'/ BTP',
-  agriculture:'/ Agriculture',
-  agroalim:'/ Agroalimentaire',
-  transport:'/ Transport',
-  sources:'/ Sources (49)',
-  terrain:'/ Signal Terrain CI',
-  brvm:'/ BRVM & Marchés',
-  about:'/ EKB'
-};
-
-function gp(id) {
-  var pages = document.querySelectorAll('.page');
-  for (var i = 0; i < pages.length; i++) {
-    pages[i].classList.remove('on');
-  }
-  var bns = document.querySelectorAll('.bn');
-  for (var j = 0; j < bns.length; j++) {
-    bns[j].classList.remove('on');
-  }
-  var pg = document.getElementById('pg-' + id);
-  var bn = document.getElementById('bn-' + id);
-  if (pg) { pg.classList.add('on'); pg.scrollTop = 0; }
-  if (bn) { bn.classList.add('on'); }
-  var tb = document.getElementById('tb-page');
-  if (tb) tb.textContent = PAGES[id] || '';
-}
-
-// Attacher les événements via addEventListener
-// Fonctionne même si onclick est bloqué
-document.addEventListener('DOMContentLoaded', function() {
-  // Nav buttons
-  var bns = document.querySelectorAll('.bn[data-page]');
-  for (var i = 0; i < bns.length; i++) {
-    (function(btn) {
-      btn.addEventListener('click', function(e) { e.preventDefault(); gp(btn.getAttribute('data-page')); });
-      btn.addEventListener('touchend', function(e) { e.preventDefault(); gp(btn.getAttribute('data-page')); });
-    })(bns[i]);
-  }
-  // Tous les éléments avec data-page (bannières, boutons CTA)
-  var dp = document.querySelectorAll('[data-page]:not(.bn)');
-  for (var j = 0; j < dp.length; j++) {
-    (function(el) {
-      el.addEventListener('click', function(e) { e.preventDefault(); gp(el.getAttribute('data-page')); });
-    })(dp[j]);
-  }
-});
-
-window.gp = gp;
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<title>EKB-Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
 <style>
 
 /* ══════════════════════════════════════════════════════════════
@@ -144,210 +87,45 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
   z-index: 10;
 }
-.tb-logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-.tb-brand-wrap {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
-.tb-brand-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--goldLt);
-  letter-spacing: .5px;
-  line-height: 1;
-}
-.tb-brand-sub {
-  font-size: 8px;
-  color: var(--txt3);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-top: 1px;
-}
-.tb-sep {
-  width: 1px;
-  height: 18px;
-  background: var(--border2);
-  flex-shrink: 0;
-}
-.tb-page {
-  flex: 1;
-  font-size: 10px;
-  color: var(--txt3);
-  letter-spacing: .5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-.tb-r {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.tb-pill {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 20px;
-  padding: 3px 8px;
-  font-size: 10px;
-  font-family: 'DM Mono', monospace;
-  font-weight: 500;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.tb-logo { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; }
+.tb-brand-wrap { display: flex; flex-direction: column; flex-shrink: 0; }
+.tb-brand-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; color: var(--goldLt); letter-spacing: .5px; line-height: 1; }
+.tb-brand-sub { font-size: 8px; color: var(--txt3); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px; }
+.tb-sep { width: 1px; height: 18px; background: var(--border2); flex-shrink: 0; }
+.tb-page { flex: 1; font-size: 10px; color: var(--txt3); letter-spacing: .5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tb-r { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.tb-pill { display: flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 20px; padding: 3px 8px; font-size: 10px; font-family: 'DM Mono', monospace; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
 .tb-pill.red { border-color: rgba(229,57,53,.4); color: #FF6B6B; }
 .tb-pill.gold { border-color: var(--border3); color: var(--goldLt); }
-.tb-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-  animation: dotPulse 2s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes dotPulse {
-  0%,100% { opacity: 1; }
-  50% { opacity: .3; }
-}
-.tb-icon-btn {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  flex-shrink: 0;
-  position: relative;
-}
-.tb-badge-dot {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 6px;
-  height: 6px;
-  background: var(--red);
-  border-radius: 50%;
-  border: 1px solid var(--bg1);
-}
+.tb-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: dotPulse 2s ease-in-out infinite; flex-shrink: 0; }
+@keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
 
 /* ── TICKER ── */
-.ticker {
-  height: 26px;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.tk-label {
-  font-family: 'Syne', sans-serif;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--bg1);
-  background: var(--gold);
-  padding: 0 8px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
+.ticker { height: 26px; background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; align-items: center; overflow: hidden; flex-shrink: 0; }
+.tk-label { font-family: 'Syne', sans-serif; font-size: 8px; font-weight: 800; letter-spacing: 2px; color: var(--bg1); background: var(--gold); padding: 0 8px; height: 100%; display: flex; align-items: center; flex-shrink: 0; }
 .tk-wrap { flex: 1; overflow: hidden; }
-.tk-inner {
-  display: flex;
-  white-space: nowrap;
-  animation: tickerScroll 80s linear infinite;
-}
-.tk-inner span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0 14px;
-  font-size: 9.5px;
-  font-family: 'DM Mono', monospace;
-  color: var(--txt2);
-  border-right: 1px solid var(--border);
-}
-.tk-inner .tsrc {
-  font-size: 7.5px;
-  color: var(--txt3);
-  background: var(--bg3);
-  padding: 1px 4px;
-  border-radius: 3px;
-  letter-spacing: .5px;
-}
+.tk-inner { display: flex; white-space: nowrap; animation: tickerScroll 80s linear infinite; }
+.tk-inner span { display: inline-flex; align-items: center; gap: 4px; padding: 0 14px; font-size: 9.5px; font-family: 'DM Mono', monospace; color: var(--txt2); border-right: 1px solid var(--border); }
+.tk-inner .tsrc { font-size: 7.5px; color: var(--txt3); background: var(--bg3); padding: 1px 4px; border-radius: 3px; letter-spacing: .5px; }
 .tk-inner .tn { color: var(--txt1); font-weight: 500; }
 .tk-inner .td.up { color: var(--green); }
 .tk-inner .td.dn { color: var(--red); }
-@keyframes tickerScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ── DATA STATUS BAR ── */
-.dbar {
-  height: 22px;
-  background: var(--bg0);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
-  gap: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  flex-shrink: 0;
-  scrollbar-width: none;
-}
+.dbar { height: 22px; background: var(--bg0); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 8px; overflow-x: auto; overflow-y: hidden; flex-shrink: 0; scrollbar-width: none; }
 .dbar::-webkit-scrollbar { display: none; }
-.db-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0 8px;
-  border-right: 1px solid var(--border);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.db-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.db-dot.ok    { background: var(--green); }
-.db-dot.warn  { background: var(--gold); }
-.db-dot.err   { background: var(--red); }
-.db-lbl {
-  font-size: 8.5px;
-  color: var(--txt3);
-  letter-spacing: .3px;
-}
+.db-item { display: flex; align-items: center; gap: 4px; padding: 0 8px; border-right: 1px solid var(--border); white-space: nowrap; flex-shrink: 0; }
+.db-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.db-dot.ok { background: var(--green); }
+.db-dot.warn { background: var(--gold); }
+.db-dot.err { background: var(--red); }
+.db-lbl { font-size: 8.5px; color: var(--txt3); letter-spacing: .3px; }
 
 /* ── MAIN ── */
-.main {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  isolation: isolate;
-}
+.main { flex: 1; overflow: hidden; position: relative; isolation: isolate; }
 
-/* ── PAGES ── */
+/* ── PAGES — CORRECTION SUPERPOSITION ── */
 .page {
   display: none !important;
   visibility: hidden !important;
@@ -371,13 +149,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  z-index: 1;
+  z-index: 2;
   animation: fadeIn .2s ease;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ── NAVIGATION ── */
 .bnav {
@@ -397,552 +172,170 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
 }
 .bnav::-webkit-scrollbar { display: none; }
-.bn {
-  flex: 0 0 auto;
-  min-width: 62px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  padding: 8px 6px 4px;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  transition: opacity .15s;
-  position: relative;
-}
+.bn { flex: 0 0 auto; min-width: 62px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 8px 6px 4px; cursor: pointer; user-select: none; -webkit-user-select: none; transition: opacity .15s; position: relative; }
 .bn:active { opacity: .6; }
 .bn-ico { font-size: 18px; line-height: 1; }
-.bn-lbl {
-  font-size: 7px;
-  font-weight: 600;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-  color: var(--txt3);
-  white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
-}
+.bn-lbl { font-size: 7px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--txt3); white-space: nowrap; font-family: 'DM Sans', sans-serif; }
 .bn.on .bn-lbl { color: var(--goldLt); }
-.bn-bar {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 2px;
-  width: 0;
-  background: var(--gold);
-  border-radius: 2px 2px 0 0;
-  transition: width .2s ease;
-  box-shadow: 0 0 8px rgba(197,146,46,.6);
-}
+.bn-bar { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 2px; width: 0; background: var(--gold); border-radius: 2px 2px 0 0; transition: width .2s ease; box-shadow: 0 0 8px rgba(197,146,46,.6); }
 .bn.on .bn-bar { width: 24px; }
 
 /* ── COMPOSANTS ── */
-
-/* Section header */
-.sec-hdr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  padding-top: 2px;
-}
+.sec-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-top: 2px; }
 .sec-hdr-left { display: flex; flex-direction: column; gap: 2px; }
-.sec-hdr-label {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--txt3);
-  font-family: 'DM Mono', monospace;
-}
-.sec-hdr-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--txt1);
-  line-height: 1.1;
-}
-.sec-hdr-badge {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  text-transform: uppercase;
-  font-family: 'DM Mono', monospace;
-  flex-shrink: 0;
-}
-.badge-gold  { background: var(--goldDim); color: var(--goldLt); border: 1px solid var(--border3); }
-.badge-red   { background: var(--redDim);  color: #FF6B6B; border: 1px solid rgba(229,57,53,.3); }
-.badge-green { background: var(--greenDim);color: var(--green); border: 1px solid rgba(46,204,113,.3); }
-.badge-blue  { background: var(--blueDim); color: #64B5F6; border: 1px solid rgba(30,136,229,.3); }
+.sec-hdr-label { font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--txt3); font-family: 'DM Mono', monospace; }
+.sec-hdr-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--txt1); line-height: 1.1; }
+.sec-hdr-badge { font-size: 8px; font-weight: 700; letter-spacing: 1px; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; font-family: 'DM Mono', monospace; flex-shrink: 0; }
+.badge-gold { background: var(--goldDim); color: var(--goldLt); border: 1px solid var(--border3); }
+.badge-red { background: var(--redDim); color: #FF6B6B; border: 1px solid rgba(229,57,53,.3); }
+.badge-green { background: var(--greenDim); color: var(--green); border: 1px solid rgba(46,204,113,.3); }
+.badge-blue { background: var(--blueDim); color: #64B5F6; border: 1px solid rgba(30,136,229,.3); }
 
-/* Card */
-.card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-.card-header {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); overflow: hidden; margin-bottom: 8px; }
+.card-header { padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
 .card-ico { font-size: 16px; flex-shrink: 0; }
-.card-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--txt2);
-  letter-spacing: .3px;
-  flex: 1;
-  min-width: 0;
-}
-.card-badge {
-  font-size: 9px;
-  font-family: 'DM Mono', monospace;
-  color: var(--txt3);
-  flex-shrink: 0;
-}
+.card-title { font-size: 11px; font-weight: 600; color: var(--txt2); letter-spacing: .3px; flex: 1; min-width: 0; }
+.card-badge { font-size: 9px; font-family: 'DM Mono', monospace; color: var(--txt3); flex-shrink: 0; }
 .card-body { padding: 10px 14px; }
 
-/* Data row */
-.dr {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 14px;
-  border-bottom: 1px solid var(--border);
-  min-height: 44px;
-}
+.dr { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-bottom: 1px solid var(--border); min-height: 44px; }
 .dr:last-child { border-bottom: none; }
-.dr-ico {
-  font-size: 15px;
-  flex-shrink: 0;
-  width: 22px;
-  text-align: center;
-}
+.dr-ico { font-size: 15px; flex-shrink: 0; width: 22px; text-align: center; }
 .dr-info { flex: 1; min-width: 0; }
-.dr-lbl {
-  font-size: 11.5px;
-  color: var(--txt2);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 400;
-}
-.dr-src {
-  font-size: 8.5px;
-  color: var(--txt3);
-  margin-top: 1px;
-  font-family: 'DM Mono', monospace;
-  letter-spacing: .3px;
-}
-.dr-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-  flex-shrink: 0;
-}
-.dr-val {
-  font-size: 13px;
-  font-weight: 600;
-  font-family: 'DM Mono', monospace;
-  white-space: nowrap;
-  line-height: 1;
-}
-.dr-val.up  { color: var(--green); }
-.dr-val.dn  { color: var(--red); }
+.dr-lbl { font-size: 11.5px; color: var(--txt2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 400; }
+.dr-src { font-size: 8.5px; color: var(--txt3); margin-top: 1px; font-family: 'DM Mono', monospace; letter-spacing: .3px; }
+.dr-right { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; }
+.dr-val { font-size: 13px; font-weight: 600; font-family: 'DM Mono', monospace; white-space: nowrap; line-height: 1; }
+.dr-val.up { color: var(--green); }
+.dr-val.dn { color: var(--red); }
 .dr-val.neu { color: var(--txt2); }
-.dr-val.gold{ color: var(--goldLt); }
-.dr-bar-wrap {
-  width: 48px;
-  height: 3px;
-  background: var(--bg4);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.dr-bar {
-  height: 100%;
-  border-radius: 2px;
-  transition: width .4s ease;
-}
-.dr-bar.up   { background: var(--green); }
-.dr-bar.dn   { background: var(--red); }
+.dr-val.gold { color: var(--goldLt); }
+.dr-bar-wrap { width: 48px; height: 3px; background: var(--bg4); border-radius: 2px; overflow: hidden; }
+.dr-bar { height: 100%; border-radius: 2px; transition: width .4s ease; }
+.dr-bar.up { background: var(--green); }
+.dr-bar.dn { background: var(--red); }
 .dr-bar.gold { background: var(--gold); }
-.dr-bar.neu  { background: var(--txt3); }
+.dr-bar.neu { background: var(--txt3); }
 
-/* KPI Grid */
-.kpi-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.kpi-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  padding: 12px;
-  position: relative;
-  overflow: hidden;
-  min-height: 88px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.kpi-card::before {
-  content: attr(data-ico);
-  position: absolute;
-  right: 8px;
-  top: 6px;
-  font-size: 32px;
-  opacity: .06;
-  pointer-events: none;
-  user-select: none;
-}
-.kpi-label {
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--txt3);
-  font-family: 'DM Mono', monospace;
-  margin-bottom: 4px;
-}
-.kpi-value {
-  font-family: 'DM Mono', monospace;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.kpi-value.red   { color: var(--red); }
-.kpi-value.gold  { color: var(--goldLt); }
+.kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.kpi-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); padding: 12px; position: relative; overflow: hidden; min-height: 88px; display: flex; flex-direction: column; justify-content: space-between; }
+.kpi-card::before { content: attr(data-ico); position: absolute; right: 8px; top: 6px; font-size: 32px; opacity: .06; pointer-events: none; user-select: none; }
+.kpi-label { font-size: 8.5px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--txt3); font-family: 'DM Mono', monospace; margin-bottom: 4px; }
+.kpi-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1; margin-bottom: 4px; }
+.kpi-value.red { color: var(--red); }
+.kpi-value.gold { color: var(--goldLt); }
 .kpi-value.green { color: var(--green); }
-.kpi-value.blue  { color: #64B5F6; }
-.kpi-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4px;
-}
-.kpi-delta {
-  font-size: 9px;
-  font-family: 'DM Mono', monospace;
-  font-weight: 500;
-  padding: 2px 5px;
-  border-radius: 4px;
-}
-.kpi-delta.up   { background: var(--greenDim); color: var(--green); }
-.kpi-delta.dn   { background: var(--redDim);   color: var(--red); }
-.kpi-delta.neu  { background: var(--bg4);       color: var(--txt3); }
-.kpi-source {
-  font-size: 8px;
-  color: var(--txt3);
-  font-family: 'DM Mono', monospace;
-  letter-spacing: .3px;
-}
+.kpi-value.blue { color: #64B5F6; }
+.kpi-footer { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.kpi-delta { font-size: 9px; font-family: 'DM Mono', monospace; font-weight: 500; padding: 2px 5px; border-radius: 4px; }
+.kpi-delta.up { background: var(--greenDim); color: var(--green); }
+.kpi-delta.dn { background: var(--redDim); color: var(--red); }
+.kpi-delta.neu { background: var(--bg4); color: var(--txt3); }
+.kpi-source { font-size: 8px; color: var(--txt3); font-family: 'DM Mono', monospace; letter-spacing: .3px; }
 
-/* Brief / Signal card */
-.signal-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--red);
-  border-radius: var(--r2);
-  padding: 12px 14px;
-  margin-bottom: 10px;
-}
+.signal-card { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: var(--r2); padding: 12px 14px; margin-bottom: 10px; }
 .signal-card.gold { border-left-color: var(--gold); }
 .signal-card.green { border-left-color: var(--green); }
-.signal-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-.signal-date {
-  font-size: 8.5px;
-  color: var(--txt3);
-  font-family: 'DM Mono', monospace;
-  letter-spacing: .5px;
-}
-.signal-level {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 2px 7px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  font-family: 'DM Mono', monospace;
-}
+.signal-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.signal-date { font-size: 8.5px; color: var(--txt3); font-family: 'DM Mono', monospace; letter-spacing: .5px; }
+.signal-level { font-size: 8px; font-weight: 700; letter-spacing: 1px; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
 .signal-level.critical { background: var(--redDim); color: var(--red); border: 1px solid rgba(229,57,53,.3); }
-.signal-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--txt1);
-  line-height: 1.3;
-  margin-bottom: 6px;
-}
-.signal-body {
-  font-size: 11px;
-  color: var(--txt2);
-  line-height: 1.65;
-  margin-bottom: 10px;
-}
-.signal-cta {
-  width: 100%;
-  background: linear-gradient(135deg, var(--gold), #A07820);
-  border-radius: 8px;
-  padding: 10px;
-  color: var(--bg0);
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  text-align: center;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+.signal-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--txt1); line-height: 1.3; margin-bottom: 6px; }
+.signal-body { font-size: 11px; color: var(--txt2); line-height: 1.65; margin-bottom: 10px; }
+.signal-cta { width: 100%; background: linear-gradient(135deg, var(--gold), #A07820); border-radius: 8px; padding: 10px; color: var(--bg0); font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .5px; text-align: center; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 
-/* Impact sector card */
-.impact-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.impact-ico {
-  font-size: 26px;
-  flex-shrink: 0;
-}
+.impact-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+.impact-ico { font-size: 26px; flex-shrink: 0; }
 .impact-info { flex: 1; min-width: 0; }
-.impact-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-.impact-sub {
-  font-size: 10px;
-  color: var(--txt3);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.impact-insight {
-  font-size: 10px;
-  color: var(--goldLt);
-  margin-top: 4px;
-  line-height: 1.4;
-}
-.impact-pct {
-  font-family: 'DM Mono', monospace;
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--red);
-  flex-shrink: 0;
-}
+.impact-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.impact-sub { font-size: 10px; color: var(--txt3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.impact-insight { font-size: 10px; color: var(--goldLt); margin-top: 4px; line-height: 1.4; }
+.impact-pct { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 500; color: var(--red); flex-shrink: 0; }
 
-/* Section divider */
-.sec-div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 14px 0 10px;
-}
-.sec-div-label {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--txt3);
-  font-family: 'DM Mono', monospace;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.sec-div-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+.sec-div { display: flex; align-items: center; gap: 8px; margin: 14px 0 10px; }
+.sec-div-label { font-size: 8.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--txt3); font-family: 'DM Mono', monospace; white-space: nowrap; flex-shrink: 0; }
+.sec-div-line { flex: 1; height: 1px; background: var(--border); }
 
-/* Terrain banner */
-.terrain-banner {
-  background: linear-gradient(135deg, rgba(229,57,53,.1), rgba(197,146,46,.06));
-  border: 1px solid rgba(229,57,53,.3);
-  border-left: 3px solid var(--red);
-  border-radius: var(--r2);
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+.terrain-banner { background: linear-gradient(135deg, rgba(229,57,53,.1), rgba(197,146,46,.06)); border: 1px solid rgba(229,57,53,.3); border-left: 3px solid var(--red); border-radius: var(--r2); padding: 10px 12px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .terrain-banner-ico { font-size: 20px; flex-shrink: 0; }
 .terrain-banner-info { flex: 1; min-width: 0; }
-.terrain-banner-title {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--red);
-  margin-bottom: 2px;
-  line-height: 1.2;
-}
-.terrain-banner-sub {
-  font-size: 9.5px;
-  color: var(--txt3);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.terrain-banner-arrow {
-  font-size: 11px;
-  color: var(--red);
-  flex-shrink: 0;
-  font-family: 'DM Mono', monospace;
-}
+.terrain-banner-title { font-size: 11.5px; font-weight: 700; color: var(--red); margin-bottom: 2px; line-height: 1.2; }
+.terrain-banner-sub { font-size: 9.5px; color: var(--txt3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.terrain-banner-arrow { font-size: 11px; color: var(--red); flex-shrink: 0; font-family: 'DM Mono', monospace; }
 
-/* Level tabs */
-.ltabs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-.ltab {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 8px 6px;
-  text-align: center;
-  cursor: pointer;
-  transition: all .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.ltab.aw {
-  background: var(--goldDim);
-  border-color: var(--border3);
-}
+.ltabs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+.ltab { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); padding: 8px 6px; text-align: center; cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent; }
+.ltab.aw { background: var(--goldDim); border-color: var(--border3); }
 .ltab-ico { font-size: 16px; margin-bottom: 3px; }
-.ltab-lbl {
-  font-size: 7.5px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--txt3);
-  font-family: 'DM Mono', monospace;
-}
+.ltab-lbl { font-size: 7.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--txt3); font-family: 'DM Mono', monospace; }
 .ltab.aw .ltab-lbl { color: var(--goldLt); }
 
-/* Overlays */
-#splash {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: radial-gradient(ellipse 80% 60% at 50% 35%, #0F2040 0%, #070D1A 55%, #040810 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  transition: opacity .5s ease;
-}
+/* ── OVERLAYS ── */
+#splash { position: fixed; inset: 0; z-index: 999; background: radial-gradient(ellipse 80% 60% at 50% 35%, #0F2040 0%, #070D1A 55%, #040810 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; transition: opacity .5s ease; }
 #splash.out { opacity: 0; pointer-events: none; }
-#lockscreen {
-  position: fixed;
-  inset: 0;
-  z-index: 998;
-  background: radial-gradient(ellipse 80% 60% at 50% 35%, #0F2040 0%, #070D1A 55%, #040810 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 30px;
-  padding-bottom: calc(40px + env(safe-area-inset-bottom, 20px));
-  transition: opacity .4s ease;
-}
+#lockscreen { position: fixed; inset: 0; z-index: 998; background: radial-gradient(ellipse 80% 60% at 50% 35%, #0F2040 0%, #070D1A 55%, #040810 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; padding-bottom: calc(40px + env(safe-area-inset-bottom, 20px)); transition: opacity .4s ease; }
 #lockscreen.out { opacity: 0; pointer-events: none; }
 #lockscreen.hidden { display: none; }
-#pdfov {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(4,8,16,.97);
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-}
+#pdfov { position: fixed; inset: 0; z-index: 200; background: rgba(4,8,16,.97); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
 #pdfov.on { display: flex; }
-#toast {
-  position: fixed;
-  bottom: calc(var(--navH) + env(safe-area-inset-bottom, 8px) + 12px);
-  left: 14px;
-  right: 14px;
-  z-index: 300;
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: var(--r2);
-  padding: 10px 14px;
-  display: none;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 8px 32px rgba(0,0,0,.6);
-  font-size: 12px;
-  animation: toastIn .25s ease;
-}
+#toast { position: fixed; bottom: calc(var(--navH) + env(safe-area-inset-bottom, 8px) + 12px); left: 14px; right: 14px; z-index: 300; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r2); padding: 10px 14px; display: none; align-items: center; gap: 10px; box-shadow: 0 8px 32px rgba(0,0,0,.6); font-size: 12px; animation: toastIn .25s ease; }
 #toast.on { display: flex; }
-@keyframes toastIn {
-  from { transform: translateY(12px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
-}
-.offbar {
-  background: var(--red);
-  color: #fff;
-  text-align: center;
-  padding: 4px;
-  display: none;
-  flex-shrink: 0;
-  font-size: 8.5px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-family: 'DM Mono', monospace;
-}
+@keyframes toastIn { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.offbar { background: var(--red); color: #fff; text-align: center; padding: 4px; display: none; flex-shrink: 0; font-size: 8.5px; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
 .offbar.on { display: block; }
 
-/* Utility */
-.dsb {
-  font-size: 8px;
-  padding: 2px 5px;
-  border-radius: 4px;
-  font-family: 'DM Mono', monospace;
-  letter-spacing: .3px;
-  white-space: nowrap;
-  display: inline-block;
-}
+/* ── UTILITY ── */
+.dsb { font-size: 8px; padding: 2px 5px; border-radius: 4px; font-family: 'DM Mono', monospace; letter-spacing: .3px; white-space: nowrap; display: inline-block; }
 .dsb-w { background: var(--bg4); color: var(--txt3); }
 .dsb-r { background: var(--greenDim); color: var(--green); }
 .dsb-c { background: var(--goldDim); color: var(--gold); }
 .dsb-n { background: var(--blueDim); color: #64B5F6; }
 
-/* Responsive */
+/* BRVM / Marchés */
+.live-api-badge { display:inline-flex;align-items:center;gap:4px;background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.25);border-radius:20px;padding:2px 7px;font-size:8.5px;font-weight:700;color:var(--green);letter-spacing:.5px; }
+.live-api-badge::before { content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:dotPulse 1.5s infinite; }
+.pulse-card { background:var(--bg2);border:1px solid var(--border3);border-radius:var(--r2);padding:13px;margin-bottom:9px; }
+.brvm-val { font-size:26px;font-weight:800;color:var(--goldLt);font-family:'DM Mono',monospace; }
+.brvm-lbl { font-size:9px;color:var(--txt3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px; }
+.stock-row { display:flex;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);gap:8px; }
+.stock-row:last-child { border-bottom:none; }
+.stock-name { flex:1;font-size:11px;font-weight:600;color:var(--txt1);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.stock-price { font-size:12px;font-weight:700;color:var(--txt1);font-family:'DM Mono',monospace;flex-shrink:0; }
+.stock-var { font-size:10px;font-weight:700;padding:2px 5px;border-radius:4px;flex-shrink:0;font-family:'DM Mono',monospace; }
+.stock-var.pos { background:rgba(46,204,113,.12);color:var(--green); }
+.stock-var.neg { background:rgba(229,57,53,.12);color:var(--red); }
+.stock-var.neu { background:rgba(255,255,255,.05);color:var(--txt3); }
+.stock-vol { font-size:9px;color:var(--txt3);flex-shrink:0; }
+.forex-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px; }
+.forex-item { background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px; }
+.forex-pair { font-size:9px;color:var(--txt3);letter-spacing:1px;margin-bottom:3px; }
+.forex-rate { font-size:16px;font-weight:700;color:var(--txt1);font-family:'DM Mono',monospace; }
+.forex-src { font-size:8px;color:var(--txt3);margin-top:2px; }
+.crypto-row { display:flex;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);gap:10px; }
+.crypto-row:last-child { border-bottom:none; }
+.crypto-icon { font-size:18px;flex-shrink:0; }
+.crypto-name { flex:1;font-size:12px;font-weight:600;color:var(--txt1); }
+.crypto-price { font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:var(--txt1); }
+.meteo-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
+.meteo-item { background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px;text-align:center; }
+.meteo-val { font-size:19px;font-weight:700;color:var(--goldLt); }
+.meteo-lbl { font-size:9px;color:var(--txt3);margin-top:2px; }
+.api-status-row { display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:11px; }
+.api-status-row:last-child { border-bottom:none; }
+.api-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+.api-dot.ok { background:var(--green); }
+.api-dot.err { background:var(--red); }
+.api-dot.load { background:var(--gold);animation:dotPulse 1s infinite; }
+.api-name { flex:1;color:var(--txt3); }
+.api-val { color:var(--txt1);font-weight:600;font-family:'DM Mono',monospace;font-size:10px; }
+.glass-card { background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:13px;margin-bottom:9px; }
+.refresh-btn { width:100%;background:rgba(197,146,46,.1);border:1px solid rgba(197,146,46,.3);border-radius:var(--r);padding:12px;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;-webkit-tap-highlight-color:transparent; }
+
+/* ── RESPONSIVE ── */
 @media (min-width: 640px) {
   .bn { min-width: 72px; }
   .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .bnav { -webkit-mask-image: none; mask-image: none; }
 }
 @media (max-width: 360px) {
   .kpi-value { font-size: 18px; }
@@ -953,66 +346,50 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 </style>
 </head>
 <body>
-<noscript><p style="font-family:sans-serif;padding:20px;color:#E8EFF8;background:#0A1628;text-align:center">EKB-Intelligence nécessite JavaScript.</p></noscript>
 
 <!-- SPLASH -->
 <div id="splash">
-  <div class="sp-glow"></div>
-  <div class="sp-particles">
-    <div class="sp-p" style="left:15%;top:25%;--d:3.8s;--dl:.4s;--op:.5"></div>
-    <div class="sp-p" style="left:80%;top:20%;--d:4.5s;--dl:.8s;--op:.4"></div>
-    <div class="sp-p" style="left:70%;top:65%;--d:3.2s;--dl:1.2s;--op:.6"></div>
-    <div class="sp-p" style="left:25%;top:70%;--d:5s;--dl:.2s;--op:.3"></div>
-    <div class="sp-p" style="left:50%;top:15%;--d:4.1s;--dl:1.8s;--op:.5"></div>
-  </div>
-  <img class="sp-logo" src="data:image/webp;base64,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" alt="EKB-Intelligence">
-  <div class="sp-subtitle">Intelligence Économique Stratégique</div>
-  <div class="sp-bar-wrap"><div class="sp-bar-fill"></div></div>
-  <div class="sp-tagline">49 Sources · 3 Niveaux + Médias · 5 Secteurs<br>EL-KEYON BUILDER SARL</div>
+  <img class="sp-logo" src="data:image/webp;base64,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" alt="EKB">
+  <div class="sp-name">EKB-Intelligence</div>
+  <div class="sp-sub">EL-KEYON BUILDER SARL</div>
+  <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
 
-
-<!-- LOCKSCREEN EKB -->
+<!-- LOCKSCREEN -->
 <div id="lockscreen">
   <div class="lk-logo">⚡</div>
-  <div class="lk-title">EKB-INTELLIGENCE</div>
-  <div class="lk-sub">EL-KEYON BUILDER SARL</div>
-
-  <!-- Face ID -->
-  <div class="lk-faceid-btn" id="lkFaceBtn" onclick="ekbFaceID()">
+  <div class="lk-title">EKB-Intelligence</div>
+  <div class="lk-sub">Code d'accès requis</div>
+  <div class="lk-faceid-btn" onclick="ekbFaceID()">
     <div class="lk-faceid-icon">🪪</div>
-    <div class="lk-faceid-lbl">Face ID</div>
+    <div class="lk-faceid-lbl">FACE ID</div>
   </div>
-
-  <div class="lk-or">— ou entrez votre code —</div>
-
-  <!-- Indicateur dots -->
+  <div class="lk-or">ou entrez votre code</div>
   <div class="lk-pin-display">
     <div class="lk-dot" id="dot0"></div>
     <div class="lk-dot" id="dot1"></div>
     <div class="lk-dot" id="dot2"></div>
     <div class="lk-dot" id="dot3"></div>
   </div>
-
-  <!-- Clavier -->
   <div class="lk-keypad">
-    <div class="lk-key" onclick="ekbPin('1')">1<span class="lk-key-sub"></span></div>
-    <div class="lk-key" onclick="ekbPin('2')">2<span class="lk-key-sub">ABC</span></div>
-    <div class="lk-key" onclick="ekbPin('3')">3<span class="lk-key-sub">DEF</span></div>
-    <div class="lk-key" onclick="ekbPin('4')">4<span class="lk-key-sub">GHI</span></div>
-    <div class="lk-key" onclick="ekbPin('5')">5<span class="lk-key-sub">JKL</span></div>
-    <div class="lk-key" onclick="ekbPin('6')">6<span class="lk-key-sub">MNO</span></div>
-    <div class="lk-key" onclick="ekbPin('7')">7<span class="lk-key-sub">PQRS</span></div>
-    <div class="lk-key" onclick="ekbPin('8')">8<span class="lk-key-sub">TUV</span></div>
-    <div class="lk-key" onclick="ekbPin('9')">9<span class="lk-key-sub">WXYZ</span></div>
+    <div class="lk-key" onclick="ekbPin('1')">1</div>
+    <div class="lk-key" onclick="ekbPin('2')">2<div class="lk-key-sub">ABC</div></div>
+    <div class="lk-key" onclick="ekbPin('3')">3<div class="lk-key-sub">DEF</div></div>
+    <div class="lk-key" onclick="ekbPin('4')">4<div class="lk-key-sub">GHI</div></div>
+    <div class="lk-key" onclick="ekbPin('5')">5<div class="lk-key-sub">JKL</div></div>
+    <div class="lk-key" onclick="ekbPin('6')">6<div class="lk-key-sub">MNO</div></div>
+    <div class="lk-key" onclick="ekbPin('7')">7<div class="lk-key-sub">PQRS</div></div>
+    <div class="lk-key" onclick="ekbPin('8')">8<div class="lk-key-sub">TUV</div></div>
+    <div class="lk-key" onclick="ekbPin('9')">9<div class="lk-key-sub">WXYZ</div></div>
     <div class="lk-key lk-empty"></div>
     <div class="lk-key" onclick="ekbPin('0')">0</div>
-    <div class="lk-key lk-del" onclick="ekbDel()">⌫</div>
+    <div class="lk-key" onclick="ekbDel()">⌫</div>
   </div>
-
   <div class="lk-error" id="lkError"></div>
-  <div class="lk-success" id="lkSuccess">Accès autorisé</div>
 </div>
+
+<!-- TOAST -->
+<div id="toast"><span id="t-ico">✅</span><span id="t-txt">OK</span></div>
 
 <!-- PDF OVERLAY -->
 <div id="pdfov">
@@ -1022,30 +399,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <div style="font-size:10px;color:var(--txt3)">FAO · EIA · BCEAO · INS CI · Claude AI</div>
 </div>
 
-<!-- TOAST -->
-<div id="toast">
-  <span id="t-ico" style="font-size:17px">✅</span>
-  <span id="t-txt" style="font-size:11.5px">OK</span>
-</div>
 
-<!-- APP SHELL -->
+
+<!-- APP -->
 <div id="app-shell">
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="tb-l">
-      <img class="tb-logo" src="data:image/webp;base64,UklGRsoBAABXRUJQVlA4IL4BAABwCgCdASodACwAPjESh0KiIQ1WAgAQAYJYwCsMsu553AOkU8og+QHflf1XlH+evRJ/3nAV/rMei723kNKzmoDT1NksMa4iV/t7AUB6yBvnX8wfv9KKNO6goKYoAAD+//aaEuD6T0752xubd9OPo8t+5rSGj+ss89/zvr8+XBsYnR8fM5OFLkqWCOFI1X/Gujv3wn+v/0rzu+2a+/45LWdfi9sVf6ZPEDaurqW30+P/iGOWh13tK45xrw+c3/RmsR3fL45gvR3t5/n6fa8zKN63XAfOsOiTMkvlCW9c/uT0UIoHZNGiOfvxovLKYZhINYKjycnfZ8shPT37k2fS1+uumAkm7hlXIAf1izecCRM3FPY0XqFEmdON5eZ9uAV3J/nXr6sm3/0bna1upp/PIkv9hLcQ2zX90mO//BlzB8MZ46uix2/Z2dWFhyL/2gPv/jSBcyWi2psT1xJTn+fHgnT2d21xpmF8izVL6nVARcphP5FFjRpWrLRf1A0VDng07qQ8UApWJ6z4/Dwto8aZSRHUsh1WNAG+2PSM5YIo1rABe7cNveWHFMKb+Gk46HD66TkUsPi2XuixegcZ2GAAAA==" alt="EKB">
-      <div class="tb-brand">
-        <div class="tb-ekb">EKB</div>
-        <div class="tb-intel">Intelligence</div>
-      </div>
-      <div class="tb-divider"></div>
-      <div class="tb-page" id="tb-page">/ Tableau de bord</div>
-    </div>
+    <img class="tb-logo" src="data:image/webp;base64,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" alt="EKB">
+    <span class="tb-name">EKB</span>
+    <span class="tb-sep"></span>
+    <span class="tb-page" id="tb-page">/ Tableau de bord</span>
     <div class="tb-r">
-      <div class="brent-pill"><div class="bp-dot"></div><span id="tb-brent">112,19 $</span></div>
-      <div class="src-pill"><div class="sp-live"></div><span id="src-count">49 src</span></div>
-      <div class="tb-btn" onclick="gp('sources')">📡<div class="tb-badge"></div></div>
+      <div class="tb-pill red"><div class="tb-dot"></div><span id="tb-brent">112,19 $</span></div>
+      <div class="tb-pill gold"><div class="tb-dot"></div><span id="src-count">49 src</span></div>
     </div>
   </header>
 
@@ -1081,203 +448,195 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <span>PAA TRAFIC<span class="tsrc">PAA</span> <span class="tn">Suivi</span></span><span class="ts">◆</span>
     <span>BRVM INDEX<span class="tsrc">BRVM</span> <span class="tn">Actif</span></span><span class="ts">◆</span>
   </div></div>
+
+  <!-- SOURCE BAR -->
+  <div class="dbar">
+    <div class="db-dot"></div><span class="db-lbl">FAO FPMA</span>
+    <div class="db-dot"></div><span class="db-lbl">EIA/IEA</span>
+    <div class="db-dot"></div><span class="db-lbl">WB Pink</span>
+    <div class="db-dot"></div><span class="db-lbl">BCEAO</span>
+    <div class="db-dot"></div><span class="db-lbl">AMIS CEDEAO</span>
+    <div class="db-dot"></div><span class="db-lbl">INS CI</span>
+    <div class="db-dot"></div><span class="db-lbl">CCA</span>
+    <div class="db-dot"></div><span class="db-lbl">BRVM</span>
+    <div class="db-dot"></div><span class="db-lbl">CIE terrain</span>
   </div>
 
-  <!-- DATA STATUS BAR -->
-  <div class="dbar">
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--success)"></div><div class="dbar-lbl">FAO FPMA</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--success)"></div><div class="dbar-lbl">EIA/IEA</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--success)"></div><div class="dbar-lbl">WB Pink</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--gold)"></div><div class="dbar-lbl">BCEAO</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--success)"></div><div class="dbar-lbl">AMIS CEDEAO</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--blue)"></div><div class="dbar-lbl">INS CI</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--success)"></div><div class="dbar-lbl">CCA</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:var(--gold)"></div><div class="dbar-lbl">GDELT</div></div><div class="dbar-sep">·</div><div class="dbar-item"><div class="dbar-dot" style="background:var(--success)"></div><div class="dbar-lbl">BRVM</div></div><div class="dbar-sep">·</div><div class="dbar-item"><div class="dbar-dot" style="background:var(--red)"></div><div class="dbar-lbl">CIE terrain</div></div><div class="dbar-sep">·</div><div class="dbar-item"><div class="dbar-dot" style="background:var(--gold)"></div><div class="dbar-lbl">42 sources actives</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:#3399FF"></div><div class="dbar-lbl">France 24</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:#00BBDD"></div><div class="dbar-lbl">Al Jazeera</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:#FF4466"></div><div class="dbar-lbl">BFM TV</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:#00CC66"></div><div class="dbar-lbl">Africa 24</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:#FF9900"></div><div class="dbar-lbl">RTI</div></div><div class="dbar-sep">·</div>
-  <div class="dbar-item"><div class="dbar-dot" style="background:#FF3333"></div><div class="dbar-lbl">CNN</div></div>
-</div>
-
   <!-- OFFLINE -->
-  <div class="offbar" id="offbar">⚠ HORS LIGNE — Données en cache local</div>
+  <div class="offbar" id="offbar">HORS LIGNE — Données en cache</div>
 
   <!-- PAGES -->
   <div class="main">
-
 <div class="page on" id="pg-home">
 
-  <!-- Signal Terrain bannière -->
-  <div class="terrain-banner" data-page="terrain" id="terrain-banner-home">
-    <div class="terrain-banner-ico">⚡</div>
-    <div class="terrain-banner-info">
-      <div class="terrain-banner-title" id="b-terrain-title">SIGNAL TERRAIN — Délestages CI + Iran menace EAU</div>
-      <div class="terrain-banner-sub">CI · EAU · Golfe · Dessalinisateurs menacés · Ormuz -95%</div>
+  <!-- Signal Terrain -->
+  <div class="signal-banner" data-page="terrain" id="signal-home">
+    <div class="signal-ico">⚡</div>
+    <div class="signal-info">
+      <div class="signal-title">SIGNAL TERRAIN — Délestages CI + Iran menace EAU</div>
+      <div class="signal-sub">CI · EAU · Golfe · Dessalinisateurs menacés · Ormuz -95% · FL24 / AFP</div>
     </div>
-    <div class="terrain-banner-arrow">VOIR →</div>
+    <div class="signal-cta">VOIR →</div>
   </div>
 
-  <!-- KPI Grid -->
+  <!-- KPIs -->
   <div class="kpi-grid">
-    <div class="kpi-card" data-ico="🛢️">
-      <div>
-        <div class="kpi-label">Brent</div>
-        <div class="kpi-value red" id="kv0">112,19</div>
-        <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">$/b</div>
-      </div>
-      <div class="kpi-footer">
-        <span class="kpi-delta dn">▲ +38%</span>
-        <span class="kpi-source">EIA</span>
+    <div class="kpi" data-ico="🛢️">
+      <span class="kpi-lbl">Brent</span>
+      <div class="kpi-val" style="color:var(--red)" id="kv0">112,19</div>
+      <div class="kpi-sub" id="ks0">+38% en 3 sem.</div>
+      <div class="kpi-foot">
+        <span class="badge badge-red" id="kb0">▲ +4,8%</span>
+        <span class="dsb dsb-w">EIA</span>
       </div>
     </div>
-    <div class="kpi-card" data-ico="🌾">
-      <div>
-        <div class="kpi-label">FAO Alim.</div>
-        <div class="kpi-value gold" id="kv1">125,3</div>
-        <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">pts fév. 2026</div>
-      </div>
-      <div class="kpi-footer">
-        <span class="kpi-delta dn">▲ +0,9%</span>
-        <span class="kpi-source">FAO</span>
+    <div class="kpi" data-ico="🌾">
+      <span class="kpi-lbl" id="kl1">FAO Alim.</span>
+      <div class="kpi-val" style="color:var(--gold)" id="kv1">125,3</div>
+      <div class="kpi-sub" id="ks1">pts Fév. 2026</div>
+      <div class="kpi-foot">
+        <span class="badge badge-gold" id="kb1">▲ +0,9%</span>
+        <span class="dsb dsb-n">FAO</span>
       </div>
     </div>
-    <div class="kpi-card" data-ico="💱">
-      <div>
-        <div class="kpi-label">USD/XOF</div>
-        <div class="kpi-value blue" id="kv2">566</div>
-        <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">BCEAO</div>
-      </div>
-      <div class="kpi-footer">
-        <span class="kpi-delta neu">Pression</span>
-        <span class="kpi-source">BCEAO</span>
+    <div class="kpi" data-ico="💱">
+      <span class="kpi-lbl">USD/XOF</span>
+      <div class="kpi-val" style="color:var(--blueLt)" id="kv2">566</div>
+      <div class="kpi-sub" id="ks2">BCEAO</div>
+      <div class="kpi-foot">
+        <span class="badge badge-blue">△ Pression</span>
+        <span class="dsb dsb-w">BCEAO</span>
       </div>
     </div>
-    <div class="kpi-card" data-ico="☀️">
-      <div>
-        <div class="kpi-label">Solaire PV</div>
-        <div class="kpi-value green" id="kv3">STABLE</div>
-        <div style="font-size:9px;color:var(--txt3);font-family:'DM Mono',monospace;">Hors conflit</div>
-      </div>
-      <div class="kpi-footer">
-        <span class="kpi-delta neu">= Stable</span>
-        <span class="kpi-source">IRENA</span>
+    <div class="kpi" data-ico="☀️">
+      <span class="kpi-lbl" id="kl3">Solaire PV</span>
+      <div class="kpi-val" style="color:var(--green)" id="kv3">STABLE</div>
+      <div class="kpi-sub" id="ks3">Hors conflit</div>
+      <div class="kpi-foot">
+        <span class="badge badge-green">= STABLE ✓</span>
+        <span class="dsb dsb-r">IRENA</span>
       </div>
     </div>
   </div>
 
-  <!-- Brief Signal -->
-  <div class="signal-card">
-    <div class="signal-meta">
-      <span class="signal-date" id="b-date">DIMANCHE 22 MARS 2026 — 06:00 UTC</span>
-      <span class="signal-level critical">NIVEAU 5</span>
+  <!-- Brief -->
+  <div class="brief-card">
+    <div class="brief-date" id="b-date">DIMANCHE 22 MARS 2026 — 06:00 UTC</div>
+    <div class="brief-title" id="b-title">⚡ ALERTE CRITIQUE — Dessalinisateurs Golfe menacés</div>
+    <div class="brief-body" id="b-body">ALERTE CRITIQUE MAXIMALE — J+23. Iran menace 56 usines de dessalinisation du Golfe. Koweït/Qatar/Bahreïn : réserves eau 48-72h seulement. Blackout Dubaï si dessalinisateurs frappés. Ormuz -95%. Brent 112,19 $/b. SUNWAVE : opportunité niveau 10/10.</div>
+    <div class="brief-tags" id="b-tags">
+      <span class="dsb dsb-w">EIA</span>
+      <span class="dsb dsb-n">FAO FPMA</span>
+      <span class="dsb dsb-w">BCEAO</span>
+      <span class="dsb dsb-r">INS CI</span>
+      <span class="dsb dsb-n">ANARE</span>
+      <span class="dsb dsb-r">IRENA</span>
     </div>
-    <div class="signal-title" id="b-title">ALERTE CRITIQUE — Dessalinisateurs Golfe menacés</div>
-    <div class="signal-body" id="b-body">J+23 conflit Iran/USA/Israël. Iran menace 56 usines de dessalinisation. Koweït/Qatar/Bahreïn : réserves eau 48-72h. Blackout Dubaï si frappe. Ormuz -95%. Brent 112,19 $/b. SUNWAVE : niveau 10/10.</div>
-    <button class="signal-cta" data-page="energie">Voir l'analyse complète →</button>
+    <button class="brief-cta" data-page="energie">Voir l'analyse complète →</button>
   </div>
 
-  <!-- Impact Sectoriel -->
-  <div class="sec-div">
-    <span class="sec-div-label">Impact sectoriel · 49 sources</span>
-    <span class="sec-div-line"></span>
-  </div>
+  <!-- Impact sectoriel -->
+  <div class="sec-sep">IMPACT SECTORIEL · 49 SOURCES VÉRIFIÉES</div>
 
-  <div class="impact-card">
+  <div class="impact-row">
     <div class="impact-ico">⚡</div>
     <div class="impact-info">
       <div class="impact-name" style="color:#F0C040;">Énergie</div>
       <div class="impact-sub">CIE + groupes électrogènes CI</div>
-      <div class="impact-insight">✓ SUNWAVE : économie client <strong>127 000 F/mois</strong></div>
+      <div class="impact-tag">✓ SUNWAVE : économie client <strong>127 000 F/mois</strong></div>
     </div>
     <div class="impact-pct">+42%</div>
   </div>
-  <div class="impact-card">
+
+  <div class="impact-row">
     <div class="impact-ico">🏗️</div>
     <div class="impact-info">
-      <div class="impact-name" style="color:#64B5F6;">Construction & BTP</div>
+      <div class="impact-name" style="color:#2A96C0;">Construction & BTP</div>
       <div class="impact-sub">Ciment, acier, transport chantier</div>
-      <div class="impact-insight">✓ SUNWAVE chantier : énergie <strong style="color:var(--green);">-40%</strong></div>
+      <div class="impact-tag">✓ SUNWAVE chantier : énergie <strong style="color:var(--green);">-40%</strong></div>
     </div>
     <div class="impact-pct">+30%</div>
   </div>
-  <div class="impact-card">
+
+  <div class="impact-row">
     <div class="impact-ico">🌾</div>
     <div class="impact-info">
-      <div class="impact-name" style="color:var(--green);">Agriculture</div>
+      <div class="impact-name" style="color:#22C55E;">Agriculture</div>
       <div class="impact-sub">Engrais, irrigation, récolte</div>
-      <div class="impact-insight">✓ Pompage solaire : carburant <strong style="color:var(--green);">0 FCFA</strong></div>
+      <div class="impact-tag">✓ SUNWAVE pompage : carburant <strong style="color:var(--green);">= 0 FCFA</strong></div>
     </div>
     <div class="impact-pct">+40%</div>
   </div>
-  <div class="impact-card">
+
+  <div class="impact-row">
     <div class="impact-ico">🏭</div>
     <div class="impact-info">
-      <div class="impact-name" style="color:#FFB74D;">Agroalimentaire</div>
+      <div class="impact-name" style="color:#B07D2A;">Agroalimentaire</div>
       <div class="impact-sub">GNL industrie, chaîne froide</div>
-      <div class="impact-insight">✓ SUNWAVE : autonomie totale garantie</div>
+      <div class="impact-tag">✓ SUNWAVE chaîne froide : autonomie totale</div>
     </div>
     <div class="impact-pct">+75%</div>
   </div>
-  <div class="impact-card">
+
+  <div class="impact-row">
     <div class="impact-ico">🚚</div>
     <div class="impact-info">
-      <div class="impact-name" style="color:var(--txt2);">Transport</div>
+      <div class="impact-name" style="color:#8A9BB0;">Transport</div>
       <div class="impact-sub">Fret, carburant, logistique</div>
-      <div class="impact-insight">✓ Flotte SUNWAVE : <strong>300 000+ F/mois</strong></div>
+      <div class="impact-tag">✓ SUNWAVE flotte : économie <strong>300 000+ F/mois</strong></div>
     </div>
     <div class="impact-pct">+60%</div>
   </div>
 
+  <div style="height:8px;"></div>
 </div>
 
-<!-- ─── DONNÉES MONDIALES ─── -->
+<!-- ─── DONNÉES MONDIALES ────────────────────────── -->
 <div class="page" id="pg-mondial">
 
   <div class="sec-hdr">
-    <div class="sec-hdr-left">
-      <span class="sec-hdr-label">Niveau 1 · 18 sources</span>
-      <span class="sec-hdr-title">Données Mondiales</span>
+    <div class="sec-hdr-l">
+      <div class="sec-eyebrow">Niveau 1 · 18 sources</div>
+      <div class="sec-title">Données Mondiales</div>
     </div>
-    <span class="sec-hdr-badge badge-gold">MONDIAL</span>
+    <span class="sec-badge world">MONDIAL</span>
   </div>
 
-  <div class="sec-div"><span class="sec-div-label">⚡ Énergie</span><span class="sec-div-line"></span></div>
+  <div class="sec-sep">⚡ ÉNERGIE</div>
   <div class="card">
-    <div class="dr"><div class="dr-ico">🛢️</div><div class="dr-info"><div class="dr-lbl">Brent (EIA USA)</div><div class="dr-src">EIA</div></div><div class="dr-right"><div class="dr-val dn">112,19 $/b</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:85%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🔥</div><div class="dr-info"><div class="dr-lbl">GNL TTF Europe (IEA)</div><div class="dr-src">IEA</div></div><div class="dr-right"><div class="dr-val dn">59,34 €/MWh</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:70%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">⛽</div><div class="dr-info"><div class="dr-lbl">WTI (EIA USA)</div><div class="dr-src">EIA</div></div><div class="dr-right"><div class="dr-val dn">108,30 $</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:78%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">Capex solaire PV (IRENA)</div><div class="dr-src">IRENA</div></div><div class="dr-right"><div class="dr-val up">STABLE</div><div class="dr-bar-wrap"><div class="dr-bar up" style="width:40%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">📊</div><div class="dr-info"><div class="dr-lbl">Production OPEP (OPEC)</div><div class="dr-src">OPEC</div></div><div class="dr-right"><div class="dr-val dn">-10% Golfe</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:30%"></div></div></div></div>
+    <div class="dr"><div class="dr-ico">🛢️</div><div class="dr-info"><div class="dr-lbl">Brent (EIA USA)</div></div><div class="dr-val" style="color:var(--red)">112,19 $/b</div><div class="dr-bar" style="background:var(--red);width:85%"></div></div>
+    <div class="dr"><div class="dr-ico">🔥</div><div class="dr-info"><div class="dr-lbl">GNL TTF Europe (IEA)</div></div><div class="dr-val" style="color:var(--red)">59,34 €/MWh</div><div class="dr-bar" style="background:var(--red);width:70%"></div></div>
+    <div class="dr"><div class="dr-ico">⛽</div><div class="dr-info"><div class="dr-lbl">WTI (EIA USA)</div></div><div class="dr-val" style="color:var(--red)">108,30 $</div><div class="dr-bar" style="background:var(--red);width:78%"></div></div>
+    <div class="dr"><div class="dr-ico">☀️</div><div class="dr-info"><div class="dr-lbl">Capex solaire PV (IRENA)</div></div><div class="dr-val" style="color:var(--green)">STABLE</div><div class="dr-bar" style="background:var(--green);width:40%"></div></div>
+    <div class="dr"><div class="dr-ico">📊</div><div class="dr-info"><div class="dr-lbl">Production OPEP (OPEC)</div></div><div class="dr-val" style="color:var(--red)">-10% Golfe</div><div class="dr-bar" style="background:var(--red);width:30%"></div></div>
   </div>
 
-  <div class="sec-div"><span class="sec-div-label">🏗️ Construction</span><span class="sec-div-line"></span></div>
+  <div class="sec-sep">🏗️ CONSTRUCTION</div>
   <div class="card">
-    <div class="dr"><div class="dr-ico">🔩</div><div class="dr-info"><div class="dr-lbl">Acier HRC (WB Pink)</div><div class="dr-src">WB Pink</div></div><div class="dr-right"><div class="dr-val dn">+28%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:55%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🪨</div><div class="dr-info"><div class="dr-lbl">Ciment CI (CCI CI)</div><div class="dr-src">CCI CI</div></div><div class="dr-right"><div class="dr-val dn">+30%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:60%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🚢</div><div class="dr-info"><div class="dr-lbl">Fret maritime (FBX)</div><div class="dr-src">FBX</div></div><div class="dr-right"><div class="dr-val dn">+60%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:72%"></div></div></div></div>
+    <div class="dr"><div class="dr-ico">🔩</div><div class="dr-info"><div class="dr-lbl">Acier HRC (WB Pink)</div></div><div class="dr-val" style="color:var(--red)">+28%</div><div class="dr-bar" style="background:var(--red);width:55%"></div></div>
+    <div class="dr"><div class="dr-ico">🪨</div><div class="dr-info"><div class="dr-lbl">Ciment CI (CCI CI)</div></div><div class="dr-val" style="color:var(--red)">+30%</div><div class="dr-bar" style="background:var(--red);width:60%"></div></div>
+    <div class="dr"><div class="dr-ico">🚢</div><div class="dr-info"><div class="dr-lbl">Fret chantier (FBX)</div></div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar" style="background:var(--red);width:72%"></div></div>
   </div>
 
-  <div class="sec-div"><span class="sec-div-label">🌾 Agriculture</span><span class="sec-div-line"></span></div>
+  <div class="sec-sep">🌾 AGRICULTURE</div>
   <div class="card">
-    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">FAO Alim. (FAO FPMA)</div><div class="dr-src">FAO</div></div><div class="dr-right"><div class="dr-val gold">125,3 pts</div><div class="dr-bar-wrap"><div class="dr-bar gold" style="width:50%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🌾</div><div class="dr-info"><div class="dr-lbl">Blé (USDA/WB)</div><div class="dr-src">USDA</div></div><div class="dr-right"><div class="dr-val dn">+8%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:30%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🌴</div><div class="dr-info"><div class="dr-lbl">Cacao CI (CCA CI)</div><div class="dr-src">CCA</div></div><div class="dr-right"><div class="dr-val gold">3 850 $/t</div><div class="dr-bar-wrap"><div class="dr-bar gold" style="width:55%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">Urée (WB Pink)</div><div class="dr-src">WB</div></div><div class="dr-right"><div class="dr-val dn">+40%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:65%"></div></div></div></div>
+    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">FAO Alim. (FAO FPMA)</div></div><div class="dr-val" style="color:var(--gold)">125,3 pts</div><div class="dr-bar" style="background:var(--gold);width:50%"></div></div>
+    <div class="dr"><div class="dr-ico">🌾</div><div class="dr-info"><div class="dr-lbl">Blé (USDA/WB)</div></div><div class="dr-val" style="color:var(--gold)">+8%</div><div class="dr-bar" style="background:var(--gold);width:30%"></div></div>
+    <div class="dr"><div class="dr-ico">🌴</div><div class="dr-info"><div class="dr-lbl">Cacao CI (CCA CI)</div></div><div class="dr-val" style="color:var(--gold)">3 850 $/t</div><div class="dr-bar" style="background:var(--gold);width:55%"></div></div>
+    <div class="dr"><div class="dr-ico">🌿</div><div class="dr-info"><div class="dr-lbl">Urée (WB Pink)</div></div><div class="dr-val" style="color:var(--red)">+40%</div><div class="dr-bar" style="background:var(--red);width:65%"></div></div>
   </div>
 
-  <div class="sec-div"><span class="sec-div-label">🏭 Agroalimentaire</span><span class="sec-div-line"></span></div>
+  <div class="sec-sep">🏭 AGROALIMENTAIRE</div>
   <div class="card">
-    <div class="dr"><div class="dr-ico">🔥</div><div class="dr-info"><div class="dr-lbl">GNL industrie (IEA)</div><div class="dr-src">IEA</div></div><div class="dr-right"><div class="dr-val dn">+75%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:80%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🫙</div><div class="dr-info"><div class="dr-lbl">Huile palme (WB Pink)</div><div class="dr-src">WB</div></div><div class="dr-right"><div class="dr-val gold">+18%</div><div class="dr-bar-wrap"><div class="dr-bar gold" style="width:40%"></div></div></div></div>
+    <div class="dr"><div class="dr-ico">🔥</div><div class="dr-info"><div class="dr-lbl">GNL industrie (IEA)</div></div><div class="dr-val" style="color:var(--red)">+75%</div><div class="dr-bar" style="background:var(--red);width:80%"></div></div>
+    <div class="dr"><div class="dr-ico">🫙</div><div class="dr-info"><div class="dr-lbl">Huile palme (WB Pink)</div></div><div class="dr-val" style="color:var(--gold)">+18%</div><div class="dr-bar" style="background:var(--gold);width:40%"></div></div>
   </div>
 
-  <div class="sec-div"><span class="sec-div-label">🚚 Transport</span><span class="sec-div-line"></span></div>
+  <div class="sec-sep">🚚 TRANSPORT</div>
   <div class="card">
-    <div class="dr"><div class="dr-ico">🚢</div><div class="dr-info"><div class="dr-lbl">Fret maritime (FBX)</div><div class="dr-src">FBX</div></div><div class="dr-right"><div class="dr-val dn">+60%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:72%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">✈️</div><div class="dr-info"><div class="dr-lbl">Kérosène IATA</div><div class="dr-src">IATA</div></div><div class="dr-right"><div class="dr-val dn">+42%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:65%"></div></div></div></div>
-    <div class="dr"><div class="dr-ico">🛡️</div><div class="dr-info"><div class="dr-lbl">Ormuz transit (Kpler)</div><div class="dr-src">Kpler</div></div><div class="dr-right"><div class="dr-val dn">-95%</div><div class="dr-bar-wrap"><div class="dr-bar dn" style="width:95%"></div></div></div></div>
+    <div class="dr"><div class="dr-ico">🚢</div><div class="dr-info"><div class="dr-lbl">Fret maritime (FBX)</div></div><div class="dr-val" style="color:var(--red)">+60%</div><div class="dr-bar" style="background:var(--red);width:72%"></div></div>
+    <div class="dr"><div class="dr-ico">✈️</div><div class="dr-info"><div class="dr-lbl">Kérosène IATA</div></div><div class="dr-val" style="color:var(--red)">+42%</div><div class="dr-bar" style="background:var(--red);width:65%"></div></div>
+    <div class="dr"><div class="dr-ico">🚧</div><div class="dr-info"><div class="dr-lbl">Ormuz transit (Kpler)</div></div><div class="dr-val" style="color:var(--red)">-95%</div><div class="dr-bar" style="background:var(--red);width:95%"></div></div>
   </div>
 
   <div style="height:8px;"></div>
@@ -1321,10 +680,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="prog"><div class="prog-h"><span class="prog-l">Objectif solaire PND CI 2030</span><span class="prog-v" style="color:var(--gold)">EN COURS</span></div><div class="prog-t"><div class="prog-f" style="width:48%;background:var(--gold)"></div></div></div>
     <div class="prog"><div class="prog-h"><span class="prog-l">Opportunité SUNWAVE</span><span class="prog-v" style="color:var(--success)">MAXIMALE</span></div><div class="prog-t"><div class="prog-f" style="width:95%;background:var(--success)"></div></div></div>
   </div>
-</div>
 
 
-  <!-- ═══ 3 NIVEAUX — ÉNERGIE ═══ -->
+<!-- ═══ 3 NIVEAUX — ÉNERGIE ═══ -->
   <div class="level-header lh-w">
     <div class="lh-ico">🌍</div>
     <div class="lh-title">Données Mondiales — Énergie</div>
@@ -1386,7 +744,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <!-- FIN 3 NIVEAUX ÉNERGIE -->
 
 <!-- ─── CONSTRUCTION ──────────────────────────────── -->
-<div class="page"
+
+</div>
 
 <div class="page" id="pg-construction">
     <div class="media-bar">
@@ -1416,10 +775,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="dr"><div class="dr-ico">🪵</div><div class="dr-lbl">Bois construction CI</div><div class="dr-val" style="color:var(--warn)">+18%</div><div class="dr-bar"><div class="dr-fill" style="width:45%;background:var(--warn)"></div></div></div>
     <div class="dr"><div class="dr-ico">💡</div><div class="dr-lbl">Énergie SW chantier</div><div class="dr-val" style="color:var(--success)">-40%</div><div class="dr-bar"><div class="dr-fill" style="width:40%;background:var(--success)"></div></div></div>
   </div>
-</div>
 
 
-  <!-- ═══ 3 NIVEAUX — CONSTRUCTION & BTP ═══ -->
+<!-- ═══ 3 NIVEAUX — CONSTRUCTION & BTP ═══ -->
   <div class="level-header lh-w">
     <div class="lh-ico">🌍</div>
     <div class="lh-title">Données Mondiales — Construction & BTP</div>
@@ -1462,7 +820,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <!-- FIN 3 NIVEAUX CONSTRUCTION & BTP -->
 
 <!-- ─── AGRICULTURE ───────────────────────────────── -->
-<div class="page"
+
+</div>
 
 <div class="page" id="pg-agriculture">
     <div class="media-bar">
@@ -1493,10 +852,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="dr"><div class="dr-ico">🍫</div><div class="dr-lbl">Cacao CI (CCA CI)</div><div class="dr-val" style="color:var(--agri)">3 850$/t</div><div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--agri)"></div></div></div>
     <div class="dr"><div class="dr-ico">💧</div><div class="dr-lbl">Pompage solaire SUNWAVE</div><div class="dr-val" style="color:var(--success)">0 FCFA</div><div class="dr-bar"><div class="dr-fill" style="width:100%;background:var(--success)"></div></div></div>
   </div>
-</div>
 
 
-  <!-- ═══ 3 NIVEAUX — AGRICULTURE ═══ -->
+<!-- ═══ 3 NIVEAUX — AGRICULTURE ═══ -->
   <div class="level-header lh-w">
     <div class="lh-ico">🌍</div>
     <div class="lh-title">Données Mondiales — Agriculture</div>
@@ -1542,7 +900,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <!-- FIN 3 NIVEAUX AGRICULTURE -->
 
 <!-- ─── AGROALIMENTAIRE ───────────────────────────── -->
-<div class="page"
+
+</div>
 
 <div class="page" id="pg-agroalim">
     <div class="media-bar">
@@ -1572,10 +931,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="dr"><div class="dr-ico">📊</div><div class="dr-lbl">Inflation UEMOA (BCEAO)</div><div class="dr-val" style="color:var(--warn)">4,2%</div><div class="dr-bar"><div class="dr-fill" style="width:42%;background:var(--warn)"></div></div></div>
     <div class="dr"><div class="dr-ico">☀️</div><div class="dr-lbl">Économie SUNWAVE PRO</div><div class="dr-val" style="color:var(--success)">-60%</div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--success)"></div></div></div>
   </div>
-</div>
 
 
-  <!-- ═══ 3 NIVEAUX — AGROALIMENTAIRE ═══ -->
+<!-- ═══ 3 NIVEAUX — AGROALIMENTAIRE ═══ -->
   <div class="level-header lh-w">
     <div class="lh-ico">🌍</div>
     <div class="lh-title">Données Mondiales — Agroalimentaire</div>
@@ -1618,7 +976,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <!-- FIN 3 NIVEAUX AGROALIMENTAIRE -->
 
 <!-- ─── TRANSPORT ─────────────────────────────────── -->
-<div class="page"
+
+</div>
 
 <div class="page" id="pg-transport">
     <div class="media-bar">
@@ -1648,10 +1007,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="dr"><div class="dr-ico">🚛</div><div class="dr-lbl">Gasoil routier CI (INS CI)</div><div class="dr-val" style="color:var(--red)">+35%</div><div class="dr-bar"><div class="dr-fill" style="width:75%;background:var(--red)"></div></div></div>
     <div class="dr"><div class="dr-ico">🏢</div><div class="dr-lbl">Dépôt solaire SUNWAVE</div><div class="dr-val" style="color:var(--success)">-40%</div><div class="dr-bar"><div class="dr-fill" style="width:40%;background:var(--success)"></div></div></div>
   </div>
-</div>
 
 
-  <!-- ═══ 3 NIVEAUX — TRANSPORT & LOGISTIQUE ═══ -->
+<!-- ═══ 3 NIVEAUX — TRANSPORT & LOGISTIQUE ═══ -->
   <div class="level-header lh-w">
     <div class="lh-ico">🌍</div>
     <div class="lh-title">Données Mondiales — Transport & Logistique</div>
@@ -1693,7 +1051,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   <!-- FIN 3 NIVEAUX TRANSPORT & LOGISTIQUE -->
 
 <!-- ─── SOURCES ────────────────────────────────────── -->
-<div class="page"
+
+</div>
 
 <div class="page" id="pg-sources">
   <div style="text-align:center;padding:12px 0 14px;border-bottom:1px solid var(--border);margin-bottom:12px;">
@@ -1860,8 +1219,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 
 <!-- ─── PAGE SIGNAL TERRAIN CI ──────────────────────────────── -->
-<div class="page"
-
 <div class="page" id="pg-terrain">
 
   <!-- Signal Dessalinisateurs -->
@@ -2159,7 +1516,312 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 
 <!-- ─── PAGE À PROPOS / PRINCIPE EKB ──────────────────────────── -->
-<div class="page"
+<div class="page" id="pg-about">
+
+  <!-- Identité EKB -->
+  <div class="ekb-principle">
+    <div class="ep-logo-wrap">
+      <img class="ep-logo" src="data:image/webp;base64,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" alt="EKB">
+      <div>
+        <div class="ep-brand-ekb">EKB</div>
+        <div class="ep-brand-intel">Intelligence</div>
+        <div class="ep-version">v5.1 · EL-KEYON BUILDER SARL · Grand-Bassam CI</div>
+      </div>
+    </div>
+
+    <!-- Principe fondamental -->
+    <div class="ep-rule">
+      <div class="ep-rule-title">⚖️ PRINCIPE FONDAMENTAL</div>
+      <div class="ep-rule-text">
+        EKB-Intelligence est une <strong>plateforme d'accumulation.</strong>
+        Chaque information reçue — mondiale, régionale, sous-régionale ou nationale —
+        constitue une <strong>couche supplémentaire</strong> qui enrichit l'analyse
+        sans jamais remplacer ni retirer ce qui existe déjà.<br><br>
+        Quand tu envoies un signal terrain (délestages CI, pluie sur cacao,
+        décision OPEP, rapport BCEAO...) ce signal <strong>s'ajoute</strong>
+        aux 49 sources (42 données + 6 médias) et vient renforcer l'intelligence des 5 secteurs.
+      </div>
+    </div>
+
+    <div class="ep-rule" style="border-color:var(--blue)">
+      <div class="ep-rule-title" style="color:var(--lr)">📐 RÈGLE D'OR</div>
+      <div class="ep-rule-text">
+        <strong>Toute information = + (addition), jamais = (remplacement)</strong><br><br>
+        Niveau 🌍 Mondial → sources permanentes automatiques<br>
+        Niveau 🌿 CEDEAO/Régional → sources permanentes automatiques<br>
+        Niveau 🇨🇮 National CI → sources permanentes + signaux terrain<br>
+        Signaux DG → complément immédiat intégré dans les couches CI
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistiques EKB -->
+  <div class="ekb-stats">
+    <div class="ekb-stat">
+      <div class="ekb-stat-val" style="color:var(--gold)">42</div>
+      <div class="ekb-stat-lbl">Sources permanentes actives</div>
+    </div>
+    <div class="ekb-stat">
+      <div class="ekb-stat-val" style="color:var(--blue)">3</div>
+      <div class="ekb-stat-lbl">Niveaux géographiques</div>
+    </div>
+    <div class="ekb-stat">
+      <div class="ekb-stat-val" style="color:var(--agri)">5</div>
+      <div class="ekb-stat-lbl">Secteurs couverts</div>
+    </div>
+    <div class="ekb-stat">
+      <div class="ekb-stat-val" style="color:var(--red)">∞</div>
+      <div class="ekb-stat-lbl">Signaux terrain intégrables</div>
+    </div>
+    <div class="ekb-stat">
+      <div class="ekb-stat-val" style="color:var(--success)">6h</div>
+      <div class="ekb-stat-lbl">Cycle mise à jour N8N</div>
+    </div>
+    <div class="ekb-stat">
+      <div class="ekb-stat-val" style="color:var(--violet)">AI</div>
+      <div class="ekb-stat-lbl">Analyse Claude quotidienne</div>
+    </div>
+  </div>
+
+  <!-- Architecture 3 niveaux -->
+  <div class="sh"><div class="sh-dot" style="background:var(--gold)"></div><div class="sh-t">Architecture des données</div></div>
+
+  <div class="arch-viz">
+    <div class="arch-level">
+      <div class="arch-badge" style="background:var(--lwGl);color:var(--lw)">MONDIAL</div>
+      <div class="arch-content">
+        <div class="arch-title" style="color:var(--lw)">🌍 Niveau Mondial — 18 sources</div>
+        <div class="arch-sources">
+          EIA · IEA · FAO FPMA · FAO FFPI · FAOSTAT · WB Pink Sheet · USDA NASS<br>
+          OPEC · OECD · FBX Freightos · IATA · NewsAPI · GDELT · ExchangeRate API · Alpha Vantage
+        </div>
+      </div>
+      <div class="arch-count" style="color:var(--lw)">18</div>
+    </div>
+
+    <div class="arch-level">
+      <div class="arch-badge" style="background:var(--lrGl);color:var(--lr)">CEDEAO</div>
+      <div class="arch-content">
+        <div class="arch-title" style="color:var(--lr)">🌿 Niveau Régional CEDEAO — 11 sources</div>
+        <div class="arch-sources">
+          BCEAO · ECOWAS AMIS · AGRHYMET CILSS · IRENA Africa · ECOWAS CEREEC<br>
+          AfDB Statistics · SE4ALL Africa Hub · FAO GIEWS AOF · UNECA · Open Data for Africa
+        </div>
+      </div>
+      <div class="arch-count" style="color:var(--lr)">11</div>
+    </div>
+
+    <div class="arch-level">
+      <div class="arch-badge" style="background:var(--lnGl);color:var(--ln)">NATIONAL</div>
+      <div class="arch-content">
+        <div class="arch-title" style="color:var(--ln)">🇨🇮 Niveau National CI — 13 sources fixes</div>
+        <div class="arch-sources">
+          INS CI · ANARE-CI · PETROCI · SOGEPE · CCA CI · MINADER CI<br>
+          PAA · CEPICI · CCI CI · AGEROUTE · BRVM · data.gouv.ci · Trésor CI
+        </div>
+      </div>
+      <div class="arch-count" style="color:var(--ln)">13</div>
+    </div>
+
+    <div class="arch-level" style="border-color:rgba(232,56,56,.3)">
+      <div class="arch-badge" style="background:var(--rGl);color:var(--red)">TERRAIN</div>
+      <div class="arch-content">
+        <div class="arch-title" style="color:var(--red)">⚡ Signaux Terrain — Sources variables</div>
+        <div class="arch-sources">
+          Rapports DG · Facebook CI · Commentaires locaux · Médias CI<br>
+          Communiqués CIE · RTI · FratMat · Pulse CI · 7info · Observations directes
+        </div>
+      </div>
+      <div class="arch-count" style="color:var(--red)">+∞</div>
+    </div>
+
+    <div class="arch-level" style="border-color:rgba(155,111,224,.25)">
+      <div class="arch-badge" style="background:rgba(155,111,224,.1);color:var(--violet)">MÉDIAS</div>
+      <div class="arch-content">
+        <div class="arch-title" style="color:var(--violet)">📺 Médias — 6 chaînes complémentaires</div>
+        <div class="arch-sources">
+          France 24 · BFM TV · Africa 24 · RTI CI<br>
+          CNN International · Al Jazeera<br>
+          <span style="color:rgba(155,111,224,.6)">Intégrés via NewsAPI + GDELT + RSS directs</span>
+        </div>
+      </div>
+      <div class="arch-count" style="color:var(--violet)">6</div>
+    </div>
+  </div>
+
+  <!-- 5 secteurs avec leurs couvertures -->
+  <div class="sh"><div class="sh-dot" style="background:var(--blue)"></div><div class="sh-t">Couverture par secteur</div></div>
+
+  <div class="sector-arch-grid">
+    <div class="sec-arch" onclick="gp('energie')" style="border-color:rgba(197,146,46,.25)">
+      <div class="sec-arch-ico">⚡</div>
+      <div class="sec-arch-name" style="color:var(--energy)">Énergie</div>
+      <div class="sec-arch-count">
+        <span class="sec-arch-dot" style="background:var(--lw)"></span>EIA·IEA·OPEC<br>
+        <span class="sec-arch-dot" style="background:var(--lr)"></span>IRENA·CEREEC<br>
+        <span class="sec-arch-dot" style="background:var(--ln)"></span>ANARE·SOGEPE·PETROCI<br>
+        <span class="sec-arch-dot" style="background:var(--red)"></span>CIE terrain · délestages
+      </div>
+    </div>
+    <div class="sec-arch" onclick="gp('construction')" style="border-color:rgba(26,118,160,.25)">
+      <div class="sec-arch-ico">🏗️</div>
+      <div class="sec-arch-name" style="color:var(--build)">Construction</div>
+      <div class="sec-arch-count">
+        <span class="sec-arch-dot" style="background:var(--lw)"></span>WB Pink·OECD·FBX<br>
+        <span class="sec-arch-dot" style="background:var(--lr)"></span>AfDB·BAD infra<br>
+        <span class="sec-arch-dot" style="background:var(--ln)"></span>CCI CI·CEPICI·AGEROUTE
+      </div>
+    </div>
+    <div class="sec-arch" onclick="gp('agriculture')" style="border-color:rgba(58,128,32,.25)">
+      <div class="sec-arch-ico">🌾</div>
+      <div class="sec-arch-name" style="color:var(--agri)">Agriculture</div>
+      <div class="sec-arch-count">
+        <span class="sec-arch-dot" style="background:var(--lw)"></span>FAO·WB·USDA·EIA<br>
+        <span class="sec-arch-dot" style="background:var(--lr)"></span>AMIS·AGRHYMET·CILSS<br>
+        <span class="sec-arch-dot" style="background:var(--ln)"></span>CCA CI·MINADER
+      </div>
+    </div>
+    <div class="sec-arch" onclick="gp('agroalim')" style="border-color:rgba(16,200,224,.2)">
+      <div class="sec-arch-ico">🏭</div>
+      <div class="sec-arch-name" style="color:var(--agro)">Agroalimentaire</div>
+      <div class="sec-arch-count">
+        <span class="sec-arch-dot" style="background:var(--lw)"></span>IEA·FAO·WB·FBX<br>
+        <span class="sec-arch-dot" style="background:var(--lr)"></span>BCEAO·AfDB<br>
+        <span class="sec-arch-dot" style="background:var(--ln)"></span>ANARE·PETROCI·MINADER
+      </div>
+    </div>
+    <div class="sec-arch" onclick="gp('transport')" style="border-color:rgba(128,96,200,.2);grid-column:1/-1">
+      <div class="sec-arch-ico">🚚</div>
+      <div class="sec-arch-name" style="color:var(--transp)">Transport & Logistique</div>
+      <div class="sec-arch-count">
+        <span class="sec-arch-dot" style="background:var(--lw)"></span>FBX Freightos · IATA · EIA · Baltic Exchange &nbsp;
+        <span class="sec-arch-dot" style="background:var(--lr)"></span>CEDEAO corridors · BCEAO &nbsp;
+        <span class="sec-arch-dot" style="background:var(--ln)"></span>INS CI · PAA · AGEROUTE
+      </div>
+    </div>
+  </div>
+
+  <!-- Flux d'information -->
+  <div class="sh"><div class="sh-dot" style="background:var(--violet)"></div><div class="sh-t">Comment les données arrivent</div></div>
+
+  <div class="info-flow">
+    <div class="if-title">Pipeline d'enrichissement EKB</div>
+    <div class="if-row">
+      <div class="if-source" style="color:var(--lw)">🌍 APIs Mondiales</div>
+      <div class="if-arrow">→</div>
+      <div class="if-dest">N8N collecte auto toutes les 6h → data.json → App mise à jour</div>
+      <div class="if-freq">6h cycle</div>
+    </div>
+    <div class="if-row">
+      <div class="if-source" style="color:var(--lr)">🌿 CEDEAO Régional</div>
+      <div class="if-arrow">→</div>
+      <div class="if-dest">BCEAO · AMIS · IRENA → couche CEDEAO de chaque secteur</div>
+      <div class="if-freq">Mensuel</div>
+    </div>
+    <div class="if-row">
+      <div class="if-source" style="color:var(--ln)">🇨🇮 Sources CI fixes</div>
+      <div class="if-arrow">→</div>
+      <div class="if-dest">INS · ANARE · CCA · PAA → couche nationale CI</div>
+      <div class="if-freq">Mensuel</div>
+    </div>
+    <div class="if-row">
+      <div class="if-source" style="color:var(--red)">⚡ Signal DG terrain</div>
+      <div class="if-arrow">→</div>
+      <div class="if-dest">Tu envoies l'info → s'ajoute comme couche CI supplémentaire</div>
+      <div class="if-freq">Immédiat</div>
+    </div>
+    <div class="if-row">
+      <div class="if-source" style="color:var(--violet)">🤖 Claude AI</div>
+      <div class="if-arrow">→</div>
+      <div class="if-dest">Analyse croisée toutes sources → Score risque/opportunité quotidien</div>
+      <div class="if-freq">06h00</div>
+    </div>
+  </div>
+
+  <!-- Signaux terrain intégrés à ce jour -->
+  <div class="sh"><div class="sh-dot" style="background:var(--red)"></div><div class="sh-t">Signaux terrain intégrés</div></div>
+
+  <div class="signal-card sc-n">
+    <div class="sig-card-head">
+      <div class="sig-card-ico">⚡</div>
+      <div>
+        <div class="sig-card-title" style="color:var(--red)">Délestages Abidjan & Grand-Bassam</div>
+      </div>
+      <span class="dsb dsb-n" style="margin-left:auto">CI Terrain</span>
+    </div>
+    <div class="sig-card-body">Coupures répétées dans 14+ zones dont Grand-Bassam. Réseau CIE saturé structurellement. 3 causes : chaleur saisonnière + travaux gaz naturel + croissance urbaine. Signal reçu via Facebook et confirmé sources officielles CIE, RTI, FratMat.</div>
+    <div class="sig-card-meta">
+      <span class="sig-date">Fév-Mars 2026</span>
+      <span class="dsb dsb-n">CIE.ci</span>
+      <span class="dsb dsb-n">RTI Infos</span>
+      <span class="dsb dsb-n">FratMat</span>
+      <span class="dsb dsb-n">Pulse CI</span>
+      <span class="dsb dsb-n">Facebook terrain</span>
+    </div>
+    <div style="margin-top:7px;font-size:10px;color:var(--txt3);font-family:'JetBrains Mono',monospace">
+      → Intégré dans : Page Énergie (couche CI) · Page Terrain CI (module complet)
+    </div>
+  </div>
+
+  <div style="background:var(--panel2);border:1px dashed rgba(197,146,46,.3);border-radius:var(--r);padding:12px;text-align:center;margin-bottom:9px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);letter-spacing:2px;margin-bottom:6px">PROCHAIN SIGNAL TERRAIN</div>
+    <div style="font-size:12px;color:var(--txt2)">Envoie toute information pertinente —<br>elle sera intégrée comme couche supplémentaire</div>
+    <div style="font-size:10px;color:var(--txt3);margin-top:5px;font-style:italic">Météo · Prix locaux · Actualités CI · Rapports sectoriels · Observations terrain...</div>
+  </div>
+
+  <!-- Contact EL-KEYON -->
+  <div style="background:linear-gradient(135deg,var(--goldGl),rgba(26,118,160,.06));border:1px solid var(--border2);border-radius:var(--r);padding:13px;text-align:center;">
+    <img src="data:image/webp;base64,UklGRsoBAABXRUJQVlA4IL4BAABwCgCdASodACwAPjESh0KiIQ1WAgAQAYJYwCsMsu553AOkU8og+QHflf1XlH+evRJ/3nAV/rMei723kNKzmoDT1NksMa4iV/t7AUB6yBvnX8wfv9KKNO6goKYoAAD+//aaEuD6T0752xubd9OPo8t+5rSGj+ss89/zvr8+XBsYnR8fM5OFLkqWCOFI1X/Gujv3wn+v/0rzu+2a+/45LWdfi9sVf6ZPEDaurqW30+P/iGOWh13tK45xrw+c3/RmsR3fL45gvR3t5/n6fa8zKN63XAfOsOiTMkvlCW9c/uT0UIoHZNGiOfvxovLKYZhINYKjycnfZ8shPT37k2fS1+uumAkm7hlXIAf1izecCRM3FPY0XqFEmdON5eZ9uAV3J/nXr6sm3/0bna1upp/PIkv9hLcQ2zX90mO//BlzB8MZ46uix2/Z2dWFhyL/2gPv/jSBcyWi2psT1xJTn+fHgnT2d21xpmF8izVL6nVARcphP5FFjRpWrLRf1A0VDng07qQ8UApWJ6z4/Dwto8aZSRHUsh1WNAG+2PSM5YIo1rABe7cNveWHFMKb+Gk46HD66TkUsPi2XuixegcZ2GAAAA==" style="height:36px;width:auto;margin-bottom:8px;" alt="EKB">
+    <div style="font-size:13px;font-weight:800;margin-bottom:3px"><span style="color:#fff">EKB</span><span style="color:var(--goldLt)">-Intelligence</span></div>
+    <div style="font-size:10px;color:var(--txt2);margin-bottom:8px">EL-KEYON BUILDER SARL · RC: CI-GRDBSM-2024-B-3133</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold)">+225 07 11 77 10 97 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed888186889482838f98848189889fad8a808c8481c38e8280">[email&#160;protected]</a></div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);margin-top:4px">Grand-Bassam, Quartier Mockeyville, Côte d'Ivoire</div>
+  </div>
+
+
+  <!-- ── CHANGER LE CODE PIN ─────────────────── -->
+  <div style="margin-top:16px;background:linear-gradient(135deg,rgba(197,146,46,.08),rgba(26,118,160,.05));border:1px solid rgba(197,146,46,.25);border-radius:12px;padding:14px;">
+    <div style="font-size:13px;font-weight:700;color:#C9972B;margin-bottom:12px;letter-spacing:.5px;">SECURITE — CODE D'ACCES</div>
+
+    <div style="font-size:11px;color:#8A9BB0;margin-bottom:14px;">Modifiez votre code PIN à 4 chiffres. Le nouveau code sera actif immédiatement.</div>
+
+    <!-- Ancien code -->
+    <div style="margin-bottom:10px;">
+      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Code actuel</div>
+      <input id="pinOld" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
+        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
+        placeholder="••••">
+    </div>
+
+    <!-- Nouveau code -->
+    <div style="margin-bottom:10px;">
+      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Nouveau code</div>
+      <input id="pinNew" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
+        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
+        placeholder="••••">
+    </div>
+
+    <!-- Confirmer -->
+    <div style="margin-bottom:14px;">
+      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Confirmer le nouveau code</div>
+      <input id="pinConfirm" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
+        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
+        placeholder="••••">
+    </div>
+
+    <!-- Message feedback -->
+    <div id="pinMsg" style="font-size:11px;height:14px;margin-bottom:10px;text-align:center;"></div>
+
+    <!-- Bouton -->
+    <button onclick="ekbChangePIN()"
+      style="width:100%;background:linear-gradient(135deg,#C9972B,#A07820);border:none;border-radius:10px;padding:13px;color:#0A1628;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;cursor:pointer;-webkit-tap-highlight-color:transparent;">
+      MODIFIER LE CODE
+    </button>
+  </div>
+
+</div>
+
+<!-- ─── BRVM & MARCHÉS FINANCIERS ────────────────────────────── -->
 
 <div class="page" id="pg-about">
 
@@ -2702,45 +2364,82 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 </div>
 
   </div>
-</div><!-- /main -->
+  </div><!-- /main -->
 
-  <!-- BOTTOM NAV -->
+
+
+  <!-- NAV -->
   <nav class="bnav">
-
   <div class="bn on" id="bn-home"         data-page="home"><div class="bn-ico">🏠</div><div class="bn-lbl">Board</div><div class="bn-bar"></div></div>
-  <div class="bn"    id="bn-mondial"      data-page="mondial">
-    <div class="bn-ico">🌍</div>
-    <div class="bn-lbl">Monde</div>
-    <div class="bn-bar"></div>
-  </div>
-    <div class="bn"    id="bn-energie"      data-page="energie"><div class="bn-ico">⚡</div><div class="bn-lbl">Énergie</div><div class="bn-bar"></div></div>
+  <div class="bn"    id="bn-mondial"      data-page="mondial"><div class="bn-ico">🌍</div><div class="bn-lbl">Monde</div><div class="bn-bar"></div></div>
+  <div class="bn"    id="bn-energie"      data-page="energie"><div class="bn-ico">⚡</div><div class="bn-lbl">Énergie</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-construction" data-page="construction"><div class="bn-ico">🏗️</div><div class="bn-lbl">BTP</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-agriculture"  data-page="agriculture"><div class="bn-ico">🌾</div><div class="bn-lbl">Agri</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-agroalim"     data-page="agroalim"><div class="bn-ico">🏭</div><div class="bn-lbl">Agro</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-transport"    data-page="transport"><div class="bn-ico">🚚</div><div class="bn-lbl">Transport</div><div class="bn-bar"></div></div>
-  <div class="bn" id="bn-terrain" data-page="terrain">
-    <div class="bn-ico">⚡</div>
-    <div class="bn-lbl">Terrain CI</div>
-    <div class="bn-bar"></div>
-  </div>
+  <div class="bn"    id="bn-terrain"      data-page="terrain"><div class="bn-ico">⚡</div><div class="bn-lbl">Terrain CI</div><div class="bn-bar"></div></div>
   <div class="bn"    id="bn-sources"      data-page="sources"><div class="bn-ico">📡</div><div class="bn-lbl">Sources</div><div class="bn-bar"></div></div>
-  <div class="bn" id="bn-brvm" data-page="brvm">
-    <div class="bn-ico">📈</div>
-    <div class="bn-lbl">BRVM</div>
-    <div class="bn-bar"></div>
-  </div>
-  <div class="bn" id="bn-about" data-page="about">
-    <div class="bn-ico">ℹ️</div>
-    <div class="bn-lbl">EKB</div>
-    <div class="bn-bar">
-  </div>
+  <div class="bn"    id="bn-brvm"         data-page="brvm"><div class="bn-ico">📈</div><div class="bn-lbl">BRVM</div><div class="bn-bar"></div></div>
+  <div class="bn"    id="bn-about"        data-page="about"><div class="bn-ico">ℹ️</div><div class="bn-lbl">EKB</div><div class="bn-bar"></div></div>
+</nav>
 
-  </nav>
+</div>
 
-</div><!-- /app-shell -->
-
-<!-- JS LOCKSCREEN -->
+<!-- SCRIPTS -->
 <script>
+var PAGES = {
+  home:'/ Tableau de bord',
+  mondial:'/ Données Mondiales',
+  energie:'/ Énergie',
+  construction:'/ BTP',
+  agriculture:'/ Agriculture',
+  agroalim:'/ Agroalimentaire',
+  transport:'/ Transport',
+  sources:'/ Sources (49)',
+  terrain:'/ Signal Terrain CI',
+  brvm:'/ BRVM & Marchés',
+  about:'/ EKB'
+};
+
+function gp(id) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('on');
+  }
+  var bns = document.querySelectorAll('.bn');
+  for (var j = 0; j < bns.length; j++) {
+    bns[j].classList.remove('on');
+  }
+  var pg = document.getElementById('pg-' + id);
+  var bn = document.getElementById('bn-' + id);
+  if (pg) { pg.classList.add('on'); pg.scrollTop = 0; }
+  if (bn) { bn.classList.add('on'); }
+  var tb = document.getElementById('tb-page');
+  if (tb) tb.textContent = PAGES[id] || '';
+}
+
+// Attacher les événements via addEventListener
+// Fonctionne même si onclick est bloqué
+document.addEventListener('DOMContentLoaded', function() {
+  // Nav buttons
+  var bns = document.querySelectorAll('.bn[data-page]');
+  for (var i = 0; i < bns.length; i++) {
+    (function(btn) {
+      btn.addEventListener('click', function(e) { e.preventDefault(); gp(btn.getAttribute('data-page')); });
+      btn.addEventListener('touchend', function(e) { e.preventDefault(); gp(btn.getAttribute('data-page')); });
+    })(bns[i]);
+  }
+  // Tous les éléments avec data-page (bannières, boutons CTA)
+  var dp = document.querySelectorAll('[data-page]:not(.bn)');
+  for (var j = 0; j < dp.length; j++) {
+    (function(el) {
+      el.addEventListener('click', function(e) { e.preventDefault(); gp(el.getAttribute('data-page')); });
+    })(dp[j]);
+  }
+});
+
+window.gp = gp;
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
 
 // ── LOCKSCREEN EKB ─────────────────────────────────────────────────
 (function() {
@@ -2890,16 +2589,15 @@ function showSuccess() {
 
 // Déverrouiller l'app
 function unlockApp(silent) {
-  try {
-    sessionStorage.setItem(SESSION_KEY, Date.now().toString());
-  } catch(e) {}
-
-  const ls = document.getElementById('lockscreen');
+  try { sessionStorage.setItem(SESSION_KEY, Date.now().toString()); } catch(e) {}
+  var ls = document.getElementById('lockscreen');
+  if (!ls) return;
   if (silent) {
-    ls.classList.add('hidden');
+    ls.style.display = 'none';
   } else {
-    ls.classList.add('out');
-    setTimeout(() => ls.classList.add('hidden'), 450);
+    ls.style.transition = 'opacity .3s';
+    ls.style.opacity = '0';
+    setTimeout(function() { ls.style.display = 'none'; }, 320);
   }
 }
 
@@ -2923,10 +2621,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })();
 
-</script>
-
-<!-- JS TERRAIN -->
-<script>
+</script><script>
 (function() {
 'use strict';
 try {
@@ -3124,10 +2819,7 @@ async function genTerrainPDF() {
 
 } catch(e) { console.warn('EKB terrain JS:', e); }
 })();
-</script>
-
-<!-- JS PRINCIPAL -->
-<script>
+</script><script>
 (function() {
 'use strict';
 try {
@@ -3462,10 +3154,7 @@ window.ekbChangePIN = typeof ekbChangePIN !== 'undefined' ? ekbChangePIN : funct
 }
 
 })();
-</script>
-
-<!-- JS APIs LIVE -->
-<script>
+</script><script>
 
 // ── APIs LIVE — BRVM & Marchés ─────────────────────────────────
 (function() {
