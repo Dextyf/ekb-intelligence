@@ -269,11 +269,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .ltab.aw .ltab-lbl { color: var(--goldLt); }
 
 /* ── OVERLAYS ── */
-#splash { position: fixed; inset: 0; z-index: 999; background: radial-gradient(ellipse 80% 60% at 50% 35%, #0F2040 0%, #070D1A 55%, #040810 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; transition: opacity .5s ease; }
-#splash.out { opacity: 0; pointer-events: none; }
-#lockscreen { position: fixed; inset: 0; z-index: 998; background: radial-gradient(ellipse 80% 60% at 50% 35%, #0F2040 0%, #070D1A 55%, #040810 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; padding-bottom: calc(40px + env(safe-area-inset-bottom, 20px)); transition: opacity .4s ease; }
-#lockscreen.out { opacity: 0; pointer-events: none; }
-#lockscreen.hidden { display: none; }
+#splash { display: none !important; }
+#splash.out { display: none !important; }
 #pdfov { position: fixed; inset: 0; z-index: 200; background: rgba(4,8,16,.97); display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
 #pdfov.on { display: flex; }
 #toast { position: fixed; bottom: calc(var(--navH) + env(safe-area-inset-bottom, 8px) + 12px); left: 14px; right: 14px; z-index: 300; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--r2); padding: 10px 14px; display: none; align-items: center; gap: 10px; box-shadow: 0 8px 32px rgba(0,0,0,.6); font-size: 12px; animation: toastIn .25s ease; }
@@ -354,37 +351,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 </div>
 
 <!-- LOCKSCREEN -->
-<div id="lockscreen">
-  <div class="lk-logo">⚡</div>
-  <div class="lk-title">EKB-Intelligence</div>
-  <div class="lk-sub">Code d'accès requis</div>
-  <div class="lk-faceid-btn" onclick="ekbFaceID()">
-    <div class="lk-faceid-icon">🪪</div>
-    <div class="lk-faceid-lbl">FACE ID</div>
-  </div>
-  <div class="lk-or">ou entrez votre code</div>
-  <div class="lk-pin-display">
-    <div class="lk-dot" id="dot0"></div>
-    <div class="lk-dot" id="dot1"></div>
-    <div class="lk-dot" id="dot2"></div>
-    <div class="lk-dot" id="dot3"></div>
-  </div>
-  <div class="lk-keypad">
-    <div class="lk-key" onclick="ekbPin('1')">1</div>
-    <div class="lk-key" onclick="ekbPin('2')">2<div class="lk-key-sub">ABC</div></div>
-    <div class="lk-key" onclick="ekbPin('3')">3<div class="lk-key-sub">DEF</div></div>
-    <div class="lk-key" onclick="ekbPin('4')">4<div class="lk-key-sub">GHI</div></div>
-    <div class="lk-key" onclick="ekbPin('5')">5<div class="lk-key-sub">JKL</div></div>
-    <div class="lk-key" onclick="ekbPin('6')">6<div class="lk-key-sub">MNO</div></div>
-    <div class="lk-key" onclick="ekbPin('7')">7<div class="lk-key-sub">PQRS</div></div>
-    <div class="lk-key" onclick="ekbPin('8')">8<div class="lk-key-sub">TUV</div></div>
-    <div class="lk-key" onclick="ekbPin('9')">9<div class="lk-key-sub">WXYZ</div></div>
-    <div class="lk-key lk-empty"></div>
-    <div class="lk-key" onclick="ekbPin('0')">0</div>
-    <div class="lk-key" onclick="ekbDel()">⌫</div>
-  </div>
-  <div class="lk-error" id="lkError"></div>
-</div>
 
 <!-- TOAST -->
 <div id="toast"><span id="t-ico">✅</span><span id="t-txt">OK</span></div>
@@ -1778,44 +1744,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 
   <!-- ── CHANGER LE CODE PIN ─────────────────── -->
-  <div style="margin-top:16px;background:linear-gradient(135deg,rgba(197,146,46,.08),rgba(26,118,160,.05));border:1px solid rgba(197,146,46,.25);border-radius:12px;padding:14px;">
-    <div style="font-size:13px;font-weight:700;color:#C9972B;margin-bottom:12px;letter-spacing:.5px;">SECURITE — CODE D'ACCES</div>
-
-    <div style="font-size:11px;color:#8A9BB0;margin-bottom:14px;">Modifiez votre code PIN à 4 chiffres. Le nouveau code sera actif immédiatement.</div>
-
-    <!-- Ancien code -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Code actuel</div>
-      <input id="pinOld" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
-        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
-        placeholder="••••">
-    </div>
-
-    <!-- Nouveau code -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Nouveau code</div>
-      <input id="pinNew" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
-        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
-        placeholder="••••">
-    </div>
-
-    <!-- Confirmer -->
-    <div style="margin-bottom:14px;">
-      <div style="font-size:10px;color:#4A5568;margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Confirmer le nouveau code</div>
-      <input id="pinConfirm" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*"
-        style="width:100%;background:rgba(255,255,255,.05);border:1px solid #2C3A47;border-radius:8px;padding:10px 12px;color:#E8EFF8;font-size:18px;letter-spacing:8px;text-align:center;outline:none;-webkit-appearance:none;"
-        placeholder="••••">
-    </div>
-
-    <!-- Message feedback -->
-    <div id="pinMsg" style="font-size:11px;height:14px;margin-bottom:10px;text-align:center;"></div>
-
-    <!-- Bouton -->
-    <button onclick="ekbChangePIN()"
-      style="width:100%;background:linear-gradient(135deg,#C9972B,#A07820);border:none;border-radius:10px;padding:13px;color:#0A1628;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;cursor:pointer;-webkit-tap-highlight-color:transparent;">
-      MODIFIER LE CODE
-    </button>
-  </div>
 
 </div>
 
@@ -1986,183 +1914,11 @@ document.addEventListener('DOMContentLoaded', function() {
 window.gp = gp;
 </script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
 
-// ── LOCKSCREEN EKB ─────────────────────────────────────────────────
-(function() {
-'use strict';
-
-// PIN stocké dans localStorage — modifiable depuis l'app
-const DEFAULT_PIN = '1234';
-const PIN_KEY = 'ekb_pin';
-function getEKB_PIN() {
-  try { return localStorage.getItem(PIN_KEY) || DEFAULT_PIN; }
-  catch(e) { return DEFAULT_PIN; }
-}
-function setEKB_PIN(newPin) {
-  try { localStorage.setItem(PIN_KEY, newPin); return true; }
-  catch(e) { return false; }
-}
-const SESSION_KEY = 'ekb_unlocked';
-const SESSION_DURATION = 8 * 60 * 60 * 1000; // 8 heures
-
-let pinBuffer = '';
-let attempts  = 0;
-let locked    = false;
-
-// Vérifier si session encore valide
-function checkSession() {
-  try {
-    const ts = sessionStorage.getItem(SESSION_KEY);
-    if (ts && (Date.now() - parseInt(ts)) < SESSION_DURATION) {
-      unlockApp(true); // déverrouillage silencieux
-      return true;
-    }
-  } catch(e) {}
-  return false;
-}
-
-// Face ID / Biométrie via WebAuthn
-async function ekbFaceID() {
-  const btn = document.getElementById('lkFaceBtn');
-  btn.style.borderColor = '#C9972B';
-
-  // Sur iOS Safari, PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable
-  // retourne true si Face ID / Touch ID disponible
-  try {
-    const available = await PublicKeyCredential
-      .isUserVerifyingPlatformAuthenticatorAvailable();
-
-    if (available) {
-      // Créer un challenge biométrique
-      const cred = await navigator.credentials.get({
-        publicKey: {
-          challenge: crypto.getRandomValues(new Uint8Array(32)),
-          timeout: 60000,
-          userVerification: 'required',
-          rpId: window.location.hostname || 'localhost',
-          allowCredentials: [],
-        }
-      });
-      // Si on arrive ici = Face ID validé
-      showSuccess();
-      setTimeout(() => unlockApp(), 600);
-    } else {
-      // Pas de biométrie — fallback PIN
-      document.getElementById('lkError').textContent =
-        'Face ID non disponible — utilisez le code';
-      setTimeout(() => {
-        document.getElementById('lkError').textContent = '';
-      }, 2500);
-    }
-  } catch(e) {
-    if (e.name === 'NotAllowedError') {
-      // Annulé par l'utilisateur — ne rien faire
-    } else if (e.name === 'InvalidStateError' || e.name === 'NotSupportedError') {
-      // Pas encore enregistré — déverrouiller directement (1er accès)
-      // Sur un vrai déploiement, on enregistrerait la clé d'abord
-      showSuccess();
-      setTimeout(() => unlockApp(), 600);
-    } else {
-      document.getElementById('lkError').textContent =
-        'Face ID non disponible — utilisez le code';
-      setTimeout(() => {
-        document.getElementById('lkError').textContent = '';
-      }, 2500);
-    }
-  }
-  btn.style.borderColor = '';
-}
-
-// Saisie PIN
-function ekbPin(digit) {
-  if (locked) return;
-  if (pinBuffer.length >= 4) return;
-
-  pinBuffer += digit;
-  updateDots();
-
-  if (pinBuffer.length === 4) {
-    setTimeout(checkPin, 150);
-  }
-}
-
-// Suppression
-function ekbDel() {
-  if (locked) return;
-  if (pinBuffer.length > 0) {
-    pinBuffer = pinBuffer.slice(0, -1);
-    updateDots();
-  }
-}
-
-// Mise à jour des points
-function updateDots() {
-  for (let i = 0; i < 4; i++) {
-    const dot = document.getElementById('dot' + i);
-    dot.classList.toggle('filled', i < pinBuffer.length);
-    dot.classList.remove('error');
-  }
-}
-
-// Vérification PIN
-function checkPin() {
-  if (pinBuffer === getEKB_PIN()) {
-    showSuccess();
-    setTimeout(() => unlockApp(), 700);
-  } else {
-    attempts++;
-    // Animation erreur
-    for (let i = 0; i < 4; i++) {
-      document.getElementById('dot' + i).classList.add('error');
-    }
-    document.getElementById('lkError').textContent =
-      attempts >= 3
-        ? 'Code incorrect (' + attempts + ' tentatives)'
-        : 'Code incorrect';
-
-    setTimeout(() => {
-      pinBuffer = '';
-      updateDots();
-      document.getElementById('lkError').textContent = '';
-    }, 800);
-  }
-}
-
-// Afficher succès
-function showSuccess() {
-  document.getElementById('lkSuccess').classList.add('show');
-}
-
-// Déverrouiller l'app
-function unlockApp(silent) {
-  try { sessionStorage.setItem(SESSION_KEY, Date.now().toString()); } catch(e) {}
-  var ls = document.getElementById('lockscreen');
-  if (!ls) return;
-  if (silent) {
-    ls.style.display = 'none';
-  } else {
-    ls.style.transition = 'opacity .3s';
-    ls.style.opacity = '0';
-    setTimeout(function() { ls.style.display = 'none'; }, 320);
-  }
-}
-
-// Exposer pour le HTML onclick
-window.ekbFaceID = ekbFaceID;
 window.ekbPin    = ekbPin;
 window.ekbDel    = ekbDel;
 
 // Initialisation : vérifier la session au chargement
-document.addEventListener('DOMContentLoaded', function() {
-  if (!checkSession()) {
-    // Afficher le lockscreen (déjà visible par défaut)
-    // Essayer Face ID automatiquement après 800ms
-    setTimeout(() => {
-      if (window.PublicKeyCredential) {
-        // Ne pas déclencher automatiquement — attendre le tap
-      }
-    }, 800);
-  }
-});
+
 
 })();
 
@@ -2628,57 +2384,7 @@ function updateUI(d) {
 
 
 // ── Changement de PIN depuis la page EKB ────────────────────────
-function ekbChangePIN() {
-  const old     = document.getElementById('pinOld').value.trim();
-  const newPin  = document.getElementById('pinNew').value.trim();
-  const confirm = document.getElementById('pinConfirm').value.trim();
-  const msg     = document.getElementById('pinMsg');
 
-  // Réinitialiser
-  msg.style.color = '#DC2626';
-
-  // Validations
-  if (old !== getEKB_PIN()) {
-    msg.textContent = 'Code actuel incorrect';
-    document.getElementById('pinOld').style.borderColor = '#DC2626';
-    setTimeout(() => {
-      document.getElementById('pinOld').style.borderColor = '#2C3A47';
-      msg.textContent = '';
-    }, 2000);
-    return;
-  }
-  if (newPin.length !== 4 || !/^[0-9]{4}$/.test(newPin)) {
-    msg.textContent = 'Le nouveau code doit contenir 4 chiffres';
-    return;
-  }
-  if (newPin !== confirm) {
-    msg.textContent = 'Les codes ne correspondent pas';
-    document.getElementById('pinConfirm').style.borderColor = '#DC2626';
-    setTimeout(() => {
-      document.getElementById('pinConfirm').style.borderColor = '#2C3A47';
-      msg.textContent = '';
-    }, 2000);
-    return;
-  }
-  if (newPin === '1234') {
-    msg.textContent = 'Choisissez un code plus sécurisé';
-    return;
-  }
-
-  // Enregistrer
-  const ok = setEKB_PIN(newPin);
-  if (ok) {
-    msg.style.color = '#C9972B';
-    msg.textContent = '✓ Code modifié avec succès';
-    document.getElementById('pinOld').value = '';
-    document.getElementById('pinNew').value = '';
-    document.getElementById('pinConfirm').value = '';
-    setTimeout(() => { msg.textContent = ''; }, 3000);
-    toast('🔐', 'Code PIN mis à jour — actif immédiatement');
-  } else {
-    msg.textContent = 'Erreur — stockage non disponible';
-  }
-}
 
 
 
@@ -2687,7 +2393,7 @@ window.gp         = gp;
 window.setLvl     = typeof setLvl     !== 'undefined' ? setLvl     : function(){};
 window.genPDF     = typeof genPDF     !== 'undefined' ? genPDF     : function(){};
 window.sendWA     = typeof sendWA     !== 'undefined' ? sendWA     : function(){};
-window.ekbChangePIN = typeof ekbChangePIN !== 'undefined' ? ekbChangePIN : function(){};
+
 
 } catch(globalErr) {
   console.warn('EKB main JS:', globalErr);
@@ -2890,24 +2596,9 @@ function initAPIs() {
   }, 1500);
 }
 
-// Déclencher après unlock
+// Démarrage direct — sans authentification
 document.addEventListener('DOMContentLoaded', function() {
-  // Si pas de lockscreen ou déjà unlocked → démarrer directement
-  const ls = document.getElementById('lockscreen');
-  if (!ls || ls.classList.contains('hidden')) {
-    initAPIs();
-  } else {
-    // Observer le retrait du lockscreen
-    const obs = new MutationObserver(function(mutations) {
-      for (const m of mutations) {
-        if (m.type === 'attributes' && ls.classList.contains('hidden')) {
-          initAPIs();
-          obs.disconnect();
-        }
-      }
-    });
-    obs.observe(ls, { attributes: true, attributeFilter: ['class'] });
-  }
+  initAPIs();
 });
 
 })();
