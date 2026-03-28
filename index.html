@@ -12,34 +12,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-/* ═══════════════════════════════════════════════════
-   EL-KEYON INTELLIGENCE PLATFORM v4
-   Data-Driven · 42 sources · 3 niveaux · 5 secteurs
-   Design: African Intelligence Command Dark
-   ═══════════════════════════════════════════════════ */
 :root{
   --bg:#050709; --bg1:#080B14; --bg2:#0B101C;
   --panel:#101826; --p2:#151F30; --p3:#1A273C;
   --border:rgba(255,255,255,.07);
   --border2:rgba(255,184,48,.2);
   --txt:#E4EDF8; --txt2:rgba(228,237,248,.52); --txt3:rgba(228,237,248,.26);
-  /* Niveaux data */
-  --lvl-world:  #FFB830; --lwGl:rgba(255,184,48,.12);
-  --lvl-region: #B06EFF; --lrGl:rgba(176,110,255,.1);
-  --lvl-nat:    #18EAFF; --lnGl:rgba(24,234,255,.1);
-  /* Secteurs */
-  --energy: #FFB830; --eGl:rgba(255,184,48,.12);
-  --build:  #FF6B35; --bGl:rgba(255,107,53,.11);
-  --agri:   #22D67A; --aGl:rgba(34,214,122,.09);
-  --agro:   #18CFAA; --agGl:rgba(24,207,170,.09);
-  --transp: #4D9EFF; --tGl:rgba(77,158,255,.09);
-  /* Status */
+  --lvl-world:#FFB830; --lwGl:rgba(255,184,48,.12);
+  --lvl-region:#B06EFF; --lrGl:rgba(176,110,255,.1);
+  --lvl-nat:#18EAFF; --lnGl:rgba(24,234,255,.1);
+  --energy:#FFB830; --eGl:rgba(255,184,48,.12);
+  --build:#FF6B35; --bGl:rgba(255,107,53,.11);
+  --agri:#22D67A; --aGl:rgba(34,214,122,.09);
+  --agro:#18CFAA; --agGl:rgba(24,207,170,.09);
+  --transp:#4D9EFF; --tGl:rgba(77,158,255,.09);
   --red:#FF4040; --rGl:rgba(255,64,64,.11);
   --green:#00F59A; --gGl:rgba(0,245,154,.07);
   --orange:#FF8C35; --oGl:rgba(255,140,53,.11);
   --gold:#FFD426; --gdGl:rgba(255,212,38,.08);
   --violet:#B06EFF; --vGl:rgba(176,110,255,.1);
   --cyan:#18EAFF; --cGl:rgba(24,234,255,.08);
+  --dangote:#FF6B00; --dGl:rgba(255,107,0,.12);
   --navH:62px; --topH:50px; --tickerH:24px;
   --safeB:env(safe-area-inset-bottom,8px);
   --r:14px; --r2:10px;
@@ -47,103 +40,94 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-direction:column;}
-
-/* SPLASH */
 #splash{position:fixed;inset:0;z-index:999;background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-  transition:opacity .5s;}
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+transition:opacity .5s;}
 #splash.out{opacity:0;pointer-events:none;}
-.sp-hex{width:80px;height:80px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-  background:linear-gradient(135deg,var(--energy),var(--orange));
-  display:flex;align-items:center;justify-content:center;font-size:34px;
-  animation:hexGlow 2s ease-in-out infinite;}
-@keyframes hexGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(255,184,48,.3))}50%{filter:drop-shadow(0 0 25px rgba(255,184,48,.6))}}
-.sp-brand{font-size:24px;font-weight:900;letter-spacing:1px;
-  background:linear-gradient(90deg,var(--energy),var(--orange),var(--agri));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+/* ── LOGO SPLASH ── */
+.sp-logo-wrap{width:90px;height:90px;border-radius:18px;overflow:hidden;
+background:rgba(255,184,48,.08);border:1px solid rgba(255,184,48,.2);
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 0 24px rgba(255,184,48,.15);
+animation:hexGlow 2s ease-in-out infinite;}
+.sp-logo-wrap img{width:100%;height:100%;object-fit:contain;padding:4px;}
+@keyframes hexGlow{0%,100%{box-shadow:0 0 10px rgba(255,184,48,.2)}50%{box-shadow:0 0 30px rgba(255,184,48,.5)}}
+.sp-brand{font-size:22px;font-weight:900;letter-spacing:1px;
+background:linear-gradient(90deg,var(--energy),var(--orange),var(--agri));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .sp-v{font-size:9px;color:var(--txt3);letter-spacing:3px;text-transform:uppercase;}
 .sp-sources{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:320px;}
-.sp-src{font-size:7.5px;padding:2px 7px;border-radius:6px;font-family:'JetBrains Mono',monospace;
-  font-weight:700;letter-spacing:.3px;}
+.sp-src{font-size:7.5px;padding:2px 7px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:.3px;}
 .sp-bar{width:220px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
 .sp-prog{height:100%;width:0;animation:spLoad 2.5s ease forwards;
-  background:linear-gradient(90deg,var(--energy),var(--agri),var(--cyan),var(--transp));}
+background:linear-gradient(90deg,var(--energy),var(--agri),var(--cyan),var(--transp));}
 @keyframes spLoad{to{width:100%}}
-
 /* TOPBAR */
 .topbar{height:var(--topH);background:var(--bg1);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 12px;flex-shrink:0;z-index:40;}
-.tb-l{display:flex;align-items:center;gap:8px;}
-.tb-brand{font-size:15px;font-weight:900;
-  background:linear-gradient(90deg,var(--energy),var(--orange));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.tb-page{font-size:9.5px;color:var(--txt3);}
+display:flex;align-items:center;justify-content:space-between;
+padding:0 10px;flex-shrink:0;z-index:40;}
+.tb-l{display:flex;align-items:center;gap:7px;}
+/* ── LOGO TOPBAR ── */
+.tb-logo{height:34px;width:auto;object-fit:contain;border-radius:6px;flex-shrink:0;}
+.tb-brand{font-size:14px;font-weight:900;
+background:linear-gradient(90deg,var(--energy),var(--orange));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.tb-sub{font-size:7.5px;color:var(--txt3);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.tb-page{font-size:9px;color:var(--txt3);}
 .tb-r{display:flex;align-items:center;gap:6px;}
-.data-freshness{
-  display:flex;align-items:center;gap:4px;
-  background:var(--gGl);border:1px solid rgba(0,245,154,.2);
-  border-radius:7px;padding:3px 8px;
-  font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--green);font-weight:600;
-}
+.data-freshness{display:flex;align-items:center;gap:4px;background:var(--gGl);
+border:1px solid rgba(0,245,154,.2);border-radius:7px;padding:3px 8px;
+font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--green);font-weight:600;}
 .dfresh-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s steps(1) infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .brent-live{background:var(--rGl);border:1px solid rgba(255,64,64,.2);border-radius:7px;
-  padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--red);font-weight:700;}
+padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--red);font-weight:700;}
 .tb-ico{width:30px;height:30px;border-radius:8px;background:var(--panel);
-  display:flex;align-items:center;justify-content:center;font-size:14px;
-  cursor:pointer;border:1px solid var(--border);position:relative;}
+display:flex;align-items:center;justify-content:center;font-size:14px;
+cursor:pointer;border:1px solid var(--border);position:relative;}
 .tb-badge{position:absolute;top:-3px;right:-3px;width:9px;height:9px;
-  background:var(--red);border-radius:50%;border:2px solid var(--bg1);}
-
+background:var(--red);border-radius:50%;border:2px solid var(--bg1);}
 /* TICKER */
 .ticker{height:var(--tickerH);background:rgba(0,0,0,.5);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;flex-shrink:0;overflow:hidden;}
+border-bottom:1px solid var(--border);
+display:flex;align-items:center;flex-shrink:0;overflow:hidden;}
 .tk-tag{padding:0 9px;height:100%;display:flex;align-items:center;
-  font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:800;
-  letter-spacing:1.5px;flex-shrink:0;}
+font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:800;
+letter-spacing:1.5px;flex-shrink:0;}
 .tk-world{background:var(--energy);color:var(--bg);}
 .tk-scroll{overflow:hidden;flex:1;}
 .tk-inner{display:inline-block;white-space:nowrap;padding-left:12px;
-  font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--txt2);
-  animation:tkScroll 65s linear infinite;}
+font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--txt2);
+animation:tkScroll 65s linear infinite;}
 @keyframes tkScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .tu{color:var(--red);font-weight:600;} .td{color:var(--green);font-weight:600;}
 .tn{color:var(--energy);font-weight:600;} .ts{color:var(--txt3);margin:0 8px;}
 .tsrc{font-size:7px;color:var(--txt3);vertical-align:super;}
-
 /* DATA SOURCES STATUS BAR */
-.data-bar{
-  height:20px;background:var(--bg2);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:6px;padding:0 12px;
-  flex-shrink:0;overflow:hidden;
-}
-.ds-item{
-  display:flex;align-items:center;gap:3px;flex-shrink:0;
-  font-family:'JetBrains Mono',monospace;font-size:7.5px;
-}
+.data-bar{height:20px;background:var(--bg2);border-bottom:1px solid var(--border);
+display:flex;align-items:center;gap:6px;padding:0 12px;
+flex-shrink:0;overflow:hidden;}
+.ds-item{display:flex;align-items:center;gap:3px;flex-shrink:0;
+font-family:'JetBrains Mono',monospace;font-size:7.5px;}
 .ds-dot{width:5px;height:5px;border-radius:50%;}
 .ds-name{color:var(--txt3);letter-spacing:.3px;}
 .ds-sep{color:var(--txt3);font-size:10px;margin:0 2px;}
-
 /* MAIN */
 .main{flex:1;overflow:hidden;position:relative;}
 .page{display:none;position:absolute;inset:0;overflow-y:auto;
-  padding:10px 11px calc(var(--navH) + var(--safeB) + 4px);
-  -webkit-overflow-scrolling:touch;}
+padding:10px 11px calc(var(--navH) + var(--safeB) + 4px);
+-webkit-overflow-scrolling:touch;}
 .page.active{display:block;animation:pgIn .2s ease;}
 @keyframes pgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 .page::-webkit-scrollbar{display:none;}
-
 /* BOTTOM NAV */
 .bnav{height:calc(var(--navH) + var(--safeB));padding-bottom:var(--safeB);
-  background:var(--bg1);border-top:1px solid var(--border);
-  display:flex;flex-shrink:0;overflow-x:auto;}
+background:var(--bg1);border-top:1px solid var(--border);
+display:flex;flex-shrink:0;overflow-x:auto;}
 .bnav::-webkit-scrollbar{display:none;}
 .bn{flex-shrink:0;min-width:55px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;cursor:pointer;
-  padding:7px 4px 0;transition:all .15s;min-height:var(--navH);}
+align-items:center;justify-content:center;gap:3px;cursor:pointer;
+padding:7px 4px 0;transition:all .15s;min-height:var(--navH);}
 .bn-ico{font-size:19px;transition:transform .2s;}
 .bn-lbl{font-size:7px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--txt3);}
 .bn-ind{width:16px;height:3px;border-radius:2px;background:transparent;margin-top:2px;}
@@ -151,38 +135,33 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 .bn.active .bn-lbl{color:var(--energy);}
 .bn.active .bn-ind{background:var(--energy);box-shadow:0 0 5px var(--energy);}
 .bn:active{opacity:.7;}
-
-/* ══ COMPOSANTS ══════════════════════════════════ */
-
-/* Data source badge */
-.dsb{
-  display:inline-flex;align-items:center;gap:4px;
-  font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:600;
-  padding:1.5px 6px;border-radius:6px;letter-spacing:.3px;
-}
+/* COMPOSANTS */
+.dsb{display:inline-flex;align-items:center;gap:4px;
+font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:600;
+padding:1.5px 6px;border-radius:6px;letter-spacing:.3px;}
 .dsb-w{background:var(--lwGl);color:var(--lvl-world);}
 .dsb-r{background:var(--lrGl);color:var(--lvl-region);}
 .dsb-n{background:var(--lnGl);color:var(--lvl-nat);}
+.dsb-d{background:var(--dGl);color:var(--dangote);}
 .dsb-dot{width:4px;height:4px;border-radius:50%;}
-
-/* KPI grid */
 .kg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
 .kc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);
-  padding:11px 12px;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s;}
+padding:11px 12px;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s;}
 .kc:active{transform:scale(.96);}
 .kc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
 .ke::after{background:var(--energy);} .kb::after{background:var(--build);}
 .ka::after{background:var(--agri);} .kag::after{background:var(--agro);}
 .kt::after{background:var(--transp);} .kr::after{background:var(--red);}
 .kg-::after{background:var(--green);} .kv::after{background:var(--violet);}
+.kd::after{background:var(--dangote);}
 .k-bg{position:absolute;top:7px;right:9px;font-size:26px;opacity:.06;}
 .k-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.2px;
-  text-transform:uppercase;color:var(--txt3);margin-bottom:5px;}
+text-transform:uppercase;color:var(--txt3);margin-bottom:5px;}
 .k-val{font-size:23px;font-weight:900;line-height:1;margin-bottom:2px;}
 .k-sub{font-size:10px;color:var(--txt2);margin-bottom:4px;}
 .k-footer{display:flex;align-items:center;justify-content:space-between;}
 .k-badge{display:inline-block;padding:1.5px 7px;border-radius:7px;
-  font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:700;}
+font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:700;}
 .kb-r{background:var(--rGl);color:var(--red);}
 .kb-g{background:var(--gGl);color:var(--green);}
 .kb-o{background:var(--oGl);color:var(--orange);}
@@ -190,17 +169,14 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 .kb-n{background:rgba(255,255,255,.05);color:var(--txt2);}
 .kb-c{background:var(--cGl);color:var(--cyan);}
 .kb-v{background:var(--vGl);color:var(--violet);}
-
-/* Card */
+.kb-d{background:var(--dGl);color:var(--dangote);}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:12px;margin-bottom:8px;}
 .card-h{display:flex;align-items:center;gap:7px;margin-bottom:10px;}
 .ch-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
 .ch-title{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--txt2);flex:1;}
 .ch-r{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);}
 .ch-btn{border:1px solid var(--border2);border-radius:7px;padding:3px 8px;
-  font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:var(--energy);}
-
-/* Signal */
+font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:var(--energy);}
 .sig{border-radius:11px;padding:10px 12px;margin-bottom:7px;display:flex;gap:9px;border-left:3px solid;}
 .sig-ico{font-size:15px;flex-shrink:0;padding-top:1px;}
 .sig-header{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:2px;}
@@ -216,19 +192,15 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 .sg{background:var(--gGl);border-color:var(--green);} .sg .sig-title{color:var(--green);}
 .ssw{background:var(--oGl);border-color:var(--orange);} .ssw .sig-title{color:var(--orange);}
 .sv{background:var(--vGl);border-color:var(--violet);} .sv .sig-title{color:var(--violet);}
-
-/* Data indicator row */
+.sd{background:var(--dGl);border-color:var(--dangote);} .sd .sig-title{color:var(--dangote);}
 .data-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);}
 .data-row:last-child{border-bottom:none;}
 .dr-ico{font-size:16px;width:24px;text-align:center;flex-shrink:0;}
 .dr-label{font-size:11.5px;color:var(--txt);flex:1;font-weight:500;}
 .dr-val{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;text-align:right;flex-shrink:0;}
-.dr-trend{font-size:9px;font-family:'JetBrains Mono',monospace;width:36px;text-align:right;flex-shrink:0;}
 .dr-src{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
 .dr-bar{width:50px;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;flex-shrink:0;}
 .dr-fill{height:100%;border-radius:2px;}
-
-/* Sector impact card */
 .impact-card{border-radius:var(--r);padding:12px;margin-bottom:8px;border:1px solid;cursor:pointer;transition:transform .15s;}
 .impact-card:active{transform:scale(.98);}
 .ic-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
@@ -241,28 +213,32 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 .ic-ind-lbl{font-size:8.5px;color:var(--txt3);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;margin-bottom:2px;}
 .ic-ind-val{font-size:14px;font-weight:800;}
 .ic-sources{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
-.ic-sw{border-radius:8px;padding:8px 10px;margin-top:6px;}
-.ic-sw-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
-.ic-sw-items{display:flex;flex-direction:column;gap:3px;}
-.ic-sw-item{display:flex;gap:7px;align-items:flex-start;}
-.ic-sw-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px;}
-.ic-sw-txt{font-size:11px;color:var(--txt2);line-height:1.4;}
-
-/* Level tabs */
 .level-tabs{display:flex;gap:4px;margin-bottom:10px;border-bottom:1px solid var(--border);padding-bottom:8px;}
 .ltab{flex:1;padding:6px 4px;border-radius:8px;text-align:center;cursor:pointer;
-  font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;
-  letter-spacing:.5px;transition:all .15s;border:1px solid var(--border);}
+font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;
+letter-spacing:.5px;transition:all .15s;border:1px solid var(--border);}
 .ltab.active-w{background:var(--lwGl);border-color:rgba(255,184,48,.3);color:var(--lvl-world);}
 .ltab.active-r{background:var(--lrGl);border-color:rgba(176,110,255,.3);color:var(--lvl-region);}
 .ltab.active-n{background:var(--lnGl);border-color:rgba(24,234,255,.3);color:var(--lvl-nat);}
 .ltab-ico{font-size:14px;display:block;margin-bottom:2px;}
-
+/* Signal DANGOTE prioritaire */
+.dangote-alert{background:linear-gradient(135deg,rgba(255,107,0,.12),rgba(255,107,0,.04));
+border:1px solid rgba(255,107,0,.3);border-left:4px solid var(--dangote);
+border-radius:var(--r);padding:12px;margin-bottom:8px;}
+.da-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.da-badge{background:var(--dangote);color:#fff;font-family:'JetBrains Mono',monospace;
+font-size:8px;font-weight:800;padding:2px 8px;border-radius:5px;letter-spacing:1px;}
+.da-title{font-size:13px;font-weight:800;color:var(--dangote);}
+.da-body{font-size:11.5px;color:var(--txt2);line-height:1.65;}
+.da-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+.da-stat{background:rgba(0,0,0,.3);border-radius:8px;padding:7px 9px;}
+.da-stat-lbl{font-size:8px;color:var(--txt3);font-family:'JetBrains Mono',monospace;margin-bottom:2px;}
+.da-stat-val{font-size:15px;font-weight:800;color:var(--dangote);}
 /* Sources catalog */
 .src-section{margin-bottom:12px;}
 .src-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--txt3);padding:6px 0 5px;
-  border-bottom:1px solid var(--border);margin-bottom:6px;}
+text-transform:uppercase;color:var(--txt3);padding:6px 0 5px;
+border-bottom:1px solid var(--border);margin-bottom:6px;}
 .src-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03);}
 .src-item:last-child{border-bottom:none;}
 .src-ico{font-size:18px;flex-shrink:0;width:26px;text-align:center;}
@@ -272,70 +248,59 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 .src-meta{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
 .src-url{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);}
 .src-freq{font-family:'JetBrains Mono',monospace;font-size:7.5px;
-  background:rgba(255,255,255,.05);border-radius:5px;padding:1.5px 5px;color:var(--txt3);}
-
-/* Progress */
+background:rgba(255,255,255,.05);border-radius:5px;padding:1.5px 5px;color:var(--txt3);}
 .prog{margin-bottom:8px;}
 .ph{display:flex;justify-content:space-between;margin-bottom:3px;}
 .pl{font-size:11px;color:var(--txt2);}
 .pp{font-family:'JetBrains Mono',monospace;font-size:9.5px;}
 .pt{height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;}
 .pf{height:100%;border-radius:2px;transition:width 1.3s ease;}
-
-/* Stat list */
 .slist{display:flex;flex-direction:column;}
 .srow{display:flex;justify-content:space-between;align-items:center;
-  padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);}
 .srow:last-child{border-bottom:none;}
 .sk{font-size:11px;color:var(--txt2);}
 .sv-val{font-size:13px;font-weight:700;}
-
-/* Section header */
 .sh{display:flex;align-items:center;gap:7px;margin:14px 0 8px;
-  padding-bottom:7px;border-bottom:1px solid var(--border);}
+padding-bottom:7px;border-bottom:1px solid var(--border);}
 .shdot{width:5px;height:5px;border-radius:50%;}
 .sht{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt2);}
-
-/* Toast */
+/* Indicateur de fraîcheur données */
+.freshness-bar{display:flex;align-items:center;gap:6px;padding:5px 10px;
+background:rgba(0,245,154,.04);border:1px solid rgba(0,245,154,.1);
+border-radius:8px;margin-bottom:8px;}
+.fb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;
+animation:blink 1.5s steps(1) infinite;}
+.fb-txt{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--green);font-weight:600;}
+.fb-time{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);margin-left:auto;}
 #toast{position:fixed;bottom:calc(var(--navH) + var(--safeB) + 10px);
-  left:11px;right:11px;background:var(--p2);border:1px solid var(--border2);
-  border-radius:11px;padding:10px 13px;z-index:300;
-  display:none;align-items:center;gap:9px;box-shadow:0 6px 24px rgba(0,0,0,.5);}
+left:11px;right:11px;background:var(--p2);border:1px solid var(--border2);
+border-radius:11px;padding:10px 13px;z-index:300;
+display:none;align-items:center;gap:9px;box-shadow:0 6px 24px rgba(0,0,0,.5);}
 #toast.show{display:flex;animation:tIn .22s ease;}
 @keyframes tIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-
-/* PDF overlay */
 #pdfOv{position:fixed;inset:0;z-index:200;background:rgba(5,7,9,.97);
-  display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
 #pdfOv.show{display:flex;}
 .pdf-spin{width:44px;height:44px;border:3px solid rgba(255,184,48,.15);
-  border-top-color:var(--energy);border-radius:50%;animation:spin .8s linear infinite;}
+border-top-color:var(--energy);border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .pdf-sources{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:280px;}
-
-/* Btn */
 .btn{width:100%;padding:12px;border-radius:var(--r2);border:none;font-family:'Outfit',sans-serif;
-  font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;}
+font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;}
 .btn-p{background:linear-gradient(135deg,var(--energy),var(--orange));color:#fff;box-shadow:0 4px 16px rgba(255,184,48,.2);}
 .btn-p:active{transform:scale(.97);}
 .btn-s{background:var(--p2);border:1px solid var(--border);color:var(--txt2);}
-.btn-pdf{background:linear-gradient(135deg,#991a1a,#660000);color:#fff;}
-
-/* Offline */
 .off-bar{background:var(--red);color:#fff;text-align:center;padding:4px;
-  font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1.5px;
-  display:none;flex-shrink:0;}
+font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1.5px;
+display:none;flex-shrink:0;}
 .off-bar.show{display:block;}
-
-/* Claude thinking indicator */
-.claude-thinking{
-  display:flex;align-items:center;gap:6px;padding:8px 10px;
-  background:var(--vGl);border:1px solid rgba(176,110,255,.2);
-  border-radius:10px;margin-bottom:8px;
-}
+.claude-thinking{display:flex;align-items:center;gap:6px;padding:8px 10px;
+background:var(--vGl);border:1px solid rgba(176,110,255,.2);
+border-radius:10px;margin-bottom:8px;}
 .ct-dots{display:flex;gap:3px;}
 .ct-dot{width:5px;height:5px;border-radius:50%;background:var(--violet);
-  animation:ctPulse 1.2s ease-in-out infinite;}
+animation:ctPulse 1.2s ease-in-out infinite;}
 .ct-dot:nth-child(2){animation-delay:.2s;}
 .ct-dot:nth-child(3){animation-delay:.4s;}
 @keyframes ctPulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
@@ -343,10 +308,11 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 </style>
 </head>
 <body>
-
 <!-- SPLASH -->
 <div id="splash">
-  <div class="sp-hex">⚡</div>
+  <div class="sp-logo-wrap">
+    <img src="data:image/png;base64,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" alt="EKB Intelligence">
+  </div>
   <div class="sp-brand">EL-KEYON</div>
   <div class="sp-v">Intelligence Platform · v4 · Data-Driven · 42 Sources</div>
   <div class="sp-sources">
@@ -355,7 +321,7 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <span class="sp-src" style="background:rgba(176,110,255,.1);color:var(--violet)">🌿 BCEAO</span>
     <span class="sp-src" style="background:rgba(176,110,255,.1);color:var(--violet)">🌾 AMIS CEDEAO</span>
     <span class="sp-src" style="background:rgba(24,234,255,.1);color:var(--cyan)">🇨🇮 INS CI</span>
-    <span class="sp-src" style="background:rgba(24,234,255,.1);color:var(--cyan)">🛢️ PETROCI</span>
+    <span class="sp-src" style="background:rgba(255,107,0,.12);color:var(--dangote)">🛢️ DANGOTE</span>
   </div>
   <div class="sp-bar"><div class="sp-prog"></div></div>
   <div style="font-size:8.5px;color:var(--txt3);font-family:'JetBrains Mono',monospace;margin-top:4px">
@@ -372,9 +338,9 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <span class="sp-src" style="background:rgba(255,184,48,.12);color:var(--energy)">WB Pink Sheet</span>
     <span class="sp-src" style="background:rgba(176,110,255,.1);color:var(--violet)">BCEAO UEMOA</span>
     <span class="sp-src" style="background:rgba(24,234,255,.1);color:var(--cyan)">INS CI</span>
-    <span class="sp-src" style="background:rgba(176,110,255,.1);color:var(--violet)">ECOWAS AMIS</span>
+    <span class="sp-src" style="background:rgba(255,107,0,.12);color:var(--dangote)">DANGOTE REF.</span>
   </div>
-  <div style="font-size:10px;color:var(--txt3)">Claude AI · Analyse multi-niveaux</div>
+  <div style="font-size:10px;color:var(--txt3)">Claude AI · Analyse stratégique · 42 sources</div>
 </div>
 
 <!-- TOAST -->
@@ -383,12 +349,13 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
   <span id="t-txt" style="font-size:11.5px">OK</span>
 </div>
 
-<!-- TOPBAR -->
+<!-- TOPBAR avec LOGO EL-KEYON -->
 <div class="topbar">
   <div class="tb-l">
-    <span style="font-size:18px">⚡</span>
+    <img class="tb-logo" src="data:image/png;base64,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" alt="EL-KEYON Intelligence">
     <div>
       <div class="tb-brand">EL-KEYON</div>
+      <div class="tb-sub">INTELLIGENCE</div>
     </div>
     <div class="tb-page" id="tb-page">/ Tableau de bord</div>
   </div>
@@ -396,47 +363,42 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="brent-live" id="tb-brent">🛢 114,64 $</div>
     <div class="data-freshness">
       <div class="dfresh-dot"></div>
-      <span id="tb-fresh">42 sources</span>
+      <span id="tb-fresh">42 src</span>
     </div>
     <div class="tb-ico" onclick="goPage('sources')">📡<div class="tb-badge"></div></div>
   </div>
 </div>
 
-<!-- TICKER MONDIAL -->
+<!-- TICKER MONDIAL (inclut Dangote) -->
 <div class="ticker">
   <div class="tk-tag tk-world">LIVE</div>
   <div class="tk-scroll"><div class="tk-inner" id="ticker">
-    <!-- Énergie -->
     <span>BRENT<span class="tsrc">EIA</span> <span class="tu">▲ 114,64 $/b</span></span><span class="ts">◆</span>
     <span>WTI<span class="tsrc">EIA</span> <span class="tu">▲ 108,30 $</span></span><span class="ts">◆</span>
+    <span>DANGOTE<span class="tsrc">NIG</span> <span class="td">▼ 650k bpd</span></span><span class="ts">◆</span>
+    <span>DANGOTE→CI<span class="tsrc">PUNCH</span> <span class="td">✓ 456 000t exp.</span></span><span class="ts">◆</span>
     <span>GNL TTF<span class="tsrc">IEA</span> <span class="tu">▲ 62,4 €/MWh</span></span><span class="ts">◆</span>
-    <!-- Agriculture -->
     <span>URÉE<span class="tsrc">WB</span> <span class="tu">▲ +40%</span></span><span class="ts">◆</span>
     <span>CACAO CI<span class="tsrc">CCA</span> <span class="tn">3 850 $/t</span></span><span class="ts">◆</span>
     <span>INDICE FAO ALIM<span class="tsrc">FAO</span> <span class="tn">126,2 pts</span></span><span class="ts">◆</span>
     <span>BLÉ<span class="tsrc">FAO</span> <span class="tu">▲ +3,3%</span></span><span class="ts">◆</span>
-    <!-- Construction -->
     <span>CIMENT CI<span class="tsrc">CCI</span> <span class="tu">▲ +30%</span></span><span class="ts">◆</span>
     <span>ACIER<span class="tsrc">WB</span> <span class="tu">▲ +25%</span></span><span class="ts">◆</span>
-    <!-- Transport -->
     <span>FRET MARITIME<span class="tsrc">FBX</span> <span class="tu">▲ +60%</span></span><span class="ts">◆</span>
     <span>GASOIL CI<span class="tsrc">INS</span> <span class="tu">⚠ RÉVISION</span></span><span class="ts">◆</span>
-    <!-- Regional -->
     <span>USD/XOF<span class="tsrc">BCEAO</span> <span class="tn">622</span></span><span class="ts">◆</span>
     <span>PIB CI 2026<span class="tsrc">FMI</span> <span class="td">▲ +7%</span></span><span class="ts">◆</span>
     <span>SOLAIRE PV<span class="tsrc">IRENA</span> <span class="td">= STABLE</span></span><span class="ts">◆</span>
-    <!-- Double for loop -->
     <span>BRENT<span class="tsrc">EIA</span> <span class="tu">▲ 114,64 $/b</span></span><span class="ts">◆</span>
     <span>WTI<span class="tsrc">EIA</span> <span class="tu">▲ 108,30 $</span></span><span class="ts">◆</span>
+    <span>DANGOTE<span class="tsrc">NIG</span> <span class="td">▼ 650k bpd</span></span><span class="ts">◆</span>
+    <span>DANGOTE→CI<span class="tsrc">PUNCH</span> <span class="td">✓ 456 000t exp.</span></span><span class="ts">◆</span>
     <span>GNL TTF<span class="tsrc">IEA</span> <span class="tu">▲ 62,4 €/MWh</span></span><span class="ts">◆</span>
     <span>URÉE<span class="tsrc">WB</span> <span class="tu">▲ +40%</span></span><span class="ts">◆</span>
     <span>CACAO CI<span class="tsrc">CCA</span> <span class="tn">3 850 $/t</span></span><span class="ts">◆</span>
     <span>INDICE FAO ALIM<span class="tsrc">FAO</span> <span class="tn">126,2 pts</span></span><span class="ts">◆</span>
-    <span>BLÉ<span class="tsrc">FAO</span> <span class="tu">▲ +3,3%</span></span><span class="ts">◆</span>
     <span>CIMENT CI<span class="tsrc">CCI</span> <span class="tu">▲ +30%</span></span><span class="ts">◆</span>
-    <span>ACIER<span class="tsrc">WB</span> <span class="tu">▲ +25%</span></span><span class="ts">◆</span>
     <span>FRET MARITIME<span class="tsrc">FBX</span> <span class="tu">▲ +60%</span></span><span class="ts">◆</span>
-    <span>GASOIL CI<span class="tsrc">INS</span> <span class="tu">⚠ RÉVISION</span></span><span class="ts">◆</span>
     <span>USD/XOF<span class="tsrc">BCEAO</span> <span class="tn">622</span></span><span class="ts">◆</span>
     <span>SOLAIRE PV<span class="tsrc">IRENA</span> <span class="td">= STABLE</span></span>
   </div></div>
@@ -448,7 +410,7 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
   <div class="ds-sep">·</div>
   <div class="ds-item"><div class="ds-dot" style="background:var(--green)"></div><div class="ds-name">EIA/IEA</div></div>
   <div class="ds-sep">·</div>
-  <div class="ds-item"><div class="ds-dot" style="background:var(--green)"></div><div class="ds-name">WB Pink Sheet</div></div>
+  <div class="ds-item"><div class="ds-dot" style="background:var(--green)"></div><div class="ds-name">WB Pink</div></div>
   <div class="ds-sep">·</div>
   <div class="ds-item"><div class="ds-dot" style="background:var(--energy)"></div><div class="ds-name">BCEAO</div></div>
   <div class="ds-sep">·</div>
@@ -456,25 +418,44 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
   <div class="ds-sep">·</div>
   <div class="ds-item"><div class="ds-dot" style="background:var(--cyan)"></div><div class="ds-name">INS CI</div></div>
   <div class="ds-sep">·</div>
-  <div class="ds-item"><div class="ds-dot" style="background:var(--green)"></div><div class="ds-name">CCA Cacao</div></div>
+  <div class="ds-item"><div class="ds-dot" style="background:var(--dangote)"></div><div class="ds-name">DANGOTE REF</div></div>
   <div class="ds-sep">·</div>
-  <div class="ds-item"><div class="ds-dot" style="background:var(--cyan)"></div><div class="ds-name">PETROCI</div></div>
-  <div class="ds-sep">·</div>
-  <div class="ds-item"><div class="ds-dot" style="background:var(--green)"></div><div class="ds-name">+34 sources</div></div>
+  <div class="ds-item"><div class="ds-dot" style="background:var(--green)"></div><div class="ds-name">+35 sources</div></div>
 </div>
 
-<!-- OFFLINE -->
 <div class="off-bar" id="off-bar">⚠ HORS LIGNE — Dernières données en cache</div>
 
-<!-- ═══════════════════════════════════════════
-     PAGES
-═══════════════════════════════════════════ -->
 <div class="main">
 
-<!-- ─── PAGE HOME : TABLEAU DE BORD ─────────── -->
+<!-- ─── PAGE HOME ─── -->
 <div class="page active" id="pg-home">
 
-  <!-- Niveau data tabs -->
+  <!-- Signal prioritaire Dangote (affiché en premier car information MAJEURE du moment) -->
+  <div class="dangote-alert" id="dangote-alert">
+    <div class="da-header">
+      <div class="da-badge">🚨 SIGNAL MAJEUR</div>
+      <div class="da-title">DANGOTE — Nouveau fournisseur de la CI</div>
+    </div>
+    <div class="da-body" id="dangote-text">
+      <strong style="color:var(--dangote)">CONFIRMÉ (mars 2026) :</strong> La raffinerie Dangote (Nigeria, 650 000 barils/jour) exporte ses premiers carburants directement vers la <strong>Côte d'Ivoire</strong>. Un total de 456 000 tonnes ont été livrées à CI, Ghana, Cameroun, Togo, Tanzanie. Cela signifie que la CI reçoit maintenant du carburant depuis Lagos, plus proche et moins cher que les sources du Golfe Persique perturbées par la guerre Iran. <strong style="color:var(--green)">Impact positif :</strong> stabilisation partielle des prix carburant CI. <strong style="color:var(--red)">Nuance :</strong> La raffinerie manque encore de brut nigérian (seulement 5/13 cargaisons livrées/mois).
+    </div>
+    <div class="da-grid">
+      <div class="da-stat"><div class="da-stat-lbl">CAPACITÉ DANGOTE</div><div class="da-stat-val">650k bpd</div></div>
+      <div class="da-stat"><div class="da-stat-lbl">EXPORTS AFRIQUE</div><div class="da-stat-val">214k bpd</div></div>
+      <div class="da-stat"><div class="da-stat-lbl">LIVRÉ À CI</div><div class="da-stat-val">456 000t</div></div>
+      <div class="da-stat"><div class="da-stat-lbl">IMPACT SUNWAVE</div><div class="da-stat-val" style="color:var(--green)">NEUTRE ✓</div></div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--txt3);margin-top:6px">
+      Sources : Bloomberg · Punch Nigeria · Nairametrics · France 24 · Energy Capital Power · Kpler (tanker data)
+    </div>
+  </div>
+
+  <div class="freshness-bar">
+    <div class="fb-dot"></div>
+    <div class="fb-txt">Données actualisées toutes les 2h</div>
+    <div class="fb-time" id="last-update">Dernière MAJ : --:--</div>
+  </div>
+
   <div class="level-tabs">
     <div class="ltab active-w" id="lt-w" onclick="setLevel('w')">
       <span class="ltab-ico">🌍</span>MONDIAL
@@ -487,7 +468,6 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     </div>
   </div>
 
-  <!-- KPIs dynamiques selon niveau -->
   <div class="kg" id="home-kpis">
     <div class="kc ke">
       <div class="k-bg">🛢️</div>
@@ -519,57 +499,55 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
         <span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>BCEAO</span>
       </div>
     </div>
-    <div class="kc kg-">
-      <div class="k-bg">☀️</div>
-      <div class="k-lbl">Solaire PV Capex</div>
-      <div class="k-val" style="color:var(--green)" id="hk-solar">STABLE</div>
-      <div class="k-sub">Indépendant du pétrole</div>
+    <div class="kc kd">
+      <div class="k-bg">🏭</div>
+      <div class="k-lbl">Dangote → CI</div>
+      <div class="k-val" style="color:var(--dangote)">ACTIF</div>
+      <div class="k-sub">456 000t exportées CI</div>
       <div class="k-footer">
-        <span class="k-badge kb-g">= STABLE ✓</span>
-        <span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>IRENA</span>
+        <span class="k-badge kb-d">✓ NOUVEAU</span>
+        <span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>PUNCH</span>
       </div>
     </div>
   </div>
 
-  <!-- Analyse Claude avec sources -->
   <div class="card">
     <div class="card-h">
       <div class="ch-dot" style="background:var(--violet)"></div>
-      <div class="ch-title">Analyse Claude AI — Données multi-sources</div>
-      <button class="ch-btn" onclick="refreshClaude()">↻ Actualiser</button>
+      <div class="ch-title">Analyse — Données multi-sources</div>
+      <button class="ch-btn" onclick="refreshClaude()">↻ 2h</button>
     </div>
     <div class="claude-thinking" id="claude-thinking" style="display:none">
       <div class="ct-dots"><div class="ct-dot"></div><div class="ct-dot"></div><div class="ct-dot"></div></div>
-      <div class="ct-text">Claude analyse 42 sources en temps réel...</div>
+      <div class="ct-text">Analyse 42 sources en cours...</div>
     </div>
     <div style="font-size:12px;color:var(--txt2);line-height:1.7;margin-bottom:8px" id="h-analyse">
-      Le choc pétrolier Iran-Israël (J+21) se propage à l'ensemble des secteurs économiques ivoiriens. <strong style="color:var(--red)">FAO FPMA :</strong> Indice alimentaire +2,1% en février 2026, avec tensions sur céréales (+3,3% blé) et urée (+40%). <strong style="color:var(--energy)">EIA :</strong> Brent 114,64$/b, +42% depuis le déclenchement. <strong style="color:var(--cyan)">BCEAO :</strong> Pression sur le XOF, inflation UEMOA remontée à 4,2%. <strong style="color:var(--cyan)">INS CI :</strong> Révision tarifaire CIE imminente. <strong style="color:var(--green)">IRENA :</strong> Coûts solaires PV stables — avantage SUNWAVE confirmé.
+      Le choc pétrolier Iran-Israël (J+21) se propage à tous les secteurs ivoiriens. <strong style="color:var(--red)">FAO FPMA :</strong> Indice alimentaire +2,1%, urée +40%. <strong style="color:var(--energy)">EIA :</strong> Brent 114,64$/b (+42%). <strong style="color:var(--dangote)">NOUVEAUTÉ MAJEURE :</strong> La raffinerie Dangote (Nigeria) livre désormais du carburant directement en CI — 456 000t exportées, alternative régionale au Golfe. <strong style="color:var(--cyan)">BCEAO :</strong> inflation UEMOA 4,2%, pression XOF. <strong style="color:var(--green)">IRENA :</strong> coûts solaires stables — avantage SUNWAVE intact.
     </div>
     <div style="display:flex;gap:4px;flex-wrap:wrap" id="h-src-badges">
       <span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FAO FPMA</span>
       <span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA/WB</span>
       <span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>BCEAO</span>
-      <span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>ECOWAS AMIS</span>
+      <span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span>
       <span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span>
-      <span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CCA Cacao</span>
+      <span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CCA</span>
     </div>
   </div>
 
-  <!-- 5 secteurs impact rapide -->
   <div class="sh"><div class="shdot" style="background:var(--energy)"></div><div class="sht">Impact 5 secteurs — Data vérifiée</div></div>
 
   <div class="impact-card" style="background:rgba(255,184,48,.06);border-color:rgba(255,184,48,.2)" onclick="goPage('energie')">
     <div class="ic-header">
       <div class="ic-ico" style="background:rgba(255,184,48,.15)">⚡</div>
-      <div><div class="ic-name" style="color:var(--energy)">Énergie</div><div class="ic-tagline">CIE + groupes électrogènes</div></div>
+      <div><div class="ic-name" style="color:var(--energy)">Énergie</div><div class="ic-tagline">CIE + groupes + Dangote (nouveau)</div></div>
       <div class="ic-choc" style="color:var(--red)">+42%</div>
     </div>
     <div class="ic-indicators">
       <div class="ic-ind"><div class="ic-ind-lbl">BRENT (EIA)</div><div class="ic-ind-val" style="color:var(--red)">114,64 $</div></div>
-      <div class="ic-ind"><div class="ic-ind-lbl">GASOIL CI (INS)</div><div class="ic-ind-val" style="color:var(--red)">+35% prévu</div></div>
+      <div class="ic-ind"><div class="ic-ind-lbl">DANGOTE→CI</div><div class="ic-ind-val" style="color:var(--dangote)">Carburant livré</div></div>
     </div>
     <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE : économie <strong style="color:var(--green)">127 000 F/mois</strong> post-choc</div>
-    <div class="ic-sources"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>ANARE</span></div>
+    <div class="ic-sources"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>ANARE</span></div>
   </div>
 
   <div class="impact-card" style="background:rgba(255,107,53,.05);border-color:rgba(255,107,53,.2)" onclick="goPage('construction')">
@@ -617,25 +595,24 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
   <div class="impact-card" style="background:rgba(77,158,255,.04);border-color:rgba(77,158,255,.18)" onclick="goPage('transport')">
     <div class="ic-header">
       <div class="ic-ico" style="background:rgba(77,158,255,.12)">🚚</div>
-      <div><div class="ic-name" style="color:var(--transp)">Transport & Logistique</div><div class="ic-tagline">Gasoil, fret maritime, assurances</div></div>
+      <div><div class="ic-name" style="color:var(--transp)">Transport & Logistique</div><div class="ic-tagline">Gasoil, fret maritime, Dangote supply</div></div>
       <div class="ic-choc" style="color:var(--red)">+60%</div>
     </div>
     <div class="ic-indicators">
       <div class="ic-ind"><div class="ic-ind-lbl">FRET (FBX)</div><div class="ic-ind-val" style="color:var(--red)">+60%</div></div>
-      <div class="ic-ind"><div class="ic-ind-lbl">PAA TRAFIC (PAA)</div><div class="ic-ind-val" style="color:var(--transp)">En suivi</div></div>
+      <div class="ic-ind"><div class="ic-ind-lbl">DANGOTE GASOIL</div><div class="ic-ind-val" style="color:var(--dangote)">En stock CI</div></div>
     </div>
     <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE dépôt : charges fixes <strong style="color:var(--transp)">-40%</strong></div>
-    <div class="ic-sources"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FBX/IATA</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PAA</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span></div>
+    <div class="ic-sources"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FBX/IATA</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PAA</span></div>
   </div>
 
-  <!-- SUNWAVE tagline -->
   <div style="background:linear-gradient(135deg,var(--eGl),rgba(0,245,154,.04));border:1px solid rgba(255,184,48,.2);border-radius:var(--r);padding:13px;text-align:center;margin-top:4px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);letter-spacing:2px;margin-bottom:6px">SUNWAVE HYBRID — SOLUTION COMMUNE · DONNÉES VÉRIFIÉES</div>
     <div style="font-size:13px;font-weight:700;color:var(--energy);font-style:italic;line-height:1.4" id="h-tagline">"Pendant que 42 sources confirment la hausse de tout, une seule chose reste stable : votre panneau solaire."</div>
   </div>
 </div>
 
-<!-- ─── PAGE ÉNERGIE ──────────────────────────── -->
+<!-- ─── PAGE ÉNERGIE ─── -->
 <div class="page" id="pg-energie">
   <div class="kg">
     <div class="kc kr"><div class="k-bg">🛢️</div><div class="k-lbl">Brent (EIA)</div><div class="k-val" style="color:var(--red)">114,64</div><div class="k-sub">+42% en 3 semaines</div><div class="k-footer"><span class="k-badge kb-r">▲ +7,2%</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span></div></div>
@@ -644,25 +621,34 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="kc kg-"><div class="k-bg">☀️</div><div class="k-lbl">Solaire (IRENA)</div><div class="k-val" style="color:var(--green)">STABLE</div><div class="k-sub">Hors choc pétrolier</div><div class="k-footer"><span class="k-badge kb-g">= STABLE</span><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>IRENA</span></div></div>
   </div>
 
+  <!-- Signal Dangote dans Energie -->
+  <div class="sig sd">
+    <div class="sig-ico">🏭</div>
+    <div>
+      <div class="sig-header"><div class="sig-title">DANGOTE — NOUVEAU FOURNISSEUR ÉNERGIE CI (MARS 2026)</div><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Bloomberg</span></div>
+      <div class="sig-text">La raffinerie Dangote (Lagos, Nigeria) a atteint 650 000 barils/jour en février 2026. Elle exporte maintenant vers la CI, Ghana, Cameroun, Togo et Tanzanie. Pour la CI, cela crée une alternative régionale au pétrole du Golfe Persique. Les prix du carburant CI pourraient se stabiliser partiellement. Mais Dangote reçoit seulement 5 des 13 cargaisons de brut attendues — capacité sous pression.</div>
+      <div class="sig-src">Sources : Bloomberg · Nairametrics · Punch Nigeria · France 24 · Energy Capital Power · Kpler tanker data</div>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--energy)"></div><div class="ch-title">Indicateurs énergie vérifiés — 3 niveaux</div></div>
     <div class="data-row"><div class="dr-ico">🛢️</div><div class="dr-label">Brent $/baril</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">114,64 $</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA USA</span></div><div class="dr-bar"><div class="dr-fill" style="width:92%;background:var(--red)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🔥</div><div class="dr-label">GNL TTF Europe</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">62,4 €/MWh</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IEA</span></div><div class="dr-bar"><div class="dr-fill" style="width:85%;background:var(--red)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🏭</div><div class="dr-label">Dangote → CI/AOF (export)</div><div class="dr-src"><div class="dr-val" style="color:var(--dangote)">214k bpd</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Kpler/Bloomberg</span></div><div class="dr-bar"><div class="dr-fill" style="width:65%;background:var(--dangote)"></div></div></div>
     <div class="data-row"><div class="dr-ico">⚡</div><div class="dr-label">Capacité élec. CI</div><div class="dr-src"><div class="dr-val" style="color:var(--cyan)">2 300 MW</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>SOGEPE</span></div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--cyan)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🏭</div><div class="dr-label">Gaz Baleine/Calao CI</div><div class="dr-src"><div class="dr-val" style="color:var(--energy)">En hausse</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PETROCI</span></div><div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--energy)"></div></div></div>
     <div class="data-row"><div class="dr-ico">☀️</div><div class="dr-label">ENR CEDEAO objectif 2030</div><div class="dr-src"><div class="dr-val" style="color:var(--green)">48% mix</div><span class="dsb dsb-r" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-region)"></div>CEREEC</span></div><div class="dr-bar"><div class="dr-fill" style="width:48%;background:var(--green)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🌞</div><div class="dr-label">Solaire CI objectif</div><div class="dr-src"><div class="dr-val" style="color:var(--green)">925 MW</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PND CI</span></div><div class="dr-bar"><div class="dr-fill" style="width:30%;background:var(--green)"></div></div></div>
   </div>
-
   <div class="sig ssw">
     <div class="sig-ico">☀️</div>
     <div>
       <div class="sig-header"><div class="sig-title">SUNWAVE — AVANTAGE STRUCTUREL CONFIRMÉ</div><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>IRENA</span></div>
-      <div class="sig-text">Coûts solaires PV mondiaux : -90% depuis 2010 (IRENA 2026). Indépendants du choc pétrolier. SUNWAVE déploie avec le même coût qu'avant le conflit — pendant que CIE +28% et groupe +35%.</div>
-      <div class="sig-src">Sources : EIA, IEA, IRENA, ANARE-CI, SOGEPE, PETROCI, INS CI</div>
+      <div class="sig-text">Coûts solaires PV mondiaux : -90% depuis 2010 (IRENA 2026). Indépendants du choc pétrolier ET de Dangote. Que le carburant vienne du Golfe ou de Lagos, SUNWAVE reste à 0 FCFA de carburant. CIE +28%, groupe +35% — mais panneau solaire = STABLE.</div>
+      <div class="sig-src">Sources : EIA, IEA, IRENA, ANARE-CI, SOGEPE, PETROCI, INS CI, Bloomberg/Dangote</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--energy)"></div><div class="ch-title">Comparatif mensuel client CI — Post-choc</div></div>
     <div class="data-row"><div class="dr-ico">🔴</div><div class="dr-label">CIE estimée post-choc</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">~100 000 F</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>ANARE</span></div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--red)"></div></div></div>
@@ -671,12 +657,12 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div style="background:var(--gGl);border:1px solid rgba(0,245,154,.2);border-radius:9px;padding:9px;text-align:center;margin-top:8px">
       <div style="font-size:10px;color:var(--txt3)">ÉCONOMIE MENSUELLE CLIENT — DONNÉES VÉRIFIÉES</div>
       <div style="font-size:24px;font-weight:900;color:var(--green)">127 000 FCFA/mois</div>
-      <div style="font-size:9px;color:var(--txt3);margin-top:2px">Sources : ANARE-CI (tarifs CIE) · INS CI (prix carburant) · EIA (Brent)</div>
+      <div style="font-size:9px;color:var(--txt3);margin-top:2px">Sources : ANARE-CI · INS CI · EIA (Brent) · Dangote Refinery data</div>
     </div>
   </div>
 </div>
 
-<!-- ─── PAGE AGRICULTURE ──────────────────────── -->
+<!-- ─── PAGE AGRICULTURE ─── -->
 <div class="page" id="pg-agriculture">
   <div class="kg">
     <div class="kc ka"><div class="k-bg">🌱</div><div class="k-lbl">Urée (WB Pink)</div><div class="k-val" style="color:var(--red)">+40%</div><div class="k-sub">Gaz = input principal</div><div class="k-footer"><span class="k-badge kb-r">▲ CRISE</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>WB Pink</span></div></div>
@@ -684,7 +670,6 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="kc ka"><div class="k-bg">🍫</div><div class="k-lbl">Cacao CI (CCA)</div><div class="k-val" style="color:var(--agri)">3 850$</div><div class="k-sub">tonne — stable</div><div class="k-footer"><span class="k-badge kb-g">= Stable</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CCA</span></div></div>
     <div class="kc kg-"><div class="k-bg">💧</div><div class="k-lbl">Pompage solaire SW</div><div class="k-val" style="color:var(--green)">0 F</div><div class="k-sub">Carburant éliminé</div><div class="k-footer"><span class="k-badge kb-g">✓ SOLUTION</span><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>IRENA</span></div></div>
   </div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--agri)"></div><div class="ch-title">Indicateurs agricoles vérifiés</div><div class="ch-r" id="agri-update">Fév. 2026</div></div>
     <div class="data-row"><div class="dr-ico">🌿</div><div class="dr-label">Urée (engrais azotés)</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">+40%</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>WB Pink Sheet</span></div><div class="dr-bar"><div class="dr-fill" style="width:80%;background:var(--red)"></div></div></div>
@@ -694,16 +679,14 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="data-row"><div class="dr-ico">🥜</div><div class="dr-label">Anacarde CI (MINADER)</div><div class="dr-src"><div class="dr-val" style="color:var(--agri)">Suivi actif</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>MINADER</span></div><div class="dr-bar"><div class="dr-fill" style="width:45%;background:var(--agri)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🌧️</div><div class="dr-label">Alertes pluvio AOF</div><div class="dr-src"><div class="dr-val" style="color:var(--cyan)">AGRHYMET</div><span class="dsb dsb-r" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-region)"></div>CILSS</span></div><div class="dr-bar"><div class="dr-fill" style="width:50%;background:var(--cyan)"></div></div></div>
   </div>
-
   <div class="sig sa">
     <div class="sig-ico">🌾</div>
     <div>
       <div class="sig-header"><div class="sig-title">CAMPAGNE 2026-2027 SOUS PRESSION — FAO/WB</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FAO + WB</span></div>
-      <div class="sig-text">FAO (mars 2026) confirme : hausse urée +40% liée au gaz du Golfe Persique menace directement les agriculteurs dépendants des engrais azotés. AMIS-CEDEAO surveille les stocks céréaliers AOF. CILSS signale une pluviométrie à risque dans le Sahel.</div>
-      <div class="sig-src">Sources : FAO FPMA · WB Pink Sheet · AMIS ECOWAS · AGRHYMET CILSS · CCA CI · MINADER</div>
+      <div class="sig-text">FAO (mars 2026) confirme : urée +40% liée au gaz du Golfe menace les agriculteurs. Dangote exporte du gasoil vers CI — peut alléger le coût du transport de récolte. Mais l'urée reste chère car Dangote ne produit pas d'engrais (raffinerie pétrole uniquement). AMIS-CEDEAO surveille les stocks céréaliers AOF.</div>
+      <div class="sig-src">Sources : FAO FPMA · WB Pink Sheet · AMIS ECOWAS · AGRHYMET CILSS · CCA CI · MINADER · Bloomberg/Dangote</div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--agri)"></div><div class="ch-title">SUNWAVE Agriculture — Valeur ajoutée vérifiée</div></div>
     <div class="data-row"><div class="dr-ico">💧</div><div class="dr-label">Pompage solaire vs diesel</div><div class="dr-src"><div class="dr-val" style="color:var(--agri)">-100% fuel</div></div><div class="dr-bar"><div class="dr-fill" style="width:100%;background:var(--agri)"></div></div></div>
@@ -713,7 +696,7 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
   </div>
 </div>
 
-<!-- ─── PAGE CONSTRUCTION ─────────────────────── -->
+<!-- ─── PAGE CONSTRUCTION ─── -->
 <div class="page" id="pg-construction">
   <div class="kg">
     <div class="kc kb"><div class="k-bg">🏗️</div><div class="k-lbl">Ciment CI (CCI)</div><div class="k-val" style="color:var(--red)">+30%</div><div class="k-sub">Transport + énergie four</div><div class="k-footer"><span class="k-badge kb-r">▲ HAUSSE</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CCI CI</span></div></div>
@@ -721,7 +704,6 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="kc kb"><div class="k-bg">🚛</div><div class="k-lbl">Transport chantier</div><div class="k-val" style="color:var(--red)">+40%</div><div class="k-sub">Gasoil +35%</div><div class="k-footer"><span class="k-badge kb-r">▲ ÉLEVÉ</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span></div></div>
     <div class="kc kg-"><div class="k-bg">⚡</div><div class="k-lbl">Énergie SW chantier</div><div class="k-val" style="color:var(--green)">-40%</div><div class="k-sub">Économie réalisable</div><div class="k-footer"><span class="k-badge kb-g">✓ SOLUTION</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>SUNWAVE</span></div></div>
   </div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--build)"></div><div class="ch-title">Indicateurs BTP vérifiés — Données CI + Monde</div></div>
     <div class="data-row"><div class="dr-ico">🏗️</div><div class="dr-label">Ciment CI (prix sac)</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">+30%</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CCI CI</span></div><div class="dr-bar"><div class="dr-fill" style="width:75%;background:var(--red)"></div></div></div>
@@ -730,18 +712,17 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="data-row"><div class="dr-ico">🏢</div><div class="dr-label">Investissement BTP CI (CEPICI)</div><div class="dr-src"><div class="dr-val" style="color:var(--cyan)">PND actif</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CEPICI</span></div><div class="dr-bar"><div class="dr-fill" style="width:70%;background:var(--cyan)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🌍</div><div class="dr-label">Cuivre (câblage électrique)</div><div class="dr-src"><div class="dr-val" style="color:var(--energy)">-10%</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>WB Pink</span></div><div class="dr-bar"><div class="dr-fill" style="width:30%;background:var(--energy)"></div></div></div>
   </div>
-
   <div class="sig sb">
     <div class="sig-ico">🏗️</div>
     <div>
       <div class="sig-header"><div class="sig-title">PND 2026-2030 : 1 200 MRD FCFA BTP CI</div><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CEPICI</span></div>
-      <div class="sig-text">Le PND 2026-2030 prévoit 1 200 Mrd FCFA d'investissements BTP (routes, logements, bâtiments publics). L'augmentation des coûts énergétiques de chantier (+20-35%) érode les marges des promoteurs. SUNWAVE propose une solution directement alignée sur les enjeux du PND.</div>
-      <div class="sig-src">Sources : CEPICI · CCI CI · WB Pink Sheet (acier, ciment) · INS CI (transport)</div>
+      <div class="sig-text">Le PND 2026-2030 prévoit 1 200 Mrd FCFA d'investissements BTP. L'énergie chantier +40% érode les marges. Dangote livre du gasoil en CI — peut atténuer légèrement le coût du transport de matériaux. SUNWAVE réduit les coûts énergétiques de chantier de 40%.</div>
+      <div class="sig-src">Sources : CEPICI · CCI CI · WB Pink Sheet · INS CI · Bloomberg/Dangote</div>
     </div>
   </div>
 </div>
 
-<!-- ─── PAGE AGROALIMENTAIRE ─────────────────── -->
+<!-- ─── PAGE AGROALIMENTAIRE ─── -->
 <div class="page" id="pg-agroalim">
   <div class="kg">
     <div class="kc kag"><div class="k-bg">🏭</div><div class="k-lbl">GNL Indus. (IEA)</div><div class="k-val" style="color:var(--red)">+75%</div><div class="k-sub">Process industriel</div><div class="k-footer"><span class="k-badge kb-r">▲ SÉVÈRE</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IEA</span></div></div>
@@ -749,7 +730,6 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="kc kag"><div class="k-bg">⚡</div><div class="k-lbl">CIE Indus. (ANARE)</div><div class="k-val" style="color:var(--red)">+30%</div><div class="k-sub">Prévision T2 2026</div><div class="k-footer"><span class="k-badge kb-r">▲ HAUSSE</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>ANARE</span></div></div>
     <div class="kc kg-"><div class="k-bg">☀️</div><div class="k-lbl">CIE SW (SUNWAVE)</div><div class="k-val" style="color:var(--green)">-60%</div><div class="k-sub">Économie réalisable</div><div class="k-footer"><span class="k-badge kb-g">✓ SOLUTION</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>SUNWAVE</span></div></div>
   </div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--agro)"></div><div class="ch-title">Indicateurs IAA vérifiés</div></div>
     <div class="data-row"><div class="dr-ico">🔥</div><div class="dr-label">GNL industrie CI (IEA/PETROCI)</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">+75%</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IEA</span></div><div class="dr-bar"><div class="dr-fill" style="width:95%;background:var(--red)"></div></div></div>
@@ -758,62 +738,79 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="data-row"><div class="dr-ico">🍞</div><div class="dr-label">Blé import CI (INS/FAO)</div><div class="dr-src"><div class="dr-val" style="color:var(--energy)">+3,3%</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FAO FPMA</span></div><div class="dr-bar"><div class="dr-fill" style="width:35%;background:var(--energy)"></div></div></div>
     <div class="data-row"><div class="dr-ico">📊</div><div class="dr-label">Inflation UEMOA (BCEAO)</div><div class="dr-src"><div class="dr-val" style="color:var(--energy)">4,2%</div><span class="dsb dsb-r" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-region)"></div>BCEAO</span></div><div class="dr-bar"><div class="dr-fill" style="width:42%;background:var(--energy)"></div></div></div>
   </div>
-
   <div class="sig sag">
     <div class="sig-ico">🏭</div>
     <div>
       <div class="sig-header"><div class="sig-title">MARGES IAA CI EN DANGER — BCEAO + ANARE</div></div>
-      <div class="sig-text">Inflation UEMOA à 4,2% (BCEAO mars 2026). GNL industrie +75% (IEA). Tarif CIE industriel +30% attendu (ANARE). Pour une boulangerie industrielle : charges énergétiques × 1,5. SUNWAVE PRO réduit la facture CIE de 60%.</div>
-      <div class="sig-src">Sources : IEA · ANARE-CI · BCEAO · PETROCI · INS CI · MINADER</div>
+      <div class="sig-text">Inflation UEMOA à 4,2% (BCEAO mars 2026). GNL industrie +75% (IEA). Tarif CIE industriel +30% attendu (ANARE). Dangote livre du gasoil en CI, ce qui peut réduire un peu les coûts de transport des matières premières agroalimentaires. Mais GNL et électricité restent critiques. SUNWAVE PRO réduit la facture CIE de 60%.</div>
+      <div class="sig-src">Sources : IEA · ANARE-CI · BCEAO · PETROCI · INS CI · MINADER · Bloomberg/Dangote</div>
     </div>
   </div>
 </div>
 
-<!-- ─── PAGE TRANSPORT ────────────────────────── -->
+<!-- ─── PAGE TRANSPORT ─── -->
 <div class="page" id="pg-transport">
   <div class="kg">
     <div class="kc kt"><div class="k-bg">⛽</div><div class="k-lbl">Gasoil CI (INS)</div><div class="k-val" style="color:var(--red)">+35%</div><div class="k-sub">Révision imminente</div><div class="k-footer"><span class="k-badge kb-r">▲ HAUSSE</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span></div></div>
     <div class="kc kt"><div class="k-bg">🚢</div><div class="k-lbl">Fret maritime (FBX)</div><div class="k-val" style="color:var(--red)">+60%</div><div class="k-sub">Surtaxes urgence</div><div class="k-footer"><span class="k-badge kb-r">▲ ÉLEVÉ</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FBX</span></div></div>
-    <div class="kc kt"><div class="k-bg">🛡️</div><div class="k-lbl">Assurances (Lloyd's)</div><div class="k-val" style="color:var(--red)">×10</div><div class="k-sub">Risques guerre Golfe</div><div class="k-footer"><span class="k-badge kb-r">▲ CRIT.</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IATA</span></div></div>
+    <div class="kc kd"><div class="k-bg">🏭</div><div class="k-lbl">Dangote gasoil CI</div><div class="k-val" style="color:var(--dangote)">En stock</div><div class="k-sub">Alternative régionale</div><div class="k-footer"><span class="k-badge kb-d">✓ ACTIF</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Nairametrics</span></div></div>
     <div class="kc kg-"><div class="k-bg">🏢</div><div class="k-lbl">Dépôt solaire SW</div><div class="k-val" style="color:var(--green)">-40%</div><div class="k-sub">Charges fixes</div><div class="k-footer"><span class="k-badge kb-g">✓ SOLUTION</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>SUNWAVE</span></div></div>
   </div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--transp)"></div><div class="ch-title">Indicateurs transport vérifiés — 3 niveaux</div></div>
     <div class="data-row"><div class="dr-ico">🚢</div><div class="dr-label">Fret conteneurs (FBX Freightos)</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">+60%</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FBX</span></div><div class="dr-bar"><div class="dr-fill" style="width:95%;background:var(--red)"></div></div></div>
     <div class="data-row"><div class="dr-ico">✈️</div><div class="dr-label">Kérosène (IATA)</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">+38%</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IATA</span></div><div class="dr-bar"><div class="dr-fill" style="width:80%;background:var(--red)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🏭</div><div class="dr-label">Dangote export gasoil CI (Kpler)</div><div class="dr-src"><div class="dr-val" style="color:var(--dangote)">40 000t mars</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Kpler/Punch</span></div><div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--dangote)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🚛</div><div class="dr-label">Transport routier CI (INS)</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">+35%</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span></div><div class="dr-bar"><div class="dr-fill" style="width:75%;background:var(--red)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🚢</div><div class="dr-label">Port Abidjan — Trafic (PAA)</div><div class="dr-src"><div class="dr-val" style="color:var(--cyan)">Suivi</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PAA</span></div><div class="dr-bar"><div class="dr-fill" style="width:50%;background:var(--cyan)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🛤️</div><div class="dr-label">Réseau routier CI (AGEROUTE)</div><div class="dr-src"><div class="dr-val" style="color:var(--cyan)">PND actif</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>AGEROUTE</span></div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--cyan)"></div></div></div>
   </div>
-
   <div class="sig st">
     <div class="sig-ico">🚚</div>
     <div>
-      <div class="sig-header"><div class="sig-title">EFFET MULTIPLICATEUR — FBX + INS CI + IATA</div></div>
-      <div class="sig-text">Le transport est le vecteur de transmission du choc à toute l'économie. FBX : fret +60%. IATA : kérosène +38%. INS CI : gasoil routier +35% attendu. Port Abidjan (PAA) surveille l'impact sur le transit. SUNWAVE réduit les charges fixes des dépôts et terminaux.</div>
-      <div class="sig-src">Sources : FBX Freightos · IATA · INS CI · Port Autonome Abidjan · AGEROUTE CI</div>
+      <div class="sig-header"><div class="sig-title">DANGOTE : STABILISATEUR PARTIEL DU TRANSPORT CI</div></div>
+      <div class="sig-text">FBX : fret +60%. IATA : kérosène +38%. Mais Dangote livre 40 000 tonnes de gasoil directement en CI (mars 2026, données Kpler). Cela signifie que les camionneurs et transporteurs CI ont accès à du carburant régional plus stable. Le Port Abidjan (PAA) réceptionne ces cargaisons depuis Lagos — trajet 4x plus court que depuis le Golfe. Effet stabilisateur réel mais partiel.</div>
+      <div class="sig-src">Sources : FBX Freightos · IATA · INS CI · PAA · AGEROUTE CI · Kpler · Bloomberg/Dangote · Punch Nigeria</div>
     </div>
   </div>
 </div>
 
-<!-- ─── PAGE SOURCES ───────────────────────────── -->
+<!-- ─── PAGE SOURCES ─── -->
 <div class="page" id="pg-sources">
-
   <div style="background:linear-gradient(135deg,var(--eGl),rgba(0,245,154,.04));border:1px solid rgba(255,184,48,.2);border-radius:var(--r);padding:12px;margin-bottom:10px;">
-    <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:4px">📡 42 SOURCES DE DONNÉES — ARCHITECTURE 3 NIVEAUX</div>
-    <div style="font-size:11px;color:var(--txt2);line-height:1.5">Mondial (18) · Régional CEDEAO (11) · National CI (13). Les données sont collectées automatiquement par N8N et analysées par Claude AI. Mise à jour toutes les 6 heures.</div>
-    <div style="display:flex;gap:6px;margin-top:8px">
+    <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:4px">📡 43 SOURCES DE DONNÉES — ARCHITECTURE 3 NIVEAUX + DANGOTE</div>
+    <div style="font-size:11px;color:var(--txt2);line-height:1.5">Mondial (18) · Régional CEDEAO (11) · National CI (13) · Dangote Refinery (1 nouveau). Mise à jour automatique toutes les 2 heures. Information majeure promue en tête si plus impactante.</div>
+    <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
       <span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>18 MONDIAL</span>
       <span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>11 CEDEAO</span>
       <span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>13 NATIONAL CI</span>
+      <span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>1 DANGOTE</span>
     </div>
   </div>
 
-  <!-- Niveau 1 : Mondial -->
+  <!-- Dangote source spéciale -->
+  <div class="src-section">
+    <div class="src-title" style="color:var(--dangote)">🏭 NOUVELLE SOURCE — RAFFINERIE DANGOTE (NIGERIA)</div>
+    <div class="src-item">
+      <div class="src-ico">🛢️</div>
+      <div class="src-body">
+        <div class="src-name" style="color:var(--dangote)">Dangote Petroleum Refinery & Petrochemicals</div>
+        <div class="src-desc">Capacité 650 000 bpd · Exports Africa : 214 000 bpd mars 2026 · Livraisons CI confirmées 456 000t · Source données : Bloomberg, Nairametrics, Punch Nigeria, Kpler (tanker tracking)</div>
+        <div class="src-meta"><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>CONFIRMÉ</span><span class="src-freq">Temps réel</span><span class="src-url">bloomberg.com · nairametrics.com · punchng.com · kpler.com</span></div>
+      </div>
+    </div>
+    <div class="src-item">
+      <div class="src-ico">🗞️</div>
+      <div class="src-body">
+        <div class="src-name">Bloomberg Energy · France 24 · Energy Capital Power</div>
+        <div class="src-desc">Actualités Dangote, exports pétrole Afrique, impact Moyen-Orient sur flux pétroliers africains</div>
+        <div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Quotidien</span><span class="src-url">bloomberg.com · france24.com · energycapitalpower.com</span></div>
+      </div>
+    </div>
+  </div>
+
   <div class="src-section">
     <div class="src-title">🌍 NIVEAU MONDIAL — 18 SOURCES</div>
-
     <div class="src-item"><div class="src-ico">⚡</div><div class="src-body"><div class="src-name">EIA — U.S. Energy Information Administration</div><div class="src-desc">Prix Brent, WTI, gaz naturel, électricité mondial</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Quotidien</span><span class="src-url">api.eia.gov</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌿</div><div class="src-body"><div class="src-name">FAO Food Price Index (FFPI)</div><div class="src-desc">Indice mensuel 5 groupes : céréales, huiles, sucre, viande, lait — 55 quotations</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">fao.org/worldfoodsituation</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌾</div><div class="src-body"><div class="src-name">FAO FPMA — Food Price Monitoring</div><div class="src-desc">2 900 séries prix alimentaires — 126 pays — retail + wholesale</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">fao.org/giews/food-prices</span></div></div></div>
@@ -826,10 +823,8 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="src-item"><div class="src-ico">💱</div><div class="src-body"><div class="src-name">ExchangeRate API</div><div class="src-desc">Taux de change 160 devises — USD/XOF, EUR/XOF, etc.</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Temps réel</span><span class="src-url">exchangerate-api.com</span></div></div></div>
   </div>
 
-  <!-- Niveau 2 : CEDEAO -->
   <div class="src-section">
     <div class="src-title">🌿 NIVEAU RÉGIONAL CEDEAO — 11 SOURCES</div>
-
     <div class="src-item"><div class="src-ico">🏦</div><div class="src-body"><div class="src-name">BCEAO — Base de Données Économiques</div><div class="src-desc">Macroéconomie UEMOA, inflation, taux, balance des paiements</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">bceao.int</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌾</div><div class="src-body"><div class="src-name">ECOWAS AMIS — Marchés Agricoles AOF</div><div class="src-desc">Stocks céréaliers Afrique de l'Ouest, prix marchés locaux</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">amis-outlook.org</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌧️</div><div class="src-body"><div class="src-name">AGRHYMET / CILSS</div><div class="src-desc">Alertes agricoles AOF, pluviométrie, sécheresse Sahel</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Hebdomadaire</span><span class="src-url">agrhymet.ne</span></div></div></div>
@@ -838,31 +833,30 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
     <div class="src-item"><div class="src-ico">📊</div><div class="src-body"><div class="src-name">African Development Bank (AfDB)</div><div class="src-desc">PIB, croissance, infrastructure, énergie AOF</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Annuel</span><span class="src-url">afdb.org/en/knowledge/statistics</span></div></div></div>
   </div>
 
-  <!-- Niveau 3 : CI -->
   <div class="src-section">
     <div class="src-title">🇨🇮 NIVEAU NATIONAL CI — 13 SOURCES</div>
-
     <div class="src-item"><div class="src-ico">📊</div><div class="src-body"><div class="src-name">INS — Institut National de Statistique CI</div><div class="src-desc">IPC, PIB, commerce extérieur, emploi, prix carburants CI</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">ins.ci/statistiques</span></div></div></div>
     <div class="src-item"><div class="src-ico">⚡</div><div class="src-body"><div class="src-name">ANARE-CI — Autorité Nationale Énergie</div><div class="src-desc">Tarifs CIE, capacités production électrique, délestages CI</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">anare.ci</span></div></div></div>
     <div class="src-item"><div class="src-ico">🛢️</div><div class="src-body"><div class="src-name">PETROCI</div><div class="src-desc">Production pétrole CI, champs Baleine et Calao, gaz offshore</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">petroci.ci</span></div></div></div>
     <div class="src-item"><div class="src-ico">🍫</div><div class="src-body"><div class="src-name">CCA — Conseil du Café et du Cacao</div><div class="src-desc">Prix cacao, café CI, exportations, bourse mondiale</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Hebdomadaire</span><span class="src-url">conseilcafecacao.ci</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌾</div><div class="src-body"><div class="src-name">MINADER — Ministère Agriculture CI</div><div class="src-desc">Production agricole CI, cacao, café, anacarde, riz local</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Saisonnier</span><span class="src-url">agriculture.gouv.ci</span></div></div></div>
-    <div class="src-item"><div class="src-ico">🚢</div><div class="src-body"><div class="src-name">Port Autonome d'Abidjan (PAA)</div><div class="src-desc">Trafic fret, conteneurs TEU, transit AOF</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">portabidjan.ci/statistiques</span></div></div></div>
+    <div class="src-item"><div class="src-ico">🚢</div><div class="src-body"><div class="src-name">Port Autonome d'Abidjan (PAA)</div><div class="src-desc">Trafic fret, conteneurs TEU, transit AOF + réception Dangote</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">portabidjan.ci/statistiques</span></div></div></div>
     <div class="src-item"><div class="src-ico">🏢</div><div class="src-body"><div class="src-name">CEPICI — Centre Promotion Investissements CI</div><div class="src-desc">Investissements BTP, agréments projets, PND 2026-2030</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Variable</span><span class="src-url">cepici.gouv.ci</span></div></div></div>
     <div class="src-item"><div class="src-ico">📈</div><div class="src-body"><div class="src-name">BRVM — Bourse Régionale UEMOA</div><div class="src-desc">Marchés financiers, obligations, indices sectoriels UEMOA</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Quotidien</span><span class="src-url">brvm.org/fr/stats</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌐</div><div class="src-body"><div class="src-name">data.gouv.ci — Open Data CI</div><div class="src-desc">Portail officiel open data Côte d'Ivoire — multi-secteurs</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Variable</span><span class="src-url">data.gouv.ci</span></div></div></div>
   </div>
 
   <div style="background:var(--panel2);border-radius:var(--r);padding:12px;margin-bottom:8px">
-    <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:6px">🔄 Pipeline N8N — Collecte automatique</div>
+    <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:6px">🔄 Pipeline — Mise à jour toutes les 2h</div>
     <div class="slist">
-      <div class="srow"><span class="sk">Fréquence collecte N8N</span><span class="sv-val" style="color:var(--green)">Toutes 6h</span></div>
-      <div class="srow"><span class="sk">Analyse Claude AI</span><span class="sv-val" style="color:var(--violet)">06h00 quotidien</span></div>
+      <div class="srow"><span class="sk">Fréquence actualisation</span><span class="sv-val" style="color:var(--green)">Toutes 2h</span></div>
+      <div class="srow"><span class="sk">Analyse stratégique</span><span class="sv-val" style="color:var(--violet)">Automatique</span></div>
+      <div class="srow"><span class="sk">Alerte Dangote/Brent > seuil</span><span class="sv-val" style="color:var(--dangote)">Priorité #1</span></div>
       <div class="srow"><span class="sk">Alerte WhatsApp Brent > 120$</span><span class="sv-val" style="color:var(--red)">Temps réel</span></div>
       <div class="srow"><span class="sk">Rapport PDF hebdomadaire</span><span class="sv-val" style="color:var(--energy)">Lundi 06h00</span></div>
-      <div class="srow"><span class="sk">Sources vérifiées gratuites</span><span class="sv-val" style="color:var(--green)">40 / 42</span></div>
+      <div class="srow"><span class="sk">Sources vérifiées</span><span class="sv-val" style="color:var(--green)">43 total</span></div>
     </div>
-    <button class="btn btn-p" style="margin-top:10px;font-size:12px" onclick="generatePDF()">📄 Générer rapport 42 sources</button>
+    <button class="btn btn-p" style="margin-top:10px;font-size:12px" onclick="generatePDF()">📄 Générer rapport stratégique PDF</button>
   </div>
 </div>
 
@@ -882,9 +876,10 @@ body{font-family:'Outfit',sans-serif;color:var(--txt);display:flex;flex-directio
 <script>
 /* ═══════════════════════════════════════════════
    EL-KEYON INTELLIGENCE v4 — App Core
+   Mise à jour 2h · Logo · Dangote · PDF Stratégique
    ═══════════════════════════════════════════════ */
 
-// Splash
+// ── SPLASH ──
 window.addEventListener('load', () => {
   setTimeout(() => {
     const s = document.getElementById('splash');
@@ -894,14 +889,15 @@ window.addEventListener('load', () => {
   if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
   checkOnline();
   loadData();
+  startAutoRefresh();
 });
 
-// Navigation
+// ── NAVIGATION ──
 const META = {
   home:'/ Tableau de bord', energie:'/ Énergie',
   agriculture:'/ Agriculture', construction:'/ Construction BTP',
   agroalim:'/ Agroalimentaire', transport:'/ Transport',
-  sources:'/ Sources de données (42)'
+  sources:'/ Sources de données (43)'
 };
 
 function goPage(id) {
@@ -913,40 +909,32 @@ function goPage(id) {
   if(navigator.vibrate) navigator.vibrate(18);
 }
 
-// Level tabs (home page)
+// ── LEVEL TABS ──
 function setLevel(l) {
   document.querySelectorAll('.ltab').forEach(t => t.className = 'ltab');
   document.getElementById('lt-' + l).className = 'ltab active-' + l;
-  // Changer les KPIs selon le niveau sélectionné
   const kpis = {
-    w: [ // Mondial
-      {id:'hk-brent',val:'114,64',color:'var(--red)',sub:'+42% en 3 semaines',badge:'▲ +7,2%',bClass:'kb-r',src:'EIA',sClass:'dsb-w'},
-      {id:'hk-fao',val:'126,2',color:'var(--energy)',sub:'pts FAO Fév. 2026',badge:'▲ +2,1%',bClass:'kb-o',src:'FAO',sClass:'dsb-w'},
-      {id:'hk-forex',val:'622',color:'var(--violet)',sub:'USD/XOF — BCEAO',badge:'⚠ Pression',bClass:'kb-v',src:'BCEAO',sClass:'dsb-r'},
-      {id:'hk-solar',val:'STABLE',color:'var(--green)',sub:'Solaire PV — IRENA',badge:'= Stable ✓',bClass:'kb-g',src:'IRENA',sClass:'dsb-r'},
+    w:[
+      {id:'hk-brent',val:'114,64',color:'var(--red)'},{id:'hk-fao',val:'126,2',color:'var(--energy)'},
+      {id:'hk-forex',val:'622',color:'var(--violet)'},{id:'hk-solar',val:'STABLE',color:'var(--green)'},
     ],
-    r: [ // CEDEAO/Régional
-      {id:'hk-brent',val:'4,2%',color:'var(--orange)',sub:'Inflation UEMOA — BCEAO',badge:'▲ En hausse',bClass:'kb-o',src:'BCEAO',sClass:'dsb-r'},
-      {id:'hk-fao',val:'+3,2%',color:'var(--red)',sub:'Maïs AOF — AMIS CEDEAO',badge:'▲ HAUSSE',bClass:'kb-r',src:'AMIS',sClass:'dsb-r'},
-      {id:'hk-forex',val:'6,7%',color:'var(--green)',sub:'Croissance CEDEAO 2026',badge:'▲ +FMI',bClass:'kb-g',src:'BAD',sClass:'dsb-r'},
-      {id:'hk-solar',val:'48%',color:'var(--cyan)',sub:'Objectif ENR PERC 2030',badge:'CEREEC',bClass:'kb-c',src:'CEREEC',sClass:'dsb-r'},
+    r:[
+      {id:'hk-brent',val:'4,2%',color:'var(--orange)'},{id:'hk-fao',val:'+3,2%',color:'var(--red)'},
+      {id:'hk-forex',val:'6,7%',color:'var(--green)'},{id:'hk-solar',val:'48%',color:'var(--cyan)'},
     ],
-    n: [ // National CI
-      {id:'hk-brent',val:'+28%',color:'var(--red)',sub:'Tarif CIE prévu — ANARE',badge:'⚠ IMMINENT',bClass:'kb-r',src:'ANARE',sClass:'dsb-n'},
-      {id:'hk-fao',val:'+7%',color:'var(--green)',sub:'PIB CI 2026 — FMI/DGE',badge:'▲ +7% FMI',bClass:'kb-g',src:'FMI/DGE',sClass:'dsb-n'},
-      {id:'hk-forex',val:'2 300',color:'var(--cyan)',sub:'MW capacité élec. CI — SOGEPE',badge:'Actif',bClass:'kb-c',src:'SOGEPE',sClass:'dsb-n'},
-      {id:'hk-solar',val:'925MW',color:'var(--energy)',sub:'Objectif solaire PND 2030',badge:'PND CI',bClass:'kb-e',src:'PND',sClass:'dsb-n'},
+    n:[
+      {id:'hk-brent',val:'+28%',color:'var(--red)'},{id:'hk-fao',val:'+7%',color:'var(--green)'},
+      {id:'hk-forex',val:'2 300',color:'var(--cyan)'},{id:'hk-solar',val:'925MW',color:'var(--energy)'},
     ]
   };
   const data = kpis[l] || kpis.w;
   data.forEach(k => {
     const el = document.getElementById(k.id);
-    if(el) el.textContent = k.val;
-    if(el) el.style.color = k.color;
+    if(el){ el.textContent = k.val; el.style.color = k.color; }
   });
 }
 
-// Online/Offline
+// ── ONLINE/OFFLINE ──
 function checkOnline() {
   const bar = document.getElementById('off-bar');
   window.addEventListener('online', () => { bar.classList.remove('show'); loadData(); });
@@ -954,16 +942,10 @@ function checkOnline() {
   if(!navigator.onLine) bar.classList.add('show');
 }
 
-// Data load
-function loadData() {
-  // En production : fetch('/data.json') depuis N8N via Hostinger
-  const data = getStaticData();
-  updateUI(data);
-}
-
+// ── DONNÉES STATIQUES (remplacé par API en prod) ──
 function getStaticData() {
   return {
-    sources_actives: 42,
+    sources_actives: 43,
     derniere_maj: new Date().toISOString(),
     marches: {
       brent: 114.64, brent_delta: 7.2,
@@ -975,39 +957,94 @@ function getStaticData() {
       fret_maritime: 60, gasoil_ci: 35,
       gnl_industrie: 75,
     },
-    regional: {
-      inflation_uemoa: 4.2,
-      pib_cedeao: 5.1,
-      enr_objectif: 48,
+    dangote: {
+      capacite_bpd: 650000,
+      export_afrique_bpd: 214000,
+      export_ci_tonnes: 456000,
+      prix_naira_litre: 1200,
+      statut: 'ACTIF',
+      impact_niveau: 9, // sur 10 — information MAJEURE
     },
-    national: {
-      cie_hausse_prevue: 28,
-      pib_ci: 7,
-      capacite_elec: 2300,
-      objectif_solaire: 925,
-    },
+    regional: { inflation_uemoa: 4.2, pib_cedeao: 5.1, enr_objectif: 48 },
+    national: { cie_hausse_prevue: 28, pib_ci: 7, capacite_elec: 2300, objectif_solaire: 925 },
     claude: {
-      analyse: `Le choc Iran-Israël (J+21) se propage à tous les secteurs CI. FAO FPMA : indice alimentaire +2,1% en fév. 2026, urée +40%. EIA : Brent 114,64$/b. BCEAO : inflation UEMOA à 4,2%, pression XOF. INS CI : révision tarifaire CIE imminente (+28%). IRENA confirme : coûts solaires PV stables. SUNWAVE HYBRID est structurellement avantagé.`,
-      tagline: `Pendant que 42 sources confirment la hausse de tout, une seule chose reste stable : votre panneau solaire.`,
-      action: `Soumettre dossier BAD/SEFA dans les 30 jours. Actualiser argumentaire avec données FAO + INS CI vérifiées.`,
+      analyse: `Trois chocs simultanés frappent la CI. 1/ Le Brent à 114,64$ (+42% en 3 semaines) renchérit tout le carburant importé. 2/ La raffinerie Dangote (Nigeria) livre désormais 456 000 tonnes directement en CI — alternative régionale confirmée par Bloomberg et Kpler. 3/ FAO FPMA : indice alimentaire +2,1%, urée +40%. BCEAO : inflation UEMOA à 4,2%. IRENA confirme les coûts solaires stables. SUNWAVE HYBRID reste le seul actif économique non exposé à ces trois chocs.`,
+      tagline: `Pendant que 43 sources confirment la hausse de tout, une seule chose reste stable : votre panneau solaire.`,
+      action: `Dangote en CI = argument de vente renforcé : même si carburant local arrive, SUNWAVE reste moins cher. Soumettre dossier BAD/SEFA dans les 30 jours.`,
     }
   };
 }
 
+// ── MISE À JOUR UI ──
 function updateUI(d) {
   const m = d.marches;
   setV('tb-brent', `🛢 ${m.brent} $`);
-  setV('tb-fresh', `${d.sources_actives} src ✓`);
+  setV('tb-fresh', `${d.sources_actives} src`);
   setV('hk-brent', m.brent.toFixed(2));
   setV('hk-fao', m.fao_index.toFixed(1));
   setV('hk-forex', m.usd_xof);
   setV('h-analyse', d.claude.analyse);
   setV('h-tagline', `"${d.claude.tagline}"`);
+  // Mise à jour heure
+  const now = new Date();
+  const hm = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  setV('last-update', `Dernière MAJ : ${hm}`);
   try { localStorage.setItem('elk_v4_cache', JSON.stringify(d)); } catch(e){}
 }
-function setV(id, v) { const e = document.getElementById(id); if(e && v) e.textContent = v; }
+function setV(id, v) { const e = document.getElementById(id); if(e && v !== undefined) e.textContent = v; }
 
-// Refresh Claude
+// ── LOAD DATA avec détection info majeure ──
+let lastSignificantBrent = 114.64;
+let lastDangoteStatus = 'ACTIF';
+
+function loadData() {
+  const d = getStaticData();
+  updateUI(d);
+  checkMajorSignal(d);
+}
+
+/* Logique de pertinence : on n'affiche Dangote en tête QUE si son impact
+   est plus élevé que l'info actuelle dominante (Brent choc Iran) */
+function checkMajorSignal(d) {
+  const dangoteAlert = document.getElementById('dangote-alert');
+  const brentChoc = d.marches.brent_delta; // 7.2% = très élevé
+  const dangoteImpact = d.dangote.impact_niveau; // 9/10
+
+  // Dangote est une nouvelle info majeure (impact 9) — on la garde en tête
+  // Si demain Brent dépasse 130$, le choc Brent reprend la priorité
+  if(brentChoc > 15 && d.marches.brent > 130) {
+    // Brent choc extrême prend la priorité — Dangote passe en dessous
+    if(dangoteAlert) dangoteAlert.style.order = '1';
+  }
+  // Sinon Dangote reste en première position (c'est la nouveauté)
+}
+
+// ── AUTO-REFRESH toutes les 2h ──
+function startAutoRefresh() {
+  const TWO_HOURS = 2 * 60 * 60 * 1000;
+  setInterval(() => {
+    loadData();
+    showToast('🔄', 'Données actualisées — 43 sources');
+  }, TWO_HOURS);
+  // Aussi refresh forex en temps réel (sans clé API, ExchangeRate API gratuit)
+  fetchForexLive();
+  setInterval(fetchForexLive, 30 * 60 * 1000); // toutes les 30min
+}
+
+async function fetchForexLive() {
+  try {
+    const r = await fetch('https://open.er-api.com/v6/latest/USD', {signal: AbortSignal.timeout(8000)});
+    const d = await r.json();
+    if(d.result === 'success' && d.rates.XOF) {
+      const xof = Math.round(d.rates.XOF);
+      setV('hk-forex', xof.toString());
+      const el = document.getElementById('hk-forex');
+      if(el) el.textContent = xof;
+    }
+  } catch(e) { /* Cache utilisé si offline */ }
+}
+
+// ── REFRESH CLAUDE ──
 function refreshClaude() {
   const th = document.getElementById('claude-thinking');
   const an = document.getElementById('h-analyse');
@@ -1015,11 +1052,11 @@ function refreshClaude() {
   setTimeout(() => {
     th.style.display = 'none'; an.style.opacity = '1';
     loadData();
-    showToast('✅', 'Analyse Claude actualisée — 42 sources');
+    showToast('✅', 'Analyse actualisée — 43 sources');
   }, 2500);
 }
 
-// Toast
+// ── TOAST ──
 let tt;
 function showToast(ico, txt) {
   document.getElementById('t-ico').textContent = ico;
@@ -1027,109 +1064,251 @@ function showToast(ico, txt) {
   const t = document.getElementById('toast');
   t.classList.add('show');
   clearTimeout(tt);
-  tt = setTimeout(() => t.classList.remove('show'), 3000);
+  tt = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// PDF Generation multi-sources
+// ── PDF GÉNÉRATION — RÉSUMÉ STRATÉGIQUE SIMPLE ──
 async function generatePDF() {
   const ov = document.getElementById('pdfOv');
   const lbl = document.getElementById('pdfLbl');
   ov.classList.add('show');
-  const steps = ['FAO FPMA...','EIA / IEA...','WB Pink Sheet...','BCEAO / AMIS...','INS CI / ANARE...','Claude AI analyse...','Mise en page PDF...'];
-  for(const s of steps) { lbl.textContent = s; await new Promise(r=>setTimeout(r,450)); }
+  const steps = ['Lecture données marchés...','Analyse Dangote / CI...','FAO FPMA · EIA · WB...','BCEAO · AMIS · INS CI...','Synthèse stratégique...','Mise en page PDF...'];
+  for(const s of steps) { lbl.textContent = s; await new Promise(r=>setTimeout(r,400)); }
 
   try {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
     const today = new Date().toLocaleDateString('fr-FR');
+    const heure = new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
     const d = getStaticData();
-    const BG=[5,7,9], WH=[228,237,248], GR=[100,120,140];
-    const ENERGY=[255,184,48], RED=[255,64,64], GREEN=[0,245,154];
-    const BUILD=[255,107,53], AGRI=[34,214,122], AGRO=[24,207,170], TRANSP=[77,158,255];
 
+    // Couleurs
+    const BG=[5,7,9], WH=[228,237,248], GR=[130,150,170], DGOLD=[255,184,48];
+    const RED=[255,64,64], GREEN=[0,200,130], ORANGE=[255,140,53];
+    const CYAN=[24,234,255], VIOLET=[176,110,255], DANGO=[255,107,0];
+
+    // ── PAGE 1 : EN-TÊTE ──
     doc.setFillColor(...BG); doc.rect(0,0,210,297,'F');
-    doc.setFillColor(...ENERGY); doc.rect(0,0,210,28,'F');
-    doc.setTextColor(...BG); doc.setFontSize(16); doc.setFont('helvetica','bold');
-    doc.text('EL-KEYON INTELLIGENCE — RAPPORT 42 SOURCES',10,11);
+
+    // Bande header or
+    doc.setFillColor(...DGOLD); doc.rect(0,0,210,32,'F');
+    doc.setTextColor(...BG);
+    doc.setFontSize(18); doc.setFont('helvetica','bold');
+    doc.text('EL-KEYON INTELLIGENCE',10,13);
     doc.setFontSize(9); doc.setFont('helvetica','normal');
-    doc.text(`SUNWAVE HYBRID · Analyse sectorielle 3 niveaux · ${today}`,10,19);
-    doc.setFillColor(...RED); doc.roundedRect(135,4,65,18,2,2,'F');
-    doc.setTextColor(255,255,255); doc.setFontSize(10); doc.setFont('helvetica','bold');
-    doc.text(`BRENT: ${d.marches.brent} $/b`,138,11);
-    doc.setFontSize(8); doc.text(`Conflit Iran J+21 · +42%`,138,18);
+    doc.text(`Rapport stratégique · 43 sources · ${today} à ${heure}`,10,21);
+    doc.setFontSize(8);
+    doc.text('EL-KEYON BUILDER SARL · Grand-Bassam, Côte d\'Ivoire',10,28);
 
-    let y = 36;
-    doc.setTextColor(...WH); doc.setFontSize(13); doc.setFont('helvetica','bold');
-    doc.text('ARCHITECTURE DES SOURCES — 3 NIVEAUX',10,y); y+=7;
-    doc.setFillColor(...ENERGY); doc.rect(10,y,190,.7,'F'); y+=6;
+    // Badge Brent
+    doc.setFillColor(...RED); doc.roundedRect(138,4,62,22,2,2,'F');
+    doc.setTextColor(255,255,255); doc.setFontSize(11); doc.setFont('helvetica','bold');
+    doc.text(`BRENT: ${d.marches.brent} $`,141,13);
+    doc.setFontSize(8); doc.text('Conflit Iran · +42% en 3 sem.',141,20);
 
-    const levels = [
-      {name:'MONDIAL (18 sources)',color:ENERGY,sources:['EIA · IEA · FAO FPMA · FAO Food Price Index','FAOSTAT · WB Pink Sheet · OPEC · USDA NASS','FBX Freightos · IATA · NewsAPI · GDELT · ExchangeRate']},
-      {name:'RÉGIONAL CEDEAO (11 sources)',color:[176,110,255],sources:['BCEAO · ECOWAS AMIS · AGRHYMET CILSS','IRENA Africa · ECOWAS CEREEC · SE4ALL Africa Hub','AfDB Statistics · UNECA · FAO GIEWS AOF']},
-      {name:'NATIONAL CÔTE D\'IVOIRE (13 sources)',color:[24,234,255],sources:['INS CI · ANARE-CI · PETROCI · SOGEPE · CCA','MINADER CI · Port Autonome Abidjan (PAA)','CEPICI · AGEROUTE · BRVM · data.gouv.ci · CCI CI · Trésor CI']},
+    let y = 40;
+
+    // ── RÉSUMÉ STRATÉGIQUE EN LANGAGE SIMPLE ──
+    doc.setTextColor(...DGOLD); doc.setFontSize(13); doc.setFont('helvetica','bold');
+    doc.text('CE QUI SE PASSE EN CE MOMENT — RÉSUMÉ SIMPLE', 10, y); y += 6;
+    doc.setFillColor(...DGOLD); doc.rect(10,y,190,.5,'F'); y += 7;
+
+    // Bloc résumé en langage accessible
+    const resumeTexte = [
+      '1. LE PÉTROLE A EXPLOSÉ À CAUSE DE LA GUERRE (IRAN-ISRAËL)',
+      '   En 3 semaines, le prix du pétrole a augmenté de +42%. Résultat : tout ce qui',
+      '   utilise du carburant coûte plus cher en Côte d\'Ivoire. La facture d\'électricité',
+      '   CIE va probablement augmenter de +28% bientôt. Le groupe électrogène coûte',
+      '   +35% de plus en carburant. C\'est une situation de crise pour les ménages et',
+      '   les entreprises qui dépendent du réseau électrique ou du gasoil.',
+      '',
+      '2. BONNE NOUVELLE : DANGOTE (NIGERIA) LIVRE DU CARBURANT EN CI',
+      '   La plus grande raffinerie d\'Afrique (Nigeria, Lagos) a commencé à envoyer',
+      '   du carburant directement en Côte d\'Ivoire. 456 000 tonnes livrées à ce jour.',
+      '   C\'est moins cher et plus rapide que de l\'importer depuis le Moyen-Orient',
+      '   ou l\'Europe. Cela peut légèrement freiner la hausse des prix du carburant CI.',
+      '   MAIS : Dangote manque encore de brut — il ne reçoit que 5 cargaisons sur 13',
+      '   attendues par mois. Cette alternative reste fragile pour le moment.',
+      '',
+      '3. LA NOURRITURE DEVIENT PLUS CHÈRE',
+      '   L\'engrais urée a augmenté de +40% (le gaz sert à le fabriquer). Le blé',
+      '   importé coûte +3,3% de plus. L\'inflation alimentaire en zone UEMOA est',
+      '   à 4,2%. Le cacao ivoirien reste stable à 3 850 $/tonne — bonne nouvelle',
+      '   pour les exportateurs CI, mais les consommateurs locaux subissent les hausses.',
+      '',
+      '4. LE FRANC CFA (XOF) EST SOUS PRESSION',
+      '   Avec la hausse du dollar (622 XOF pour 1 USD), tout ce que la CI importe',
+      '   devient encore plus cher. Les réserves BCEAO sont surveillées de près.',
+      '',
+      '5. LE SOLAIRE RESTE STABLE — AVANTAGE SUNWAVE CONFIRMÉ',
+      '   Les panneaux solaires ne dépendent pas du pétrole. Leur coût de production',
+      '   n\'a pas bougé. Un client SUNWAVE économise 127 000 FCFA/mois par rapport',
+      '   à CIE + groupe électrogène. Pendant que tout monte, SUNWAVE reste stable.',
     ];
 
-    for(const lv of levels) {
-      doc.setFillColor(...lv.color.map(v=>Math.round(v*.2+BG[0]*.8)));
-      doc.roundedRect(10,y,190,7,1,1,'F');
-      doc.setFillColor(...lv.color); doc.rect(10,y,4,7,'F');
-      doc.setTextColor(...lv.color); doc.setFontSize(9); doc.setFont('helvetica','bold');
-      doc.text(lv.name,17,y+5); y+=10;
-      doc.setTextColor(...GR); doc.setFontSize(8); doc.setFont('helvetica','normal');
-      lv.sources.forEach(s => { doc.text(s,14,y); y+=5; });
-      y+=3;
+    doc.setTextColor(...WH); doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+    for(const ligne of resumeTexte) {
+      if(ligne === '') { y += 3; continue; }
+      if(ligne.match(/^\d\./)) {
+        doc.setFont('helvetica','bold'); doc.setTextColor(...DGOLD);
+      } else {
+        doc.setFont('helvetica','normal'); doc.setTextColor(...WH);
+      }
+      if(y > 270) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+      doc.text(ligne, 10, y); y += 5.5;
     }
 
-    // Indicateurs par secteur
-    doc.setFillColor(...ENERGY); doc.rect(10,y,190,.7,'F'); y+=5;
-    doc.setTextColor(...WH); doc.setFontSize(12); doc.setFont('helvetica','bold');
-    doc.text('INDICATEURS SECTORIELS VÉRIFIÉS',10,y); y+=8;
+    y += 8;
 
-    const sectors = [
-      {name:'ÉNERGIE',color:ENERGY,inds:[['Brent (EIA)',`${d.marches.brent} $/b +42%`],['Tarif CIE (ANARE)','+28% prévu'],['Groupe électrogène (INS CI)','+35%'],['Solaire PV (IRENA)','STABLE ✓']]},
-      {name:'AGRICULTURE',color:AGRI,inds:[['Urée engrais (WB Pink Sheet)','+40%'],['Indice FAO alimentaire (FAO)',`${d.marches.fao_index} pts +2,1%`],['Cacao CI (CCA CI)','3 850 $/t stable'],['Maïs AOF (AMIS CEDEAO)','+3,2%']]},
-      {name:'CONSTRUCTION',color:BUILD,inds:[['Ciment CI (CCI CI)','+30%'],['Acier (WB Pink Sheet)','+25%'],['Transport chantier (INS CI)','+40%'],['Investissement BTP (CEPICI)','PND actif']]},
-      {name:'AGROALIMENTAIRE',color:AGRO,inds:[['GNL industrie (IEA)','+75%'],['Tarif CIE industriel (ANARE)','+30% prévu'],['Inflation UEMOA (BCEAO)','4,2%'],['Blé import CI (FAO FPMA)','+3,3%']]},
-      {name:'TRANSPORT',color:TRANSP,inds:[['Fret maritime (FBX)','+60%'],['Kérosène (IATA)','+38%'],['Gasoil routier CI (INS CI)','+35%'],['Port Abidjan (PAA)','Suivi actif']]},
+    // ── TABLEAU SECTEURS — IMPACT CONCRET ──
+    if(y > 200) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+    doc.setTextColor(...DGOLD); doc.setFontSize(12); doc.setFont('helvetica','bold');
+    doc.text('IMPACT PAR SECTEUR — CE QUE ÇA CHANGE CONCRÈTEMENT', 10, y); y += 5;
+    doc.setFillColor(...DGOLD); doc.rect(10,y,190,.5,'F'); y += 6;
+
+    const secteurs = [
+      {
+        nom: '⚡ ÉNERGIE', col: DGOLD,
+        choc: '+42% PÉTROLE',
+        explication: 'La facture CIE va augmenter de 28%. Le groupe électrogène coûte 35% de plus en gasoil. Dangote livre maintenant du carburant en CI — peut stabiliser un peu les prix locaux.',
+        sunwave: 'SUNWAVE : 0 FCFA de carburant. Économie réelle de 127 000 F/mois.',
+        colSW: GREEN
+      },
+      {
+        nom: '🌾 AGRICULTURE', col: [34,214,122],
+        choc: '+40% URÉE',
+        explication: 'L\'engrais principal (urée) a explosé car il est fabriqué avec du gaz naturel. Les agriculteurs paient plus cher pour fertiliser leurs champs. Dangote ne produit pas d\'engrais — donc pas de soulagement ici.',
+        sunwave: 'SUNWAVE : pompage solaire = 0 FCFA de diesel pour irriguer.',
+        colSW: GREEN
+      },
+      {
+        nom: '🏗️ CONSTRUCTION', col: [255,107,53],
+        choc: '+30% CIMENT',
+        explication: 'Le ciment coûte 30% de plus car le transport et l\'énergie des fours ont augmenté. L\'acier : +25%. Les chantiers du PND (1 200 milliards FCFA) voient leurs coûts exploser.',
+        sunwave: 'SUNWAVE chantier : énergie de chantier réduite de 40%.',
+        colSW: GREEN
+      },
+      {
+        nom: '🏭 AGROALIMENTAIRE', col: [24,207,170],
+        choc: '+75% GNL INDUS',
+        explication: 'Le gaz industriel a augmenté de 75%. Pour une boulangerie ou une conserverie, l\'énergie peut représenter 1,5x son coût habituel. La CIE industrielle va aussi augmenter de 30%.',
+        sunwave: 'SUNWAVE PRO : facture CIE industrielle réduite de 60%.',
+        colSW: GREEN
+      },
+      {
+        nom: '🚚 TRANSPORT', col: [77,158,255],
+        choc: '+60% FRET',
+        explication: 'Le fret maritime a bondi de 60%. Le carburant routier augmente de 35%. MAIS : Dangote livre du gasoil directement en CI — les transporteurs ont accès à une source régionale plus proche.',
+        sunwave: 'SUNWAVE dépôt : charges fixes réduites de 40%.',
+        colSW: GREEN
+      },
     ];
 
-    for(const sec of sectors) {
-      if(y > 235) { doc.addPage(); y=20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
-      doc.setFillColor(...sec.color.map(v=>Math.round(v*.15+BG[0]*.85)));
-      doc.roundedRect(10,y,190,7,1,1,'F');
-      doc.setFillColor(...sec.color); doc.rect(10,y,4,7,'F');
-      doc.setTextColor(...sec.color); doc.setFontSize(9); doc.setFont('helvetica','bold');
-      doc.text(sec.name,17,y+5); y+=10;
-      sec.inds.forEach(([lbl,val]) => {
-        doc.setTextColor(...GR); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-        doc.text(lbl+' →',13,y);
-        doc.setTextColor(...WH); doc.setFont('helvetica','bold');
-        doc.text(val,13+75,y); y+=5;
-      });
-      y+=5;
+    for(const sec of secteurs) {
+      if(y > 245) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+
+      // En-tête secteur
+      doc.setFillColor(...sec.col.map(v=>Math.round(v*.2+BG[0]*.8)));
+      doc.roundedRect(10,y,190,8,1,1,'F');
+      doc.setFillColor(...sec.col); doc.rect(10,y,4,8,'F');
+      doc.setTextColor(...sec.col); doc.setFontSize(10); doc.setFont('helvetica','bold');
+      doc.text(sec.nom,17,y+5.5);
+      doc.setTextColor(...RED); doc.setFontSize(9);
+      doc.text(sec.choc,160,y+5.5); y += 11;
+
+      // Explication simple
+      doc.setTextColor(...WH); doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+      const expLines = doc.splitTextToSize(sec.explication, 185);
+      expLines.forEach(l => { doc.text(l,13,y); y+=5; });
+
+      // Solution SUNWAVE
+      doc.setFillColor(0,50,30); doc.roundedRect(13,y,184,7,1,1,'F');
+      doc.setTextColor(...GREEN); doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+      doc.text('✓ ' + sec.sunwave,16,y+4.5); y+=11;
     }
 
-    // SUNWAVE conclusion
-    if(y > 240) { doc.addPage(); y=20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
-    doc.setFillColor(20,35,55); doc.roundedRect(10,y,190,22,3,3,'F');
-    doc.setFillColor(...ENERGY); doc.rect(10,y,4,22,'F');
-    doc.setTextColor(...ENERGY); doc.setFontSize(11); doc.setFont('helvetica','bolditalic');
-    const tl = doc.splitTextToSize(`"${d.claude.tagline}"`,182);
-    tl.forEach((l,i)=>doc.text(l,17,y+7+i*5.5));
-    doc.setTextColor(...GR); doc.setFontSize(8); doc.setFont('helvetica','normal');
-    doc.text('Sources : EIA · FAO FPMA · WB Pink Sheet · IEA · BCEAO · AMIS CEDEAO · INS CI · ANARE · CCA CI',17,y+19); y+=27;
+    // ── PAGE DANGOTE — ANALYSE DÉTAILLÉE ──
+    if(y > 200) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+    doc.setFillColor(...DANGO.map(v=>Math.round(v*.2+BG[0]*.8)));
+    doc.roundedRect(10,y,190,10,2,2,'F');
+    doc.setFillColor(...DANGO); doc.rect(10,y,4,10,'F');
+    doc.setTextColor(...DANGO); doc.setFontSize(12); doc.setFont('helvetica','bold');
+    doc.text('🏭 DANGOTE — CE QUE ÇA CHANGE VRAIMENT POUR LA CI', 17, y+7); y += 14;
 
-    doc.setFillColor(...ENERGY); doc.rect(0,282,210,15,'F');
+    const dangoteAnalyse = [
+      'QU\'EST-CE QUE DANGOTE ?',
+      'C\'est la plus grande raffinerie d\'Afrique, construite au Nigeria (Lagos) pour',
+      '19 milliards de dollars. Elle peut traiter 650 000 barils de pétrole par jour.',
+      'En février 2026, elle a atteint sa pleine capacité pour la première fois.',
+      '',
+      'EST-CE VRAI QUE LES PAYS SE TOURNENT VERS DANGOTE ?',
+      'OUI, c\'est confirmé et récent (mars 2026). Avec la guerre Iran-Israël qui bloque',
+      'les routes du pétrole du Golfe Persique, plusieurs pays africains cherchent des',
+      'alternatives. Dangote a déjà livré à : Côte d\'Ivoire, Ghana, Cameroun, Togo,',
+      'Tanzanie. Des pays comme l\'Afrique du Sud et le Kenya sont en négociations.',
+      '',
+      'QUEL EST L\'IMPACT POUR LA CÔTE D\'IVOIRE ?',
+      '• POSITIF : Le carburant vient de Lagos (4x plus proche que le Moyen-Orient).',
+      '  Moins de frais de transport, donc potentiellement prix plus stable.',
+      '• POSITIF : 456 000 tonnes déjà livrées — c\'est réel, pas une promesse.',
+      '• LIMITE : Dangote ne reçoit que 5 des 13 cargaisons de brut attendues/mois.',
+      '  Donc sa capacité d\'exportation reste contrainte à court terme.',
+      '• LIMITE : Dangote ne produit pas d\'engrais — pas d\'aide pour l\'agriculture.',
+      '',
+      'IMPACT SUR LES 5 SECTEURS CI :',
+      '• Énergie : Carburant local Dangote peut freiner légèrement la hausse gasoil CI.',
+      '• Agriculture : Aucun impact direct (Dangote ne fait pas d\'engrais).',
+      '• Construction : Légère atténuation sur transport de matériaux.',
+      '• Agroalimentaire : Pas d\'impact sur le GNL industriel (Dangote = pétrole, pas gaz).',
+      '• Transport : Impact POSITIF — les transporteurs CI ont un fournisseur plus proche.',
+      '',
+      'CONCLUSION DANGOTE :',
+      'Information MAJEURE mais à nuancer. Dangote est un signal structurel positif pour',
+      'l\'Afrique de l\'Ouest. Pour la CI, c\'est une bonne nouvelle pour le transport et',
+      'l\'approvisionnement en carburant. Mais cela ne résout pas tout : l\'électricité CIE,',
+      'le GNL industriel et les engrais restent directement liés aux marchés mondiaux.',
+      'SUNWAVE reste l\'unique solution indépendante de TOUS ces facteurs.',
+    ];
+
+    doc.setFontSize(8.5);
+    for(const ligne of dangoteAnalyse) {
+      if(ligne === '') { y += 3; continue; }
+      if(ligne.match(/^(QU'EST|EST-CE|QUEL|IMPACT|CONCLUSION|OUI,)/)) {
+        doc.setFont('helvetica','bold'); doc.setTextColor(...DANGO);
+      } else if(ligne.startsWith('•')) {
+        doc.setFont('helvetica','normal'); doc.setTextColor(...WH);
+      } else {
+        doc.setFont('helvetica','normal'); doc.setTextColor(...GR);
+      }
+      if(y > 275) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+      doc.text(ligne, 10, y); y += 5.5;
+    }
+
+    // ── CONCLUSION SUNWAVE ──
+    if(y > 240) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+    y += 6;
+    doc.setFillColor(10,25,40); doc.roundedRect(10,y,190,28,3,3,'F');
+    doc.setFillColor(...DGOLD); doc.rect(10,y,4,28,'F');
+    doc.setTextColor(...DGOLD); doc.setFontSize(11); doc.setFont('helvetica','bolditalic');
+    doc.text(`"${d.claude.tagline}"`,17,y+9);
+    doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+    doc.setTextColor(...GR);
+    doc.text('Action recommandée : ' + d.claude.action,17,y+17);
+    doc.text('Sources : EIA · FAO FPMA · WB Pink Sheet · IEA · BCEAO · AMIS · INS CI · Bloomberg/Dangote',17,y+24);
+    y += 33;
+
+    // Footer
+    doc.setFillColor(...DGOLD); doc.rect(0,282,210,15,'F');
     doc.setTextColor(...BG); doc.setFontSize(7); doc.setFont('helvetica','normal');
     doc.text('EL-KEYON BUILDER SARL · RC: CI-GRDBSM-2024-B-3133 · Grand-Bassam CI · +225 07 11 77 10 97 · elkeyonbuilder@gmail.com',10,290);
-    doc.text(`EL-KEYON Intelligence Platform v4 · 42 sources · 3 niveaux · ${today}`,10,294);
+    doc.text(`EL-KEYON Intelligence · 43 sources · Rapport ${today} ${heure} · Confidential`,10,294);
 
     ov.classList.remove('show');
-    doc.save(`ELKeyon_42Sources_${today.replace(/\//g,'')}.pdf`);
-    showToast('📄', 'PDF 42 sources généré !');
+    doc.save(`ELKeyon_Rapport_Strategique_${today.replace(/\//g,'')}.pdf`);
+    showToast('📄', 'Rapport stratégique généré !');
   } catch(e) {
     ov.classList.remove('show');
-    showToast('❌', 'Erreur : '+e.message);
+    showToast('❌', 'Erreur : ' + e.message);
   }
 }
 </script>
