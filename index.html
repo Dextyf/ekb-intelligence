@@ -251,6 +251,8 @@ background:rgba(0,245,154,.05);border-left:2px solid var(--green);color:var(--tx
 color:var(--green);letter-spacing:.8px;margin-bottom:1px;}
 /* ── FLUX ACTUALITÉS LIVE ── */
 .news-feed{display:flex;flex-direction:column;gap:0;margin-bottom:8px;}
+.premium-item{border-left:2px solid var(--green) !important;background:rgba(0,245,154,.03) !important;}
+.ni-src-premium{color:var(--green) !important;font-weight:700;}
 .news-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);
 cursor:pointer;transition:background .15s;}
 .news-item:last-child{border-bottom:none;}
@@ -384,7 +386,7 @@ animation:ctPulse 1.2s ease-in-out infinite;}
     <img src="data:image/png;base64,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" alt="EKB Intelligence">
   </div>
   <div class="sp-brand">EL-KEYON</div>
-  <div class="sp-v">Intelligence Platform · v5 · APIs Live · 46 Sources · GDELT</div>
+  <div class="sp-v">Intelligence Platform · v7 · France24 · CNN · Al Jazeera · BBC · Africa24 · Refresh 10min</div>
   <div class="sp-sources">
     <span class="sp-src" style="background:rgba(255,184,48,.12);color:var(--energy)">🌍 FAO / WB</span>
     <span class="sp-src" style="background:rgba(255,184,48,.12);color:var(--energy)">⚡ EIA Live</span>
@@ -1020,7 +1022,7 @@ animation:ctPulse 1.2s ease-in-out infinite;}
 <div class="page" id="pg-sources">
   <div style="background:linear-gradient(135deg,var(--eGl),rgba(0,245,154,.04));border:1px solid rgba(255,184,48,.2);border-radius:var(--r);padding:12px;margin-bottom:10px;">
     <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:4px">📡 46 SOURCES — 3 NIVEAUX + APIs LIVE EN TEMPS RÉEL</div>
-    <div style="font-size:11px;color:var(--txt2);line-height:1.5">Mondial (18) · Régional CEDEAO (11) · National CI (13) · Dangote (1) · <strong style="color:var(--green)">GDELT · EIA · ExchangeRate (3 APIs live)</strong>. Actualités temps réel, Brent live, Forex 30min.</div>
+    <div style="font-size:11px;color:var(--txt2);line-height:1.5">Mondial · CEDEAO · CI · <strong style="color:var(--green)">France 24 · CNN · Al Jazeera · Africa 24 · Africanews · Business 24 · CNBC Africa · BBC News · Reuters · Bloomberg · RFI</strong> · GDELT · EIA · ExchangeRate. Refresh <strong style="color:var(--green)">10 minutes</strong>.</div>
     <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
       <span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>18 MONDIAL</span>
       <span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>11 CEDEAO</span>
@@ -1231,13 +1233,26 @@ function setV(id, v) { const e = document.getElementById(id); if(e && v !== unde
 // ═══════════════════════════════════════════════
 async function initAPIs() {
   updateTimestamp();
-  // Lancement parallèle pour vitesse
+  // Lancement parallèle pour vitesse maximale
   await Promise.allSettled([
     fetchForexLive(),
     fetchEIABrent(),
     fetchNewsLive(),
   ]);
   updateTimestamp();
+
+  // ═══ REFRESH AUTOMATIQUE ═══
+  // Brent + Forex : toutes les 15 minutes
+  setInterval(async () => {
+    await Promise.allSettled([fetchForexLive(), fetchEIABrent()]);
+    updateTimestamp();
+  }, 15 * 60 * 1000);
+
+  // Actualités — Sources premium (France24, CNN, Al Jazeera, BBC...) : toutes les 10 minutes
+  setInterval(async () => {
+    await fetchNewsLive();
+    updateTimestamp();
+  }, 10 * 60 * 1000);
 }
 
 // ── TIMESTAMP ──
@@ -1280,33 +1295,89 @@ async function fetchForexLive() {
 // On utilise l'API publique EIA proxy CORS
 // ═══════════════════════════════════════════════
 async function fetchEIABrent() {
+  // Stratégie multi-sources : 3 APIs gratuites en cascade
+  // Source 1 : Yahoo Finance via AllOrigins proxy (CORS libre, sans clé)
+  // Source 2 : stooq.com CSV (Brent historique, CORS)
+  // Source 3 : Fallback cache localStorage ou valeur récente
+
+  // Vérifier d'abord le cache (< 30 min = valide)
   try {
-    // EIA API publique - Brent Crude Oil (pas de clé requise pour données récentes)
-    const r = await fetch(
-      'https://api.eia.gov/v2/petroleum/pri/spt/data/?api_key=DEMO&frequency=daily&data[0]=value&facets[product][]=EPCBRENT&sort[0][column]=period&sort[0][direction]=desc&length=1',
-      {signal: AbortSignal.timeout(8000)}
-    );
-    const d = await r.json();
-    const val = d?.response?.data?.[0]?.value;
-    if(val && !isNaN(parseFloat(val))) {
-      const brent = parseFloat(val).toFixed(2);
-      updateBrentUI(brent);
+    const cached = JSON.parse(localStorage.getItem('ekb_brent') || 'null');
+    if(cached?.v && cached?.t && (Date.now() - cached.t) < 30 * 60 * 1000) {
+      updateBrentUI(cached.v.toString());
+      // Quand même essayer de rafraîchir en arrière-plan
     }
-  } catch(e) {
-    // Fallback : valeur statique confirmée (données vérifiées 28 mars 2026)
-    updateBrentUI('114.64');
+  } catch(_){}
+
+  // Source 1 : Yahoo Finance BZO=F (Brent Crude Futures) via allorigins.win
+  try {
+    const yhUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?interval=1d&range=1d';
+    const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(yhUrl);
+    const r = await fetch(proxy, {signal: AbortSignal.timeout(10000)});
+    const wrapper = await r.json();
+    const data = JSON.parse(wrapper.contents);
+    const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+    if(price && !isNaN(price) && price > 50 && price < 300) {
+      updateBrentUI(price.toFixed(2));
+      return;
+    }
+  } catch(e1) {
+    console.warn('Brent Source 1 (Yahoo) failed:', e1.message);
   }
+
+  // Source 2 : stooq.com — Brent CSV (CORS ouvert)
+  try {
+    const stooqUrl = 'https://stooq.com/q/d/l/?s=brent.f&d1=&d2=&i=d';
+    const proxy2 = 'https://api.allorigins.win/get?url=' + encodeURIComponent(stooqUrl);
+    const r2 = await fetch(proxy2, {signal: AbortSignal.timeout(10000)});
+    const w2 = await r2.json();
+    const lines = w2.contents.trim().split('\n');
+    const last = lines[lines.length - 1].split(',');
+    const price2 = parseFloat(last[4]); // Close price
+    if(!isNaN(price2) && price2 > 50 && price2 < 300) {
+      updateBrentUI(price2.toFixed(2));
+      return;
+    }
+  } catch(e2) {
+    console.warn('Brent Source 2 (Stooq) failed:', e2.message);
+  }
+
+  // Source 3 : Fallback cache
+  try {
+    const cached = JSON.parse(localStorage.getItem('ekb_brent') || 'null');
+    if(cached?.v) {
+      updateBrentUI(cached.v.toString());
+      return;
+    }
+  } catch(_){}
+
+  // Dernier recours : valeur statique datée + indication visuelle
+  updateBrentUI('114.64');
+  const deltaEl = document.getElementById('brent-live-delta');
+  if(deltaEl) deltaEl.style.opacity = '0.5';
 }
 
 function updateBrentUI(brentVal) {
   const v = parseFloat(brentVal);
+  if(isNaN(v)) return;
   const display = v.toFixed(2).replace('.',',');
   setV('brent-live-val', `${display} $`);
   setV('tb-brent', `🛢 ${display} $`);
   setV('hk-brent', display);
   // Calcul delta vs avant-guerre (69$)
   const delta = (((v - 69) / 69) * 100).toFixed(1);
-  setV('brent-live-delta', `▲ +${delta}% vs pré-guerre`);
+  const signe = v > 69 ? '▲ +' : '▼ ';
+  setV('brent-live-delta', `${signe}${delta}% vs pré-guerre`);
+  // Couleur dynamique selon niveau
+  const el = document.getElementById('brent-live-val');
+  if(el) {
+    el.style.color = v > 100 ? 'var(--red)' : v > 80 ? 'var(--orange)' : 'var(--green)';
+  }
+  // Horodatage de dernière mise à jour
+  const now = new Date();
+  const hm = now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  const freshEl = document.getElementById('news-freshness-txt');
+  if(freshEl) freshEl.textContent = `Brent mis à jour ${hm} · GDELT · EIA · Forex`;
   try { localStorage.setItem('ekb_brent', JSON.stringify({v,t:Date.now()})); } catch(e){}
 }
 
@@ -1320,28 +1391,33 @@ function updateBrentUI(brentVal) {
 const GDELT_QUERIES = [
   {
     zone:'MO', label:'MO', cls:'nz-mo',
-    q:'(Houthi OR "Bab al-Mandeb" OR "Strait Hormuz" OR Iran OR Israel) AND (oil OR energy OR shipping)',
+    q:'(Houthi OR "Bab al-Mandeb" OR "Strait of Hormuz" OR Iran OR Israel OR "Red Sea") AND (oil OR energy OR shipping OR war)',
     desc:'Moyen-Orient'
   },
   {
     zone:'EU', label:'EU', cls:'nz-eu',
-    q:'(Ukraine OR "Saudi Arabia" OR "drone defense") AND (energy OR Iran OR war)',
-    desc:'Europe / Golfe'
+    q:'(Ukraine OR Russia OR "Saudi Arabia" OR drone OR NATO) AND (energy OR oil OR war OR economy)',
+    desc:'Europe / Russie'
   },
   {
     zone:'AF', label:'AF', cls:'nz-af',
-    q:'(Africa OR "Cote d Ivoire" OR Nigeria OR Egypt OR Dangote) AND (energy OR oil OR economy)',
+    q:'("Cote d Ivoire" OR "Ivory Coast" OR Nigeria OR "West Africa" OR ECOWAS OR Dangote OR Egypt OR Ethiopia) AND (energy OR oil OR economy OR CIE OR electricity)',
     desc:'Afrique'
   },
   {
     zone:'AS', label:'AS', cls:'nz-as',
-    q:'(Asia OR China OR India OR Pakistan) AND (Iran OR energy OR oil OR shipping)',
+    q:'(China OR India OR Pakistan OR Asia) AND (Iran OR energy OR oil OR shipping OR strait)',
     desc:'Asie'
   },
   {
     zone:'AM', label:'AM', cls:'nz-am',
-    q:'(America OR "United States" OR Trump) AND (Iran OR oil OR energy OR war)',
-    desc:'Amérique'
+    q:'("United States" OR Trump OR America OR "Federal Reserve") AND (Iran OR oil OR energy OR economy OR tariff)',
+    desc:'Amériques'
+  },
+  {
+    zone:'EN', label:'ÉN', cls:'nz-en',
+    q:'(oil OR "crude oil" OR "natural gas" OR LNG OR "energy crisis" OR "solar energy" OR renewable) AND (price OR market OR Africa OR supply)',
+    desc:'Énergie'
   }
 ];
 
@@ -1384,12 +1460,68 @@ function timeAgo(dateStr) {
   } catch(e) { return ''; }
 }
 
-async function fetchOneGdelt(query) {
-  // GDELT DOC API — gratuite, sans clé, CORS ouvert
-  const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(query)}&mode=ArtList&maxrecords=5&format=json&timespan=12h&sort=DateDesc`;
-  const r = await fetch(url, {signal: AbortSignal.timeout(10000)});
+// ══ SOURCES PREMIUM PRIORITAIRES ══
+// GDELT indexe ces médias — on filtre par domaine pour les prioriser
+const SOURCES_PREMIUM = {
+  'france24.com':     {label:'France 24',   logo:'🇫🇷', prio:5},
+  'cnn.com':          {label:'CNN',          logo:'🇺🇸', prio:5},
+  'africa24.com':     {label:'Africa 24',   logo:'🌍', prio:5},
+  'aljazeera.com':    {label:'Al Jazeera',  logo:'🇶🇦', prio:5},
+  'africanews.com':   {label:'Africanews',  logo:'🌍', prio:5},
+  'business24.tv':    {label:'Business 24', logo:'📊', prio:5},
+  'cnbcafrica.com':   {label:'CNBC Africa', logo:'📈', prio:5},
+  'bbc.com':          {label:'BBC News',    logo:'🇬🇧', prio:5},
+  'bbc.co.uk':        {label:'BBC News',    logo:'🇬🇧', prio:5},
+  // Sources secondaires fiables
+  'reuters.com':      {label:'Reuters',     logo:'📰', prio:4},
+  'bloomberg.com':    {label:'Bloomberg',   logo:'📊', prio:4},
+  'apnews.com':       {label:'AP News',     logo:'📰', prio:4},
+  'ft.com':           {label:'Financial Times', logo:'📰', prio:3},
+  'lemonde.fr':       {label:'Le Monde',    logo:'🇫🇷', prio:3},
+  'rfi.fr':           {label:'RFI',         logo:'📻', prio:4},
+  'voafrica.com':     {label:'VOA Africa',  logo:'📻', prio:3},
+};
+
+function getSourceInfo(article) {
+  const domain = (article.domain || '').toLowerCase().replace('www.','');
+  for(const [d, info] of Object.entries(SOURCES_PREMIUM)) {
+    if(domain.includes(d.replace('www.',''))) return {domain:d, ...info};
+  }
+  // Source inconnue — extraire un label propre
+  const parts = domain.split('.');
+  return {label: parts[0].toUpperCase().slice(0,10), logo:'📄', prio:1};
+}
+
+// Requête GDELT avec filtre sources premium
+async function fetchOneGdelt(query, sourceDomains = null) {
+  // GDELT DOC API — gratuite, sans clé, CORS ouvert, mise à jour toutes les 15 min
+  let q = query;
+  // Si on passe des domaines spécifiques, GDELT supporte sourcedomain:
+  if(sourceDomains && sourceDomains.length > 0) {
+    const srcFilter = sourceDomains.map(d => `sourcedomain:${d}`).join(' OR ');
+    q = `(${query}) AND (${srcFilter})`;
+  }
+  const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(q)}&mode=ArtList&maxrecords=8&format=json&timespan=10min&sort=DateDesc`;
+  const r = await fetch(url, {signal: AbortSignal.timeout(12000)});
   const d = await r.json();
   return d.articles || [];
+}
+
+// Requête dédiée pour les sources premium (sans filtre thématique strict)
+async function fetchPremiumSources(zone, themeQuery) {
+  const PREMIUM_DOMAINS = [
+    'france24.com', 'cnn.com', 'africa24.com', 'aljazeera.com',
+    'africanews.com', 'business24.tv', 'cnbcafrica.com', 'bbc.com',
+    'bbc.co.uk', 'reuters.com', 'bloomberg.com', 'rfi.fr'
+  ];
+  // On fait 2 requêtes : thème général + thème CI/Afrique sur sources premium
+  const srcFilter = PREMIUM_DOMAINS.slice(0,6).map(d => `sourcedomain:${d}`).join(' OR ');
+  const url = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(themeQuery + ' AND (' + srcFilter + ')')}&mode=ArtList&maxrecords=10&format=json&timespan=10min&sort=DateDesc`;
+  try {
+    const r = await fetch(url, {signal: AbortSignal.timeout(12000)});
+    const d = await r.json();
+    return (d.articles || []).map(a => ({...a, _zone: zone, _premium: true}));
+  } catch(e) { return []; }
 }
 
 let lastNewsTimestamp = null;
@@ -1400,69 +1532,111 @@ async function fetchNewsLive() {
   const status = document.getElementById('news-status');
   const btn = document.getElementById('news-refresh-btn');
 
-  if(status) status.textContent = '⏳ Connexion GDELT...';
+  if(status) status.textContent = '⏳ France24 · CNN · Al Jazeera · BBC...';
   if(btn) btn.textContent = '⏳';
 
   try {
-    // Lancement de toutes les requêtes en parallèle
-    const results = await Promise.allSettled(
-      GDELT_QUERIES.map(q => fetchOneGdelt(q.q).then(arts => ({...q, articles: arts})))
-    );
+    // ── REQUÊTES PARALLÈLES : zones géographiques + sources premium ──
+    const [zoneResults, premiumMO, premiumAF] = await Promise.allSettled([
+      // Zones thématiques classiques
+      Promise.allSettled(
+        GDELT_QUERIES.map(q => fetchOneGdelt(q.q).then(arts => ({...q, articles: arts})))
+      ),
+      // Sources premium — Moyen-Orient / énergie
+      fetchPremiumSources('MO', '(Iran OR Houthi OR oil OR energy OR "Strait of Hormuz" OR "Red Sea")'),
+      // Sources premium — Afrique / économie
+      fetchPremiumSources('AF', '("Ivory Coast" OR "Cote d Ivoire" OR Africa OR Nigeria OR Dangote OR economy OR energy)')
+    ]);
 
-    // Agrégation et scoring
     let allArticles = [];
-    results.forEach(r => {
-      if(r.status === 'fulfilled' && r.value.articles?.length) {
-        r.value.articles.forEach(art => {
-          const score = calcImpactScore(art, r.value.zone);
+
+    // Agrégation des requêtes par zone
+    if(zoneResults.status === 'fulfilled') {
+      zoneResults.value.forEach(r => {
+        if(r.status === 'fulfilled' && r.value.articles?.length) {
+          r.value.articles.forEach(art => {
+            const score = calcImpactScore(art, r.value.zone);
+            allArticles.push({
+              ...art,
+              zone: r.value.zone,
+              zoneCls: r.value.cls,
+              zoneDesc: r.value.desc,
+              score,
+              _premium: false
+            });
+          });
+        }
+      });
+    }
+
+    // Intégration des articles sources premium (France24, CNN, Al Jazeera, BBC, etc.)
+    [premiumMO, premiumAF].forEach((res, i) => {
+      if(res.status === 'fulfilled' && Array.isArray(res.value)) {
+        res.value.forEach(art => {
+          const srcInfo = getSourceInfo(art);
+          const zone = art._zone || (i === 0 ? 'MO' : 'AF');
+          const zoneCls = zone === 'MO' ? 'nz-mo' : 'nz-af';
+          // Score boosté pour sources premium
+          const baseScore = calcImpactScore(art, zone);
+          const premiumBoost = srcInfo.prio >= 4 ? 30 : srcInfo.prio >= 3 ? 15 : 0;
           allArticles.push({
             ...art,
-            zone: r.value.zone,
-            zoneCls: r.value.cls,
-            zoneDesc: r.value.desc,
-            score
+            zone, zoneCls,
+            zoneDesc: srcInfo.label,
+            score: Math.min(baseScore + premiumBoost, 100),
+            _premium: true,
+            _srcInfo: srcInfo
           });
         });
       }
     });
 
-    // Dédoublonnage par titre (garder le plus haut score)
+    // Dédoublonnage par titre
     const seen = new Set();
     allArticles = allArticles.filter(a => {
-      const key = (a.title||'').slice(0,40);
+      const key = (a.title||'').toLowerCase().slice(0,50);
       if(seen.has(key)) return false;
       seen.add(key);
       return true;
     });
 
-    // Tri par score décroissant
-    allArticles.sort((a,b) => b.score - a.score);
-    const top = allArticles.slice(0, 12);
+    // Tri : premium + score décroissant
+    allArticles.sort((a,b) => {
+      // Premium en priorité si même score
+      if(a._premium && !b._premium && a.score >= b.score - 15) return -1;
+      if(!a._premium && b._premium && b.score >= a.score - 15) return 1;
+      return b.score - a.score;
+    });
 
-    // ── LOGIQUE DE PERTINENCE : montrer en tête si plus impactant ──
+    const top = allArticles.slice(0, 15);
+
+    // Signal en tête
     if(top.length > 0 && top[0].score > currentTopSignalScore) {
       currentTopSignalScore = top[0].score;
       promoteTopSignal(top[0]);
     }
 
-    // Rendu HTML
+    // ── RENDU HTML AVEC BADGE SOURCE ──
     if(feed) {
       if(top.length === 0) {
-        feed.innerHTML = '<div style="font-size:11px;color:var(--txt3);padding:8px 0">Aucun article récent — données en cache utilisées</div>';
+        feed.innerHTML = '<div style="font-size:11px;color:var(--txt3);padding:8px 0">Chargement sources premium... Veuillez patienter.</div>';
       } else {
         feed.innerHTML = top.map(a => {
           const imp = impactLabel(a.score);
           const age = timeAgo(a.seendate||a.dateadded||'');
-          const src = (a.domain||a.sourcecountry||'Source').replace('www.','').split('.')[0].toUpperCase().slice(0,12);
+          const srcInfo = a._srcInfo || getSourceInfo(a);
+          const isPremium = a._premium || srcInfo.prio >= 4;
+          const srcLabel = srcInfo.label || (a.domain||'').replace('www.','').split('.')[0].toUpperCase().slice(0,10);
+          const srcLogo = srcInfo.logo || '📰';
           return `
-<div class="news-item" onclick="window.open('${a.url||'#'}','_blank')">
+<div class="news-item${isPremium?' premium-item':''}" onclick="window.open('${(a.url||'#').replace(/'/g,"\'")}','_blank')" title="${srcLabel}">
   <div class="ni-zone ${a.zoneCls}">${a.zone}</div>
   <div class="ni-body">
-    <div class="ni-title">${(a.title||'').slice(0,90)}${(a.title||'').length>90?'…':''}</div>
+    <div class="ni-title">${(a.title||'').slice(0,95)}${(a.title||'').length>95?'…':''}</div>
     <div class="ni-meta">
       <span class="ni-impact ${imp.cls}">${imp.txt}</span>
-      <span class="ni-src">${src}</span>
-      ${age ? `<span class="ni-age">il y a ${age}</span>` : ''}
+      <span class="ni-src${isPremium?' ni-src-premium':''}">${srcLogo} ${srcLabel}</span>
+      ${age ? `<span class="ni-age">${age}</span>` : ''}
     </div>
   </div>
 </div>`;
@@ -1472,21 +1646,21 @@ async function fetchNewsLive() {
 
     lastNewsTimestamp = new Date();
     const hm = lastNewsTimestamp.getHours().toString().padStart(2,'0')+':'+lastNewsTimestamp.getMinutes().toString().padStart(2,'0');
-    if(status) status.textContent = `✅ GDELT live · ${top.length} articles · ${hm}`;
-    setV('news-freshness-txt', `GDELT live · ${top.length} articles chargés`);
+    const premiumCount = top.filter(a => a._premium || (a._srcInfo?.prio||0) >= 4).length;
+    if(status) status.textContent = `✅ ${top.length} articles · ${premiumCount} sources premium · ${hm}`;
+    setV('news-freshness-txt', `France24 · CNN · Al Jazeera · BBC · Africa24 · ${hm}`);
     if(btn) btn.textContent = '↻ Live';
 
-    // Cache de secours
     try { localStorage.setItem('ekb_news_cache', JSON.stringify({articles:top, t:Date.now()})); } catch(e){}
 
   } catch(e) {
-    // Fallback cache
     try {
       const c = JSON.parse(localStorage.getItem('ekb_news_cache')||'null');
       if(c?.articles?.length && feed) {
         feed.innerHTML = c.articles.slice(0,8).map(a => {
           const imp = impactLabel(a.score||0);
-          return `<div class="news-item"><div class="ni-zone ${a.zoneCls||'nz-mo'}">${a.zone||'?'}</div><div class="ni-body"><div class="ni-title">${(a.title||'').slice(0,90)}</div><div class="ni-meta"><span class="ni-impact ${imp.cls}">${imp.txt}</span><span class="ni-src">CACHE</span></div></div></div>`;
+          const srcInfo = a._srcInfo || getSourceInfo(a);
+          return `<div class="news-item"><div class="ni-zone ${a.zoneCls||'nz-mo'}">${a.zone||'?'}</div><div class="ni-body"><div class="ni-title">${(a.title||'').slice(0,90)}</div><div class="ni-meta"><span class="ni-impact ${imp.cls}">${imp.txt}</span><span class="ni-src">${srcInfo.logo||'📰'} ${srcInfo.label||'Cache'}</span></div></div></div>`;
         }).join('');
       } else if(feed) {
         feed.innerHTML = renderFallbackNews();
@@ -1596,7 +1770,7 @@ function getStaticData() {
     sources_actives: 46,
     derniere_maj: new Date().toISOString(),
     marches: {
-      brent: 114.64, brent_delta: 42,
+      brent: 114.64, brent_delta: 42, // Mis à jour dynamiquement par fetchEIABrent()
       wti: 108.3, gnl_ttf: 62.4,
       usd_xof: 622,
       fao_index: 126.2, fao_delta: 2.1,
