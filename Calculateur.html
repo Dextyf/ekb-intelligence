@@ -223,6 +223,8 @@ input[type=number]{text-align:right}
   <div class="step-hd"><div class="step-num">1</div><div class="step-ttl">Paramètres tarifaires</div></div>
   <div class="tariff-row"><span class="tariff-lbl">Tarif CIE actuel (référence : 87 FCFA/kWh · hausse +27% annoncée)</span><div class="tinput-wrap"><input type="number" id="tarifCIE" value="87" min="50" max="400" step="1"><span>FCFA/kWh</span></div></div>
   <div class="tariff-row"><span class="tariff-lbl">Votre facture CIE mensuelle actuelle (optionnel)</span><div class="tinput-wrap"><input type="number" id="facture" value="0" min="0" step="500"><span>FCFA/mois</span></div></div>
+  <div class="tariff-row"><span class="tariff-lbl">Puissance du compteur (ampères)</span><div class="tinput-wrap"><select id="ampere" style="background:transparent;border:none;color:var(--txt);font-family:'Inter',sans-serif;font-size:.88rem;outline:none;width:90px"><option value="5">5 A</option><option value="10">10 A</option><option value="15" selected>15 A</option><option value="20">20 A</option></select></div></div>
+  <div class="tariff-row"><span class="tariff-lbl">Type de prospect</span><div class="tinput-wrap"><select id="typeProspect" style="background:transparent;border:none;color:var(--txt);font-family:'Inter',sans-serif;font-size:.88rem;outline:none;width:120px"><option value="Ménage" selected>Ménage</option><option value="PME">PME</option></select></div></div>
 </div>
 
 <div class="card">
@@ -249,6 +251,27 @@ input[type=number]{text-align:right}
   <div class="app-hdrs"><div class="app-hc" style="text-align:left">Appareil</div><div class="app-hc">Watts</div><div class="app-hc">Qté</div><div class="app-hc">H/jour</div><div></div></div>
   <div class="app-list" id="app-list"></div>
   <button class="btn-add" onclick="addApp()"><svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 1v11M1 6.5h11"/></svg>Ajouter un appareil</button>
+  <div id="totaux-bloc" style="display:none;margin-top:1rem;background:rgba(27,127,79,0.08);border:1px solid rgba(27,127,79,0.25);border-radius:10px;overflow:hidden">
+    <div style="background:rgba(27,127,79,0.14);padding:.55rem 1rem;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--vert);font-weight:600">Synthèse de consommation</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;border-top:1px solid rgba(27,127,79,0.15)">
+      <div style="padding:.65rem .8rem;border-right:1px solid rgba(27,127,79,0.12)">
+        <div style="font-size:.63rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Appareils</div>
+        <div id="tot-nb" style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--or)">0</div>
+      </div>
+      <div style="padding:.65rem .8rem;border-right:1px solid rgba(27,127,79,0.12)">
+        <div style="font-size:.63rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Puissance totale</div>
+        <div id="tot-w" style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--or)">0 W</div>
+      </div>
+      <div style="padding:.65rem .8rem;border-right:1px solid rgba(27,127,79,0.12)">
+        <div style="font-size:.63rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Wh/jour brut</div>
+        <div id="tot-wh" style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--or)">0 Wh</div>
+      </div>
+      <div style="padding:.65rem .8rem">
+        <div style="font-size:.63rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">kWh/j (+25% pertes)</div>
+        <div id="tot-kwh" style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#5de0a0">0 kWh</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="card">
@@ -417,18 +440,41 @@ const PACKS=[
   {id:11,name:"PRO",                panels:"24×600W", battery:150, inverter:16, comfort:"10 Clim",  price:15100000,deposit_pct:35,months:28,autonomy:"~25h",  minKwh:55,  maxKwh:9999,priority:false},
 ];
 const PHONE='2250711771097';
-let mode='INST',appN=0,_pack=null,_pr=null,_payMode='';
+let mode='INST',appN=0,_pack=null,_pr=null,_payMode='',_ampereG='15A',_typeProspectG='Ménage';
 
 document.addEventListener('DOMContentLoaded',()=>{ap('Réfrigérateur',150,1,24);ap('Télévision LED',80,1,6);ap('Ampoule LED',10,6,8);ap('Ventilateur',60,2,10);});
 
 function addApp(n='',w='',q=1,h=''){
   appN++;const id=appN;
   const d=document.createElement('div');d.className='app-row';d.id='ar'+id;
-  d.innerHTML=`<input type="text" value="${n}" placeholder="ex: Frigo" id="an${id}"><input type="number" value="${w}" placeholder="W" min="1" step="1" id="aw${id}"><input type="number" value="${q}" placeholder="1" min="1" max="99" step="1" id="aq${id}"><input type="number" value="${h}" placeholder="H" min="0.1" max="24" step="0.5" id="ah${id}"><button class="btn-del" onclick="delApp(${id})">×</button>`;
+  d.innerHTML=`<input type="text" value="${n}" placeholder="ex: Frigo" id="an${id}"><input type="number" value="${w}" placeholder="W" min="1" step="1" id="aw${id}" oninput="updateTotaux()"><input type="number" value="${q}" placeholder="1" min="1" max="99" step="1" id="aq${id}" oninput="updateTotaux()"><input type="number" value="${h}" placeholder="H" min="0.1" max="24" step="0.5" id="ah${id}" oninput="updateTotaux()"><button class="btn-del" onclick="delApp(${id})">×</button>`;
   document.getElementById('app-list').appendChild(d);
+  updateTotaux();
 }
 function ap(n,w,q,h){addApp(n,w,q,h);}
-function delApp(id){const e=document.getElementById('ar'+id);if(e){e.style.cssText='opacity:0;transform:translateX(14px);transition:all .2s';setTimeout(()=>e.remove(),200);}}
+function delApp(id){const e=document.getElementById('ar'+id);if(e){e.style.cssText='opacity:0;transform:translateX(14px);transition:all .2s';setTimeout(()=>{e.remove();updateTotaux();},200);}}
+function updateTotaux(){
+  const rows=document.querySelectorAll('#app-list .app-row');
+  let nb=0,totalW=0,totalWh=0;
+  rows.forEach(r=>{
+    const id=r.id.replace('ar','');
+    const w=parseFloat(document.getElementById('aw'+id)?.value)||0;
+    const q=parseFloat(document.getElementById('aq'+id)?.value)||1;
+    const h=parseFloat(document.getElementById('ah'+id)?.value)||0;
+    if(w>0){nb++;totalW+=w*q;totalWh+=w*q*h;}
+  });
+  const kwhPerDay=(totalWh*1.25)/1000;
+  const bloc=document.getElementById('totaux-bloc');
+  if(nb>0){
+    bloc.style.display='block';
+    document.getElementById('tot-nb').textContent=nb+' appareil'+(nb>1?'s':'');
+    document.getElementById('tot-w').textContent=totalW.toLocaleString('fr-FR')+' W';
+    document.getElementById('tot-wh').textContent=totalWh.toLocaleString('fr-FR')+' Wh';
+    document.getElementById('tot-kwh').textContent=kwhPerDay.toFixed(2)+' kWh';
+  } else {
+    bloc.style.display='none';
+  }
+}
 function setMode(m){
   mode=m;
   document.getElementById('tab-i').classList.toggle('active',m==='INST');
@@ -459,11 +505,13 @@ function calc(){
   if(!apps.length){alert('Veuillez saisir au moins un appareil.');return;}
   const tarif=parseFloat(document.getElementById('tarifCIE').value)||87;
   const factS=parseFloat(document.getElementById('facture').value)||0;
+  const _ampere=document.getElementById('ampere').value+'A';
+  const _typeProspect=document.getElementById('typeProspect').value;
   const kwh=calcKwh(apps);
   const billMo=factS>0?factS:Math.round(kwh*30*tarif);
   const pack=recoPack(kwh);
   const pr=pricing(pack);
-  _pack=pack;_pr=pr;
+  _pack=pack;_pr=pr;_ampereG=_ampere;_typeProspectG=_typeProspect;
   const gainP2=billMo;
   const gainP1=billMo-(mode==='INST'?pr.monthly:0);
   let cumul=0,roi=null;
@@ -550,6 +598,8 @@ function openWhatsapp(e){
 
 🏦 *DEMANDE DE SOUSCRIPTION — PAIEMENT CASH*
 
+🏠 *Type prospect :* ${_typeProspectG} | ⚡ *Compteur :* ${_ampereG}
+
 ☀️ *Pack choisi :* ${_pack.name}
 💰 *Prix TTC (remise −15%) :* ${fmt(_pr.final)}
 🔋 *Batterie :* ${_pack.battery} kWh | ⚡ *Onduleur :* ${_pack.inverter} kVA
@@ -605,7 +655,7 @@ function submitForm(){
   const note=document.getElementById('fNote').value.trim();
   const waTxt=
     `🌞 *NOUVELLE RÉSERVATION SUNWAVE HYBRID*\n\nRéf : *${ref}* · ${date}\n\n`+
-    `👤 *Client :* ${prenom} ${nom}\n📞 *Téléphone :* ${tel}\n📍 *Localité :* ${ville} — ${type}\n\n`+
+    `👤 *Client :* ${prenom} ${nom}\n📞 *Téléphone :* ${tel}\n📍 *Localité :* ${ville} — ${type}\n🏠 *Type prospect :* ${_typeProspectG} | ⚡ *Compteur :* ${_ampereG}\n\n`+
     `☀️ *Pack réservé :* ${_pack.name}\n💰 *Prix TTC :* ${fmt(_pr.final)}\n`+
     `💳 *Acompte 35% :* ${fmt(_pr.deposit)}\n📅 *Mode PAYGO :* ${mode==='CASH'?'Cash intégral':fmt(_pr.monthly)+' / 28 mois'}\n`+
     `💳 *Paiement :* ${_payMode}\n`+
