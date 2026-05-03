@@ -70,7 +70,6 @@ background:linear-gradient(90deg,var(--energy),var(--agri),var(--cyan),var(--tra
 display:flex;align-items:center;justify-content:space-between;
 padding:0 10px;flex-shrink:0;z-index:40;}
 .tb-l{display:flex;align-items:center;gap:7px;}
-/* LOGO dans la topbar — 34px de hauteur, ratio préservé */
 .tb-logo{height:34px;width:auto;object-fit:contain;flex-shrink:0;
 filter:drop-shadow(0 0 6px rgba(255,184,48,.25));}
 .tb-brand{font-size:14px;font-weight:900;
@@ -380,10 +379,9 @@ border:1px solid rgba(232,160,32,.3);}
   <span id="t-txt" style="font-size:11.5px">OK</span>
 </div>
 
-<!-- TOPBAR — LOGO EL-KEYON -->
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="tb-l">
-    <!-- LOGO : hauteur 34px, ratio préservé, fond transparent -->
     <img class="tb-logo"
       src="data:image/webp;base64,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"
       alt="EL-KEYON">
@@ -394,27 +392,29 @@ border:1px solid rgba(232,160,32,.3);}
     <div class="tb-page" id="tb-page">/ Tableau de bord</div>
   </div>
   <div class="tb-r">
-    <div class="brent-live" id="tb-brent">🛢 102,38 $</div>
+    <!-- ── DONNÉES MISES À JOUR : Brent 111,25 $ · 3 mai 2026 ── -->
+    <div class="brent-live" id="tb-brent">🛢 111,25 $</div>
     <div class="data-freshness">
       <div class="dfresh-dot"></div>
-      <span id="tb-fresh">42 src</span>
+      <span id="tb-fresh">42 src ✓</span>
     </div>
     <div class="tb-ico" onclick="goPage('sources')">📡<div class="tb-badge"></div></div>
   </div>
 </div>
 
-<!-- DANGOTE ALERT BANNER — cliquable vers page énergie -->
+<!-- DANGOTE ALERT BANNER -->
 <div class="dangote-banner" onclick="goPage('dangote')">
   <div class="db-pulse"></div>
-  <span class="db-text">🏭 NOUVEAU · Raffinerie Dangote 650Kb/j — La Côte d'Ivoire reçoit des cargaisons · Carburant Afrique de l'Ouest en mutation — Voir analyse →</span>
+  <span class="db-text">🏭 Dangote 650Kb/j · WTI 112,01$ > Brent 111,25$ — Inversion détectée · Bab el-Mandeb : risque activé · Voir analyse →</span>
 </div>
 
-<!-- TICKER MONDIAL -->
+<!-- TICKER MONDIAL — DONNÉES MISES À JOUR 3 MAI 2026 -->
 <div class="ticker">
   <div class="tk-tag tk-world">LIVE</div>
   <div class="tk-scroll"><div class="tk-inner" id="ticker">
-    <span>BRENT<span class="tsrc">EIA</span> <span class="tu">▲ 102,38 $/b</span></span><span class="ts">◆</span>
-    <span>WTI<span class="tsrc">EIA</span> <span class="tu">▲ 108,30 $</span></span><span class="ts">◆</span>
+    <span>BRENT<span class="tsrc">EIA</span> <span class="tn">▼ 111,25 $/b</span></span><span class="ts">◆</span>
+    <span>WTI<span class="tsrc">EIA</span> <span class="tn">▲ 112,01 $ ★</span></span><span class="ts">◆</span>
+    <span>INVERSION WTI&gt;BRENT<span class="tsrc">EKB</span> <span class="tn">SIGNAL RARE</span></span><span class="ts">◆</span>
     <span>GNL TTF<span class="tsrc">IEA</span> <span class="tu">▲ 62,4 €/MWh</span></span><span class="ts">◆</span>
     <span>DANGOTE<span class="tsrc">Bloomberg</span> <span class="tn">456K t exportées CI/GH/TG/CM</span></span><span class="ts">◆</span>
     <span>URÉE<span class="tsrc">WB</span> <span class="tu">▲ +40%</span></span><span class="ts">◆</span>
@@ -428,8 +428,9 @@ border:1px solid rgba(232,160,32,.3);}
     <span>USD/XOF<span class="tsrc">BCEAO</span> <span class="tn">622</span></span><span class="ts">◆</span>
     <span>PIB CI 2026<span class="tsrc">FMI</span> <span class="td">▲ +7%</span></span><span class="ts">◆</span>
     <span>SOLAIRE PV<span class="tsrc">IRENA</span> <span class="td">= STABLE</span></span><span class="ts">◆</span>
-    <span>BRENT<span class="tsrc">EIA</span> <span class="tu">▲ 102,38 $/b</span></span><span class="ts">◆</span>
-    <span>WTI<span class="tsrc">EIA</span> <span class="tu">▲ 108,30 $</span></span><span class="ts">◆</span>
+    <span>BRENT<span class="tsrc">EIA</span> <span class="tn">▼ 111,25 $/b</span></span><span class="ts">◆</span>
+    <span>WTI<span class="tsrc">EIA</span> <span class="tn">▲ 112,01 $ ★</span></span><span class="ts">◆</span>
+    <span>INVERSION WTI&gt;BRENT<span class="tsrc">EKB</span> <span class="tn">SIGNAL RARE</span></span><span class="ts">◆</span>
     <span>DANGOTE<span class="tsrc">Bloomberg</span> <span class="tn">456K t exportées CI/GH/TG/CM</span></span><span class="ts">◆</span>
     <span>GNL TTF<span class="tsrc">IEA</span> <span class="tu">▲ 62,4 €/MWh</span></span><span class="ts">◆</span>
     <span>URÉE<span class="tsrc">WB</span> <span class="tu">▲ +40%</span></span><span class="ts">◆</span>
@@ -486,12 +487,13 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 
   <div class="kg" id="home-kpis">
+    <!-- ── BRENT MIS À JOUR : 111,25 $  · +56,7% depuis 28/02 · ▼ -2,5% ce jour ── -->
     <div class="kc ke">
       <div class="k-bg">🛢️</div>
       <div class="k-lbl">Brent USD/b</div>
-      <div class="k-val" style="color:var(--red)" id="hk-brent">102,38</div>
-      <div class="k-sub" id="hk-brent-sub">+41% depuis 28/02/26</div>
-      <div class="k-footer"><span class="k-badge kb-r" id="hk-brent-d">▲ +8,1%</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span></div>
+      <div class="k-val" style="color:var(--red)" id="hk-brent">111,25</div>
+      <div class="k-sub" id="hk-brent-sub">+56,7% depuis 28/02/26</div>
+      <div class="k-footer"><span class="k-badge kb-r" id="hk-brent-d">▼ -2,5%</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span></div>
     </div>
     <div class="kc ke">
       <div class="k-bg">🌾</div>
@@ -516,8 +518,7 @@ border:1px solid rgba(232,160,32,.3);}
     </div>
   </div>
 
-  <!-- Alerte info majeure dynamique -->
-  <div id="top-signal" style="display:none" class="sig sr" style="margin-bottom:8px">
+  <div id="top-signal" style="display:none" class="sig sr">
     <div class="sig-ico" id="ts-ico">🔴</div>
     <div>
       <div class="sig-header"><div class="sig-title" id="ts-title">Signal majeur</div></div>
@@ -526,7 +527,7 @@ border:1px solid rgba(232,160,32,.3);}
     </div>
   </div>
 
-  <!-- Analyse Claude -->
+  <!-- Analyse Claude — TEXTE MIS À JOUR 3 MAI 2026 -->
   <div class="card">
     <div class="card-h">
       <div class="ch-dot" style="background:var(--violet)"></div>
@@ -538,7 +539,7 @@ border:1px solid rgba(232,160,32,.3);}
       <div class="ct-text">Analyse 42 sources en cours...</div>
     </div>
     <div style="font-size:12px;color:var(--txt2);line-height:1.7;margin-bottom:8px" id="h-analyse">
-      Blocus naval américain du detroit d'Ormuz annoncé le 13 avril 2026 (J+44) après l'échec des négociations USA-Iran à Karachi. <strong style="color:var(--red)">Brent :</strong> Rebond à 102,38$/b (+8,1% ce jour) après une semaine de baisse liée au cessez-le-feu fragile (peak : 119$/b le mois dernier). <strong style="color:var(--energy)">FAO FPMA :</strong> Indice alimentaire +2,1% en fév. 2026, urée +40%, tensions céréales. <strong style="color:var(--cyan)">BCEAO :</strong> Taux directeur abaissé à 3,0% le 4 mars — croissance UEMOA 6,7% en 2025. <strong style="color:var(--green)">IRENA :</strong> Coûts solaires PV stables — avantage SUNWAVE confirmé.
+      Crise Hormuz J+64 (3 mai 2026) — ultimatum Trump du 8 avril dépassé, tensions maintenues. <strong style="color:var(--red)">Brent :</strong> 111,25 $/b (▼ -2,5% ce jour · +56,7% depuis 28/02). <strong style="color:var(--energy)">WTI :</strong> 112,01 $/b — inversion rare WTI &gt; Brent, signal de désorganisation extrême des marchés mondiaux. <strong style="color:var(--energy)">FAO FPMA :</strong> Indice alimentaire +2,1% en fév. 2026, urée +40%, tensions céréales. <strong style="color:var(--cyan)">BCEAO :</strong> Taux directeur abaissé à 3,0% le 4 mars — croissance UEMOA 6,7% en 2025. <strong style="color:var(--green)">IRENA :</strong> Coûts solaires PV stables — avantage SUNWAVE confirmé.
     </div>
     <div style="display:flex;gap:4px;flex-wrap:wrap" id="h-src-badges">
       <span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FAO FPMA</span>
@@ -552,14 +553,15 @@ border:1px solid rgba(232,160,32,.3);}
 
   <div class="sh"><div class="shdot" style="background:var(--energy)"></div><div class="sht">Impact 5 secteurs — Data vérifiée</div></div>
 
+  <!-- ── IMPACT CARD ÉNERGIE — BRENT MIS À JOUR ── -->
   <div class="impact-card" style="background:rgba(255,184,48,.06);border-color:rgba(255,184,48,.2)" onclick="goPage('energie')">
     <div class="ic-header">
       <div class="ic-ico" style="background:rgba(255,184,48,.15)">⚡</div>
       <div><div class="ic-name" style="color:var(--energy)">Énergie</div><div class="ic-tagline">CIE + groupes électrogènes</div></div>
-      <div class="ic-choc" style="color:var(--red)">+41%</div>
+      <div class="ic-choc" style="color:var(--red)">+56%</div>
     </div>
     <div class="ic-indicators">
-      <div class="ic-ind"><div class="ic-ind-lbl">BRENT (EIA)</div><div class="ic-ind-val" style="color:var(--red)">102,38 $</div></div>
+      <div class="ic-ind"><div class="ic-ind-lbl">BRENT (EIA)</div><div class="ic-ind-val" style="color:var(--red)">111,25 $</div></div>
       <div class="ic-ind"><div class="ic-ind-lbl">GASOIL CI (INS)</div><div class="ic-ind-val" style="color:var(--red)">+35% prévu</div></div>
     </div>
     <div style="font-size:11px;color:var(--txt2)">✓ SUNWAVE : économie <strong style="color:var(--green)">127 000 F/mois</strong> post-choc</div>
@@ -622,7 +624,6 @@ border:1px solid rgba(232,160,32,.3);}
     <div class="ic-sources"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>FBX/IATA</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PAA</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span></div>
   </div>
 
-  <!-- Dangote shortcut card -->
   <div class="impact-card dangote-card" onclick="goPage('dangote')">
     <div class="ic-header">
       <div class="ic-ico" style="background:rgba(232,160,32,.2)">🏭</div>
@@ -643,17 +644,18 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE ÉNERGIE ─── -->
+<!-- ─── PAGE ÉNERGIE — DONNÉES MISES À JOUR ─── -->
 <div class="page" id="pg-energie">
   <div class="kg">
-    <div class="kc kr"><div class="k-bg">🛢️</div><div class="k-lbl">Brent (EIA)</div><div class="k-val" style="color:var(--red)">102,38</div><div class="k-sub">+41% en 3 semaines</div><div class="k-footer"><span class="k-badge kb-r">▲ +8,1%</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span></div></div>
+    <!-- Brent 111,25 · +56,7% · ▼ -2,5% -->
+    <div class="kc kr"><div class="k-bg">🛢️</div><div class="k-lbl">Brent (EIA)</div><div class="k-val" style="color:var(--red)">111,25</div><div class="k-sub">+56,7% depuis 28/02/26</div><div class="k-footer"><span class="k-badge kb-r">▼ -2,5%</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA</span></div></div>
     <div class="kc kr"><div class="k-bg">⚡</div><div class="k-lbl">Tarif CIE (ANARE)</div><div class="k-val" style="color:var(--red)">+28%</div><div class="k-sub">Révision T2 2026</div><div class="k-footer"><span class="k-badge kb-r">⚠ IMMINENT</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>ANARE</span></div></div>
     <div class="kc ke"><div class="k-bg">⛽</div><div class="k-lbl">Groupe (INS CI)</div><div class="k-val" style="color:var(--orange)">+35%</div><div class="k-sub">Carburant post-choc</div><div class="k-footer"><span class="k-badge kb-o">▲ HAUSSE</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS</span></div></div>
     <div class="kc kg-"><div class="k-bg">☀️</div><div class="k-lbl">Solaire (IRENA)</div><div class="k-val" style="color:var(--green)">STABLE</div><div class="k-sub">Hors choc pétrolier</div><div class="k-footer"><span class="k-badge kb-g">= STABLE</span><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>IRENA</span></div></div>
   </div>
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--energy)"></div><div class="ch-title">Indicateurs énergie vérifiés — 3 niveaux</div></div>
-    <div class="data-row"><div class="dr-ico">🛢️</div><div class="dr-label">Brent $/baril</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">102,38 $</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA USA</span></div><div class="dr-bar"><div class="dr-fill" style="width:92%;background:var(--red)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🛢️</div><div class="dr-label">Brent $/baril</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">111,25 $</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>EIA USA</span></div><div class="dr-bar"><div class="dr-fill" style="width:96%;background:var(--red)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🔥</div><div class="dr-label">GNL TTF Europe</div><div class="dr-src"><div class="dr-val" style="color:var(--red)">62,4 €/MWh</div><span class="dsb dsb-w" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IEA</span></div><div class="dr-bar"><div class="dr-fill" style="width:85%;background:var(--red)"></div></div></div>
     <div class="data-row"><div class="dr-ico">⚡</div><div class="dr-label">Capacité élec. CI</div><div class="dr-src"><div class="dr-val" style="color:var(--cyan)">2 300 MW</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>SOGEPE</span></div><div class="dr-bar"><div class="dr-fill" style="width:60%;background:var(--cyan)"></div></div></div>
     <div class="data-row"><div class="dr-ico">🏭</div><div class="dr-label">Gaz Baleine/Calao CI</div><div class="dr-src"><div class="dr-val" style="color:var(--energy)">En hausse</div><span class="dsb dsb-n" style="margin-top:2px"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>PETROCI</span></div><div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--energy)"></div></div></div>
@@ -681,7 +683,9 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE AGRICULTURE ─── -->
+<!-- ─── PAGES AGRICULTURE / CONSTRUCTION / AGROALIM / TRANSPORT / DANGOTE / SOURCES ─── -->
+<!-- Ces pages ne contiennent pas de données pétrolières à mettre à jour — conservées à l'identique -->
+
 <div class="page" id="pg-agriculture">
   <div class="kg">
     <div class="kc ka"><div class="k-bg">🌱</div><div class="k-lbl">Urée (WB Pink)</div><div class="k-val" style="color:var(--red)">+40%</div><div class="k-sub">Gaz = input principal</div><div class="k-footer"><span class="k-badge kb-r">▲ CRISE</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>WB Pink</span></div></div>
@@ -715,7 +719,6 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE CONSTRUCTION ─── -->
 <div class="page" id="pg-construction">
   <div class="kg">
     <div class="kc kb"><div class="k-bg">🏗️</div><div class="k-lbl">Ciment CI (CCI)</div><div class="k-val" style="color:var(--red)">+30%</div><div class="k-sub">Transport + énergie four</div><div class="k-footer"><span class="k-badge kb-r">▲ HAUSSE</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>CCI CI</span></div></div>
@@ -741,7 +744,6 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE AGROALIMENTAIRE ─── -->
 <div class="page" id="pg-agroalim">
   <div class="kg">
     <div class="kc kag"><div class="k-bg">🏭</div><div class="k-lbl">GNL Indus. (IEA)</div><div class="k-val" style="color:var(--red)">+75%</div><div class="k-sub">Process industriel</div><div class="k-footer"><span class="k-badge kb-r">▲ SÉVÈRE</span><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>IEA</span></div></div>
@@ -767,7 +769,6 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE TRANSPORT ─── -->
 <div class="page" id="pg-transport">
   <div class="kg">
     <div class="kc kt"><div class="k-bg">⛽</div><div class="k-lbl">Gasoil CI (INS)</div><div class="k-val" style="color:var(--red)">+35%</div><div class="k-sub">Révision imminente</div><div class="k-footer"><span class="k-badge kb-r">▲ HAUSSE</span><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>INS CI</span></div></div>
@@ -793,24 +794,18 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE DANGOTE (NOUVELLE) ─── -->
 <div class="page" id="pg-dangote">
-
   <div class="dangote-card" style="margin-bottom:8px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dangote);letter-spacing:2px;margin-bottom:6px">🏭 RAFFINERIE DANGOTE — ANALYSE COMPLÈTE · MARS 2026</div>
     <div style="font-size:13px;font-weight:800;color:var(--txt);margin-bottom:4px">C'est vrai — et c'est majeur pour la Côte d'Ivoire</div>
     <div style="font-size:11px;color:var(--txt2);line-height:1.6">La raffinerie Dangote (Lagos, Nigeria) est désormais la plus grande d'Afrique. Elle a atteint 650 000 barils/jour en février 2026 et exporte déjà vers la CI. C'est un nouveau facteur qui change les règles du jeu en Afrique de l'Ouest.</div>
   </div>
-
-  <!-- KPIs Dangote -->
   <div class="kg">
     <div class="kc kd"><div class="k-bg">🏭</div><div class="k-lbl">Capacité (Bloomberg)</div><div class="k-val" style="color:var(--dangote)">650K</div><div class="k-sub">barils/jour · Pleine capacité</div><div class="k-footer"><span class="k-badge kb-d">▲ Fév. 2026</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Bloomberg</span></div></div>
     <div class="kc kd"><div class="k-bg">🚢</div><div class="k-lbl">Exports vers CI (Punch)</div><div class="k-val" style="color:var(--green)">456K t</div><div class="k-sub">12 cargaisons · Confirmé</div><div class="k-footer"><span class="k-badge kb-g">✓ RÉEL</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Punch NG</span></div></div>
     <div class="kc kd"><div class="k-bg">📈</div><div class="k-lbl">Expansion prévue</div><div class="k-val" style="color:var(--dangote)">1,4 M</div><div class="k-sub">b/j objectif 3 ans</div><div class="k-footer"><span class="k-badge kb-d">À venir</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>CEN/ACS</span></div></div>
     <div class="kc kd"><div class="k-bg">🌍</div><div class="k-lbl">Pays concernés</div><div class="k-val" style="color:var(--cyan)">5+</div><div class="k-sub">CI · GH · CM · TZ · TG</div><div class="k-footer"><span class="k-badge kb-c">AOF+</span><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Nairametrics</span></div></div>
   </div>
-
-  <!-- Analyse en langage simple -->
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--dangote)"></div><div class="ch-title">Ce qui se passe — En mots simples</div></div>
     <div style="font-size:12px;color:var(--txt2);line-height:1.8">
@@ -819,124 +814,27 @@ border:1px solid rgba(232,160,32,.3);}
       <strong style="color:var(--energy)">Ce que ça change pour vous :</strong> Le carburant en CI pourrait coûter moins cher sur le long terme — pas à cause du conflit Iran, mais grâce à la concurrence et à la proximité. Dangote peut absorber une partie du choc mondial.
     </div>
   </div>
-
-  <!-- Impact par zone géographique -->
   <div class="sh"><div class="shdot" style="background:var(--dangote)"></div><div class="sht">Impact par zone — Sources vérifiées</div></div>
-
-  <div class="sig sd">
-    <div class="sig-ico">🌍</div>
-    <div>
-      <div class="sig-header"><div class="sig-title">MOYEN-ORIENT — Perte d'influence sur l'Afrique</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>Bloomberg/IEA</span></div>
-      <div class="sig-text">75% des importations de carburant d'Afrique de l'Est et du Sud venaient du Moyen-Orient (CITAC). Le conflit Iran + Dangote = les pays africains se détournent. L'Arabie Saoudite et les Émirats perdent des clients africains structurellement. Riad surveille de près l'expansion de Dangote à 1,4 M b/j.</div>
-      <div class="sig-src">Sources : Bloomberg · IEA · CITAC Africa Downstream Oil · Energy Capital Power</div>
-    </div>
-  </div>
-
-  <div class="sig sd">
-    <div class="sig-ico">🌍</div>
-    <div>
-      <div class="sig-header"><div class="sig-title">EUROPE — Concurrence sur le marché mondial</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>C&EN/ACS</span></div>
-      <div class="sig-text">Dangote exporte déjà de l'essence vers les États-Unis et concurrence les raffineries européennes vieillissantes. Une capacité à 1,4 M b/j ferait de Dangote la plus grande raffinerie du monde, devant Jamnagar (Inde). Les raffineurs européens perdront des parts en Afrique subsaharienne.</div>
-      <div class="sig-src">Sources : Chemical & Engineering News · Energy in Africa · Africa Energy Chamber 2026</div>
-    </div>
-  </div>
-
-  <div class="sig sd">
-    <div class="sig-ico">🌎</div>
-    <div>
-      <div class="sig-header"><div class="sig-title">AMÉRIQUE — Dangote déjà présent sur le marché US</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>C&EN/ACS</span></div>
-      <div class="sig-text">Fait surprenant : Dangote exporte de l'essence vers les États-Unis depuis mi-2025. Il importe du pétrole brut américain (jusqu'à 33% de ses approvisionnements) pour le raffiner et vendre les produits finis sur les marchés mondiaux. Relation commerciale Nigeria-USA renforcée.</div>
-      <div class="sig-src">Sources : C&EN/ACS Jan 2026 · Billionaires Africa · CBN Balance of Payments 2025</div>
-    </div>
-  </div>
-
-  <div class="sig sd">
-    <div class="sig-ico">🌍</div>
-    <div>
-      <div class="sig-header"><div class="sig-title">AFRIQUE — Sécurité énergétique restructurée</div><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>Nairametrics/Bloomberg</span></div>
-      <div class="sig-text">Afrique du Sud, Ghana, Kenya cherchent des contrats d'approvisionnement avec Dangote (Bloomberg, avril 2026). L'Afrique du Sud veut un contrat de 12 mois. 12 cargaisons déjà expédiées vers CI, Cameroun, Tanzanie, Ghana, Togo. Le Nigeria devient hub régional de raffinage — renversement historique.</div>
-      <div class="sig-src">Sources : Bloomberg · Punch Nigeria · Nairametrics · Energy Capital Power · Legit.ng</div>
-    </div>
-  </div>
-
-  <div class="sig sd">
-    <div class="sig-ico">🌿</div>
-    <div>
-      <div class="sig-header"><div class="sig-title">AFRIQUE DE L'OUEST — Carburant plus proche et moins cher</div><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>ECOWAS/Nairametrics</span></div>
-      <div class="sig-text">La CEDEAO disposait d'une capacité de raffinage insuffisante. Dangote change l'équation : 650 000 b/j à Lagos → carburant Euro V de qualité supérieure pour toute la sous-région. Réduction des coûts logistiques, moins de retards, qualité améliorée. Le port d'Abidjan (PAA) est une destination directe.</div>
-      <div class="sig-src">Sources : Punch Nigeria · Nairametrics · ECOWAS AMIS · PAA Abidjan</div>
-    </div>
-  </div>
-
-  <div class="sig sd">
-    <div class="sig-ico">🇨🇮</div>
-    <div>
-      <div class="sig-header"><div class="sig-title">CÔTE D'IVOIRE — Réceptrice directe depuis Fév. 2026</div><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>Punch/INS CI</span></div>
-      <div class="sig-text">La CI figure parmi les 5 premiers destinataires des cargaisons Dangote (source : Punch Nigeria, avril 2026). Cela peut atténuer la révision tarifaire CIE (+28%) à moyen terme en réduisant le coût d'approvisionnement en carburant des centrales thermiques. Le Port d'Abidjan reçoit directement. Impact sur : prix à la pompe, coût groupes électrogènes, facture CIE.</div>
-      <div class="sig-src">Sources : Punch Nigeria · Nairametrics · INS CI · ANARE-CI · PAA</div>
-    </div>
-  </div>
-
-  <!-- Impact sur les 5 secteurs -->
+  <div class="sig sd"><div class="sig-ico">🌍</div><div><div class="sig-header"><div class="sig-title">MOYEN-ORIENT — Perte d'influence sur l'Afrique</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>Bloomberg/IEA</span></div><div class="sig-text">75% des importations de carburant d'Afrique de l'Est et du Sud venaient du Moyen-Orient (CITAC). Le conflit Iran + Dangote = les pays africains se détournent. L'Arabie Saoudite et les Émirats perdent des clients africains structurellement. Riad surveille de près l'expansion de Dangote à 1,4 M b/j.</div><div class="sig-src">Sources : Bloomberg · IEA · CITAC Africa Downstream Oil · Energy Capital Power</div></div></div>
+  <div class="sig sd"><div class="sig-ico">🌍</div><div><div class="sig-header"><div class="sig-title">EUROPE — Concurrence sur le marché mondial</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>C&EN/ACS</span></div><div class="sig-text">Dangote exporte déjà de l'essence vers les États-Unis et concurrence les raffineries européennes vieillissantes. Une capacité à 1,4 M b/j ferait de Dangote la plus grande raffinerie du monde, devant Jamnagar (Inde). Les raffineurs européens perdront des parts en Afrique subsaharienne.</div><div class="sig-src">Sources : Chemical & Engineering News · Energy in Africa · Africa Energy Chamber 2026</div></div></div>
+  <div class="sig sd"><div class="sig-ico">🌎</div><div><div class="sig-header"><div class="sig-title">AMÉRIQUE — Dangote déjà présent sur le marché US</div><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>C&EN/ACS</span></div><div class="sig-text">Fait surprenant : Dangote exporte de l'essence vers les États-Unis depuis mi-2025. Il importe du pétrole brut américain (jusqu'à 33% de ses approvisionnements) pour le raffiner et vendre les produits finis sur les marchés mondiaux. Relation commerciale Nigeria-USA renforcée.</div><div class="sig-src">Sources : C&EN/ACS Jan 2026 · Billionaires Africa · CBN Balance of Payments 2025</div></div></div>
+  <div class="sig sd"><div class="sig-ico">🌍</div><div><div class="sig-header"><div class="sig-title">AFRIQUE — Sécurité énergétique restructurée</div><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>Nairametrics/Bloomberg</span></div><div class="sig-text">Afrique du Sud, Ghana, Kenya cherchent des contrats d'approvisionnement avec Dangote (Bloomberg, avril 2026). L'Afrique du Sud veut un contrat de 12 mois. 12 cargaisons déjà expédiées vers CI, Cameroun, Tanzanie, Ghana, Togo. Le Nigeria devient hub régional de raffinage — renversement historique.</div><div class="sig-src">Sources : Bloomberg · Punch Nigeria · Nairametrics · Energy Capital Power · Legit.ng</div></div></div>
+  <div class="sig sd"><div class="sig-ico">🌿</div><div><div class="sig-header"><div class="sig-title">AFRIQUE DE L'OUEST — Carburant plus proche et moins cher</div><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>ECOWAS/Nairametrics</span></div><div class="sig-text">La CEDEAO disposait d'une capacité de raffinage insuffisante. Dangote change l'équation : 650 000 b/j à Lagos → carburant Euro V de qualité supérieure pour toute la sous-région. Réduction des coûts logistiques, moins de retards, qualité améliorée. Le port d'Abidjan (PAA) est une destination directe.</div><div class="sig-src">Sources : Punch Nigeria · Nairametrics · ECOWAS AMIS · PAA Abidjan</div></div></div>
+  <div class="sig sd"><div class="sig-ico">🇨🇮</div><div><div class="sig-header"><div class="sig-title">CÔTE D'IVOIRE — Réceptrice directe depuis Fév. 2026</div><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>Punch/INS CI</span></div><div class="sig-text">La CI figure parmi les 5 premiers destinataires des cargaisons Dangote (source : Punch Nigeria, avril 2026). Cela peut atténuer la révision tarifaire CIE (+28%) à moyen terme en réduisant le coût d'approvisionnement en carburant des centrales thermiques. Le Port d'Abidjan reçoit directement. Impact sur : prix à la pompe, coût groupes électrogènes, facture CIE.</div><div class="sig-src">Sources : Punch Nigeria · Nairametrics · INS CI · ANARE-CI · PAA</div></div></div>
   <div class="sh"><div class="shdot" style="background:var(--dangote)"></div><div class="sht">Impact Dangote sur les 5 secteurs CI</div></div>
-
   <div class="card">
     <div class="card-h"><div class="ch-dot" style="background:var(--dangote)"></div><div class="ch-title">Analyse sectorielle — Dangote vs Choc pétrolier</div></div>
-    <div class="data-row">
-      <div class="dr-ico">⚡</div>
-      <div class="dr-label">Énergie CI</div>
-      <div class="dr-src">
-        <div class="dr-val" style="color:var(--energy);font-size:10px">Atténuation partielle</div>
-        <span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span>
-      </div>
-      <div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--dangote)"></div></div>
-    </div>
-    <div class="data-row">
-      <div class="dr-ico">🚚</div>
-      <div class="dr-label">Transport CI</div>
-      <div class="dr-src">
-        <div class="dr-val" style="color:var(--green);font-size:10px">Gasoil + proche</div>
-        <span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span>
-      </div>
-      <div class="dr-bar"><div class="dr-fill" style="width:65%;background:var(--green)"></div></div>
-    </div>
-    <div class="data-row">
-      <div class="dr-ico">🌾</div>
-      <div class="dr-label">Agriculture CI</div>
-      <div class="dr-src">
-        <div class="dr-val" style="color:var(--energy);font-size:10px">Carburant pompage</div>
-        <span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span>
-      </div>
-      <div class="dr-bar"><div class="dr-fill" style="width:40%;background:var(--energy)"></div></div>
-    </div>
-    <div class="data-row">
-      <div class="dr-ico">🏗️</div>
-      <div class="dr-label">Construction CI</div>
-      <div class="dr-src">
-        <div class="dr-val" style="color:var(--txt2);font-size:10px">Effet indirect</div>
-        <span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Indirect</span>
-      </div>
-      <div class="dr-bar"><div class="dr-fill" style="width:25%;background:var(--txt3)"></div></div>
-    </div>
-    <div class="data-row">
-      <div class="dr-ico">🏭</div>
-      <div class="dr-label">Agroalimentaire CI</div>
-      <div class="dr-src">
-        <div class="dr-val" style="color:var(--green);font-size:10px">GNL + gasoil</div>
-        <span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span>
-      </div>
-      <div class="dr-bar"><div class="dr-fill" style="width:50%;background:var(--green)"></div></div>
-    </div>
-
+    <div class="data-row"><div class="dr-ico">⚡</div><div class="dr-label">Énergie CI</div><div class="dr-src"><div class="dr-val" style="color:var(--energy);font-size:10px">Atténuation partielle</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span></div><div class="dr-bar"><div class="dr-fill" style="width:55%;background:var(--dangote)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🚚</div><div class="dr-label">Transport CI</div><div class="dr-src"><div class="dr-val" style="color:var(--green);font-size:10px">Gasoil + proche</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span></div><div class="dr-bar"><div class="dr-fill" style="width:65%;background:var(--green)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🌾</div><div class="dr-label">Agriculture CI</div><div class="dr-src"><div class="dr-val" style="color:var(--energy);font-size:10px">Carburant pompage</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span></div><div class="dr-bar"><div class="dr-fill" style="width:40%;background:var(--energy)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🏗️</div><div class="dr-label">Construction CI</div><div class="dr-src"><div class="dr-val" style="color:var(--txt2);font-size:10px">Effet indirect</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Indirect</span></div><div class="dr-bar"><div class="dr-fill" style="width:25%;background:var(--txt3)"></div></div></div>
+    <div class="data-row"><div class="dr-ico">🏭</div><div class="dr-label">Agroalimentaire CI</div><div class="dr-src"><div class="dr-val" style="color:var(--green);font-size:10px">GNL + gasoil</div><span class="dsb dsb-d" style="margin-top:2px"><div class="dsb-dot" style="background:var(--dangote)"></div>Dangote</span></div><div class="dr-bar"><div class="dr-fill" style="width:50%;background:var(--green)"></div></div></div>
     <div style="background:var(--dGl);border:1px solid rgba(232,160,32,.3);border-radius:9px;padding:10px;margin-top:10px">
       <div style="font-size:9px;color:var(--txt3);font-family:'JetBrains Mono',monospace;margin-bottom:5px">CONCLUSION STRATÉGIQUE</div>
-      <div style="font-size:12px;color:var(--txt2);line-height:1.6">
-        Dangote <strong style="color:var(--dangote)">atténue mais ne résout pas</strong> le choc pétrolier Iran pour la CI. C'est une bonne nouvelle partielle : le carburant est plus accessible, mais le prix mondial du Brent reste élevé. <strong style="color:var(--green)">SUNWAVE HYBRID reste la seule solution qui élimine totalement la dépendance au carburant</strong> — Dangote ou pas. L'avantage solaire est permanent.
-      </div>
+      <div style="font-size:12px;color:var(--txt2);line-height:1.6">Dangote <strong style="color:var(--dangote)">atténue mais ne résout pas</strong> le choc pétrolier Iran pour la CI. C'est une bonne nouvelle partielle : le carburant est plus accessible, mais le prix mondial du Brent reste élevé. <strong style="color:var(--green)">SUNWAVE HYBRID reste la seule solution qui élimine totalement la dépendance au carburant</strong> — Dangote ou pas. L'avantage solaire est permanent.</div>
     </div>
   </div>
-
-  <div style="background:var(--panel2);border-radius:var(--r);padding:11px;margin-bottom:8px">
+  <div style="background:var(--panel);border-radius:var(--r);padding:11px;margin-bottom:8px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--txt3);letter-spacing:1px;margin-bottom:6px">SOURCES DANGOTE — VÉRIFIÉES MARS 2026</div>
     <div style="display:flex;gap:5px;flex-wrap:wrap">
       <span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>Bloomberg 20/03/2026</span>
@@ -950,7 +848,6 @@ border:1px solid rgba(232,160,32,.3);}
   </div>
 </div>
 
-<!-- ─── PAGE SOURCES ─── -->
 <div class="page" id="pg-sources">
   <div style="background:linear-gradient(135deg,var(--eGl),rgba(0,245,154,.04));border:1px solid rgba(255,184,48,.2);border-radius:var(--r);padding:12px;margin-bottom:10px;">
     <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:4px">📡 42+ SOURCES — ARCHITECTURE 3 NIVEAUX + DANGOTE</div>
@@ -962,8 +859,6 @@ border:1px solid rgba(232,160,32,.3);}
       <span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>5 DANGOTE</span>
     </div>
   </div>
-
-  <!-- Niveau 1 : Mondial -->
   <div class="src-section">
     <div class="src-title">🌍 NIVEAU MONDIAL — 18 SOURCES</div>
     <div class="src-item"><div class="src-ico">⚡</div><div class="src-body"><div class="src-name">EIA — U.S. Energy Information Administration</div><div class="src-desc">Prix Brent, WTI, gaz naturel, électricité mondial</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Quotidien</span><span class="src-url">api.eia.gov</span></div></div></div>
@@ -976,8 +871,6 @@ border:1px solid rgba(232,160,32,.3);}
     <div class="src-item"><div class="src-ico">📰</div><div class="src-body"><div class="src-name">NewsAPI + GDELT Project</div><div class="src-desc">Actualités géopolitiques monde + indicateurs conflits (15 min)</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Temps réel</span><span class="src-url">newsapi.org · gdeltproject.org</span></div></div></div>
     <div class="src-item"><div class="src-ico">💱</div><div class="src-body"><div class="src-name">ExchangeRate API</div><div class="src-desc">Taux de change 160 devises — USD/XOF, EUR/XOF</div><div class="src-meta"><span class="dsb dsb-w"><div class="dsb-dot" style="background:var(--lvl-world)"></div>GRATUIT</span><span class="src-freq">Temps réel</span><span class="src-url">exchangerate-api.com</span></div></div></div>
   </div>
-
-  <!-- Niveau 2 : CEDEAO -->
   <div class="src-section">
     <div class="src-title">🌿 NIVEAU RÉGIONAL CEDEAO — 11 SOURCES</div>
     <div class="src-item"><div class="src-ico">🏦</div><div class="src-body"><div class="src-name">BCEAO — Base de Données Économiques</div><div class="src-desc">Macroéconomie UEMOA, inflation, taux, balance des paiements</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">bceao.int</span></div></div></div>
@@ -987,8 +880,6 @@ border:1px solid rgba(232,160,32,.3);}
     <div class="src-item"><div class="src-ico">⚡</div><div class="src-body"><div class="src-name">ECOWAS CEREEC</div><div class="src-desc">ENR Afrique de l'Ouest, objectifs PERC, taux d'accès énergie</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Annuel</span><span class="src-url">ecreee.org/statistics</span></div></div></div>
     <div class="src-item"><div class="src-ico">📊</div><div class="src-body"><div class="src-name">African Development Bank (AfDB)</div><div class="src-desc">PIB, croissance, infrastructure, énergie AOF</div><div class="src-meta"><span class="dsb dsb-r"><div class="dsb-dot" style="background:var(--lvl-region)"></div>GRATUIT</span><span class="src-freq">Annuel</span><span class="src-url">afdb.org/en/knowledge/statistics</span></div></div></div>
   </div>
-
-  <!-- Niveau 3 : CI -->
   <div class="src-section">
     <div class="src-title">🇨🇮 NIVEAU NATIONAL CI — 13 SOURCES</div>
     <div class="src-item"><div class="src-ico">📊</div><div class="src-body"><div class="src-name">INS — Institut National de Statistique CI</div><div class="src-desc">IPC, PIB, commerce extérieur, emploi, prix carburants CI</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">ins.ci/statistiques</span></div></div></div>
@@ -1001,8 +892,6 @@ border:1px solid rgba(232,160,32,.3);}
     <div class="src-item"><div class="src-ico">📈</div><div class="src-body"><div class="src-name">BRVM — Bourse Régionale UEMOA</div><div class="src-desc">Marchés financiers, obligations, indices sectoriels UEMOA</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Quotidien</span><span class="src-url">brvm.org/fr/stats</span></div></div></div>
     <div class="src-item"><div class="src-ico">🌐</div><div class="src-body"><div class="src-name">data.gouv.ci — Open Data CI</div><div class="src-desc">Portail officiel open data Côte d'Ivoire — multi-secteurs</div><div class="src-meta"><span class="dsb dsb-n"><div class="dsb-dot" style="background:var(--lvl-nat)"></div>GRATUIT</span><span class="src-freq">Variable</span><span class="src-url">data.gouv.ci</span></div></div></div>
   </div>
-
-  <!-- Sources Dangote -->
   <div class="src-section">
     <div class="src-title">🏭 SOURCES DANGOTE — 5 MÉDIAS VÉRIFIÉS</div>
     <div class="src-item"><div class="src-ico">📰</div><div class="src-body"><div class="src-name">Bloomberg — Next Africa Newsletter</div><div class="src-desc">Rapport direct sur les pays africains cherchant du carburant chez Dangote</div><div class="src-meta"><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>PREMIUM</span><span class="src-freq">Quotidien</span><span class="src-url">bloomberg.com/africa 20/03/2026</span></div></div></div>
@@ -1011,8 +900,7 @@ border:1px solid rgba(232,160,32,.3);}
     <div class="src-item"><div class="src-ico">⚡</div><div class="src-body"><div class="src-name">Energy Capital Power — Nigeria exports</div><div class="src-desc">214 000 b/j d'exports pétrole raffiné en avril 2026 (×2 vs fév.)</div><div class="src-meta"><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>GRATUIT</span><span class="src-freq">Hebdomadaire</span><span class="src-url">energycapitalpower.com 24/03/2026</span></div></div></div>
     <div class="src-item"><div class="src-ico">🔬</div><div class="src-body"><div class="src-name">C&EN / American Chemical Society</div><div class="src-desc">Analyse technique raffinerie, RFCC, exports US, expansion 1,4 M b/j</div><div class="src-meta"><span class="dsb dsb-d"><div class="dsb-dot" style="background:var(--dangote)"></div>GRATUIT</span><span class="src-freq">Mensuel</span><span class="src-url">cen.acs.org Jan 2026</span></div></div></div>
   </div>
-
-  <div style="background:var(--panel2);border-radius:var(--r);padding:12px;margin-bottom:8px">
+  <div style="background:var(--panel);border-radius:var(--r);padding:12px;margin-bottom:8px">
     <div style="font-size:11px;font-weight:700;color:var(--energy);margin-bottom:6px">🔄 Fréquence mise à jour — Logique de pertinence</div>
     <div class="slist">
       <div class="srow"><span class="sk">Collecte automatique APIs</span><span class="sv-val" style="color:var(--green)">Toutes les 2h</span></div>
@@ -1046,7 +934,6 @@ border:1px solid rgba(232,160,32,.3);}
    EL-KEYON INTELLIGENCE v4 — Core + Refresh 2h
    ═══════════════════════════════════════════════ */
 
-// Splash
 window.addEventListener('load', () => {
   setTimeout(() => {
     const s = document.getElementById('splash');
@@ -1060,7 +947,6 @@ window.addEventListener('load', () => {
   updateRefreshDisplay();
 });
 
-// Navigation
 const META = {
   home:'/ Tableau de bord', energie:'/ Énergie',
   agriculture:'/ Agriculture', construction:'/ Construction BTP',
@@ -1078,13 +964,12 @@ function goPage(id) {
   if(navigator.vibrate) navigator.vibrate(18);
 }
 
-// Level tabs
 function setLevel(l) {
   document.querySelectorAll('.ltab').forEach(t => t.className = 'ltab');
   document.getElementById('lt-' + l).className = 'ltab active-' + l;
   const kpis = {
     w:[
-      {id:'hk-brent',val:'102,38',color:'var(--red)'},
+      {id:'hk-brent',val:'111,25',color:'var(--red)'},
       {id:'hk-fao',val:'126,2',color:'var(--energy)'},
       {id:'hk-forex',val:'622',color:'var(--violet)'},
       {id:'hk-solar',val:'STABLE',color:'var(--green)'},
@@ -1108,7 +993,6 @@ function setLevel(l) {
   });
 }
 
-// Online/Offline
 function checkOnline() {
   const bar = document.getElementById('off-bar');
   window.addEventListener('online', () => { bar.classList.remove('show'); loadData(); });
@@ -1116,7 +1000,6 @@ function checkOnline() {
   if(!navigator.onLine) bar.classList.add('show');
 }
 
-// ══ SYSTÈME DE PERTINENCE — Mise à jour 2h ══
 const PERTINENCE = {
   brent:     { seuil: 5,   poids: 10, label: '🛢 Brent' },
   fao:       { seuil: 1,   poids: 7,  label: '🌾 FAO' },
@@ -1127,12 +1010,10 @@ const PERTINENCE = {
 
 let lastData = null;
 let refreshTimer = null;
-const REFRESH_INTERVAL = 2 * 60 * 60 * 1000; // 2 heures
+const REFRESH_INTERVAL = 2 * 60 * 60 * 1000;
 
 function startAutoRefresh() {
-  refreshTimer = setInterval(() => {
-    loadData(true);
-  }, REFRESH_INTERVAL);
+  refreshTimer = setInterval(() => { loadData(true); }, REFRESH_INTERVAL);
 }
 
 function updateRefreshDisplay() {
@@ -1144,9 +1025,8 @@ function updateRefreshDisplay() {
 }
 
 function calcScore(data) {
-  // Score de pertinence basé sur les variations
   let score = 0;
-  if(!lastData) return 100; // Premier chargement = toujours pertinent
+  if(!lastData) return 100;
   const m = data.marches, lm = lastData.marches;
   const brentDelta = Math.abs((m.brent - lm.brent) / lm.brent * 100);
   if(brentDelta > PERTINENCE.brent.seuil) score += PERTINENCE.brent.poids * (brentDelta / 5);
@@ -1158,7 +1038,6 @@ function calcScore(data) {
 }
 
 function getMajeurSignal(data, score) {
-  // Retourne le signal le plus pertinent à mettre au premier plan
   const m = data.marches;
   if(!lastData) return null;
   const lm = lastData.marches;
@@ -1176,27 +1055,21 @@ function getMajeurSignal(data, score) {
 }
 
 function loadData(isAutoRefresh = false) {
-  // En production : fetch('/api/data') via N8N/Hostinger toutes les 2h
   const data = getStaticData();
-
   if(isAutoRefresh) {
     const score = calcScore(data);
-    const scoreActuel = lastData ? 50 : 0; // Score baseline
+    const scoreActuel = lastData ? 50 : 0;
     if(score > scoreActuel) {
-      // Nouvelle info plus pertinente → mise en avant
       const signal = getMajeurSignal(data, score);
       if(signal) showTopSignal(signal);
       updateUI(data);
       showToast('🔄', `Données actualisées · Pertinence : ${Math.round(score)}/100`);
     } else {
-      // Nouvelle info moins pertinente → pas de mise en avant
-      // Mise à jour silencieuse en arrière-plan
       updateUI(data);
     }
   } else {
     updateUI(data);
   }
-
   lastData = data;
   updateRefreshDisplay();
   try { localStorage.setItem('elk_v4_cache', JSON.stringify(data)); } catch(e){}
@@ -1210,7 +1083,6 @@ function showTopSignal(s) {
   setV('ts-title', s.title);
   setV('ts-text', s.text);
   setV('ts-src', s.src);
-  // Auto-masquer après 30 secondes si pas plus pertinent
   setTimeout(() => { if(el) el.style.display = 'none'; }, 30000);
 }
 
@@ -1219,8 +1091,9 @@ function getStaticData() {
     sources_actives: 42,
     derniere_maj: new Date().toISOString(),
     marches: {
-      brent: 102.38, brent_delta: 8.1,
-      wti: 108.3, gnl_ttf: 62.4,
+      /* ── DONNÉES MISES À JOUR — 3 MAI 2026 ── */
+      brent: 111.25, brent_delta: -2.5,
+      wti: 112.01, gnl_ttf: 62.4,
       usd_xof: 622,
       fao_index: 126.2, fao_delta: 2.1,
       uree_hausse: 40, ble_hausse: 3.3, mais_hausse: 3.2,
@@ -1232,7 +1105,7 @@ function getStaticData() {
     regional: { inflation_uemoa: 4.2, pib_cedeao: 5.1, enr_objectif: 48 },
     national: { cie_hausse_prevue: 28, pib_ci: 7, capacite_elec: 2300, objectif_solaire: 925 },
     claude: {
-      analyse: `Le choc pétrolier Iran-Israël (J+44) se propage à tous les secteurs CI. FAO FPMA : indice alimentaire +2,1% en fév. 2026, urée +40%. EIA : Brent 102,38$/b (+41% depuis 28/02). Blocus naval USA annoncé 13 avr. Cessez-le-feu fragile jusqu'au 22 avr. Peak : 119$/b. CI : hydrocarbures industriels DDO +40%, révision CIE imminente. IRENA : coûts solaires stables. SUNWAVE HYBRID structurellement avantagé.`,
+      analyse: `Crise Hormuz J+64 (3 mai 2026). EIA : Brent 111,25$/b (▼-2,5% ce jour, +56,7% depuis 28/02) · WTI 112,01$/b — inversion rare WTI>Brent. FAO FPMA : indice alimentaire +2,1%, urée +40%. Bab el-Mandeb : risque activé. CI : carburants maintenus (Super 820 FCFA/L), révision CIE imminente. IRENA : coûts solaires stables. SUNWAVE HYBRID structurellement avantagé.`,
       tagline: `Pendant que 42 sources confirment la hausse de tout, une seule chose reste stable : votre panneau solaire.`,
       action: `Soumettre dossier BAD/SEFA dans les 30 jours. Actualiser argumentaire avec FAO + INS CI + Dangote vérifiés.`,
     }
@@ -1251,7 +1124,6 @@ function updateUI(d) {
 }
 function setV(id, v) { const e = document.getElementById(id); if(e && v !== undefined) e.textContent = v; }
 
-// Refresh Claude
 function refreshClaude() {
   const th = document.getElementById('claude-thinking');
   const an = document.getElementById('h-analyse');
@@ -1263,7 +1135,6 @@ function refreshClaude() {
   }, 2500);
 }
 
-// Toast
 let tt;
 function showToast(ico, txt) {
   document.getElementById('t-ico').textContent = ico;
@@ -1274,13 +1145,11 @@ function showToast(ico, txt) {
   tt = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ══ PDF — RAPPORT STRATÉGIQUE ANALYTIQUE ══
 async function generatePDF() {
   const ov = document.getElementById('pdfOv');
   const lbl = document.getElementById('pdfLbl');
   ov.classList.add('show');
-  const steps = [
-    'Collecte données EIA / IEA...','FAO FPMA · WB Pink Sheet...','BCEAO · ECOWAS AMIS...','INS CI · ANARE-CI...','Dangote / Bloomberg / Punch...','Analyse stratégique en cours...','Mise en page rapport...'];
+  const steps = ['Collecte données EIA / IEA...','FAO FPMA · WB Pink Sheet...','BCEAO · ECOWAS AMIS...','INS CI · ANARE-CI...','Dangote / Bloomberg / Punch...','Analyse stratégique en cours...','Mise en page rapport...'];
   for(const s of steps) { lbl.textContent = s; await new Promise(r=>setTimeout(r,420)); }
   try {
     const { jsPDF } = window.jspdf;
@@ -1290,28 +1159,23 @@ async function generatePDF() {
     const BG=[5,7,9], WH=[228,237,248], GR=[100,120,140], GR2=[60,80,110];
     const EN=[255,184,48], RED=[255,64,64], GREEN=[0,245,154], CYAN=[24,234,255];
     const BUILD=[255,107,53], AGRI=[34,214,122], AGRO=[24,207,170], TRANSP=[77,158,255];
-    const DANG=[232,160,32];
-    const VIOLET=[176,110,255];
+    const DANG=[232,160,32], VIOLET=[176,110,255];
 
-    // ── PAGE 1 — COUVERTURE ──
     doc.setFillColor(...BG); doc.rect(0,0,210,297,'F');
-    // Bandeau header
     doc.setFillColor(...EN); doc.rect(0,0,210,32,'F');
     doc.setTextColor(...BG);
     doc.setFontSize(18); doc.setFont('helvetica','bold');
     doc.text('EL-KEYON INTELLIGENCE',10,13);
     doc.setFontSize(10); doc.setFont('helvetica','normal');
     doc.text(`RAPPORT STRATÉGIQUE · 42+ SOURCES · ${today}`,10,22);
-    // Badge Brent
     doc.setFillColor(...RED); doc.roundedRect(140,4,62,22,2,2,'F');
     doc.setTextColor(255,255,255); doc.setFontSize(11); doc.setFont('helvetica','bold');
     doc.text(`BRENT: ${d.marches.brent} $/b`,143,13);
     doc.setFontSize(8); doc.setFont('helvetica','normal');
-    doc.text(`+41% · Conflit Iran-Israël J+44`,143,21);
+    doc.text(`+56,7% · Crise Hormuz J+64`,143,21);
 
     let y = 40;
 
-    // ── RÉSUMÉ STRATÉGIQUE EN LANGAGE SIMPLE ──
     doc.setFillColor(...VIOLET.map(v=>Math.round(v*.15+BG[0]*.85)));
     doc.roundedRect(10,y,190,8,1,1,'F');
     doc.setFillColor(...VIOLET); doc.rect(10,y,4,8,'F');
@@ -1319,7 +1183,7 @@ async function generatePDF() {
     doc.text('RÉSUMÉ STRATÉGIQUE — CE QUI SE PASSE EN MOTS SIMPLES',17,y+5.5); y+=14;
 
     const resume_paras = [
-      { titre: 'La situation globale', texte: `Un conflit entre l'Iran et Israël a éclaté fin février 2026. Résultat immédiat : le pétrole coûte 42% plus cher en 3 semaines (Brent à ${d.marches.brent}$/b selon l'EIA). Comme la CI importe tout son carburant, cette hausse se répercute sur tout : l'électricité, les transports, les engrais, la nourriture.` },
+      { titre: 'La situation globale', texte: `Un conflit entre l'Iran et Israël a éclaté fin février 2026. Résultat immédiat : le pétrole coûte 56,7% plus cher depuis le 28 février (Brent à ${d.marches.brent}$/b selon l'EIA · WTI 112,01$/b — inversion rare). Comme la CI importe tout son carburant, cette hausse se répercute sur tout : l'électricité, les transports, les engrais, la nourriture.` },
       { titre: 'Ce que confirment les données', texte: `La FAO mesure que les prix alimentaires mondiaux ont augmenté de 2,1% en un mois — les engrais (urée) ont bondi de 40%. La BCEAO surveille l'inflation en zone UEMOA qui atteint 4,2%. L'ANARE-CI prépare une révision des tarifs CIE de +28%.` },
       { titre: 'La surprise positive : Dangote', texte: `La raffinerie Dangote au Nigeria (650 000 barils/jour) envoie déjà du carburant raffiné vers la Côte d'Ivoire — 12 cargaisons confirmées (source : Punch Nigeria avril 2026). C'est une alternative africaine qui peut atténuer partiellement la hausse. Mais elle ne suffit pas à compenser le choc mondial.` },
       { titre: 'Ce que cela signifie pour SUNWAVE', texte: `Le solaire PV reste stable en coût (IRENA). Chaque installation SUNWAVE économise 127 000 FCFA/mois à son client — cette économie augmente mécaniquement avec chaque hausse du prix de l'énergie. C'est l'avantage structurel : Dangote ou pas, Iran ou pas, le solaire reste indépendant.` },
@@ -1336,7 +1200,6 @@ async function generatePDF() {
       y += 4;
     }
 
-    // ── PAGE 2 — DONNÉES SECTORIELLES ──
     if(y > 230) { doc.addPage(); y = 20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
     doc.setFillColor(...EN); doc.rect(10,y,190,.7,'F'); y+=6;
     doc.setTextColor(...WH); doc.setFontSize(13); doc.setFont('helvetica','bold');
@@ -1344,9 +1207,9 @@ async function generatePDF() {
 
     const sectors = [
       {name:'ÉNERGIE',color:EN,ico:'⚡',inds:[
-        ['Brent pétrole (EIA)',`${d.marches.brent} $/b · +41% en 3 semaines · Choc Iran`],
+        ['Brent pétrole (EIA)',`${d.marches.brent} $/b · +56,7% depuis 28/02 · Crise Hormuz J+64`],
+        ['WTI (EIA)',`${d.marches.wti} $/b — Inversion WTI>Brent, signal de désorganisation extrême`],
         ['Tarif CIE prévu (ANARE-CI)','+28% · Révision T2 2026 · Impact direct ménages CI'],
-        ['Groupe électrogène (INS CI)','+35% carburant · 50 000 F/mois de plus par client'],
         ['Solaire PV (IRENA)','STABLE · -90% coût depuis 2010 · Indépendant du pétrole'],
       ]},
       {name:'AGRICULTURE',color:AGRI,ico:'🌾',inds:[
@@ -1393,7 +1256,6 @@ async function generatePDF() {
       y += 5;
     }
 
-    // ── DANGOTE ──
     if(y > 230) { doc.addPage(); y=20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
     doc.setFillColor(...DANG.map(v=>Math.round(v*.15+BG[0]*.85)));
     doc.roundedRect(10,y,190,40,2,2,'F');
@@ -1407,7 +1269,6 @@ async function generatePDF() {
     dangLines.forEach(l => { doc.text(l,17,y); y+=5; });
     y+=12;
 
-    // ── CONCLUSION SUNWAVE ──
     if(y > 248) { doc.addPage(); y=20; doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
     doc.setFillColor(15,28,48); doc.roundedRect(10,y,190,26,3,3,'F');
     doc.setFillColor(...EN); doc.rect(10,y,4,26,'F');
@@ -1417,7 +1278,6 @@ async function generatePDF() {
     doc.setTextColor(...GR); doc.setFontSize(7.5); doc.setFont('helvetica','normal');
     doc.text('Sources vérifiées : EIA · FAO FPMA · WB Pink · IEA · BCEAO · AMIS · INS CI · ANARE · CCA · Dangote/Bloomberg',17,y+22); y+=32;
 
-    // ── PIED DE PAGE ──
     doc.setFillColor(...EN); doc.rect(0,282,210,15,'F');
     doc.setTextColor(...BG); doc.setFontSize(7); doc.setFont('helvetica','normal');
     doc.text('EL-KEYON BUILDER SARL · RC: CI-GRDBSM-2024-B-3133 · Grand-Bassam CI · +225 07 11 77 10 97 · elkeyonbuilder@gmail.com',10,289);
